@@ -1,11 +1,11 @@
 {
   "name": "endurant/donations-free",
   "description": "Free Braintree Donation System",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "type": "craft-plugin",
   "minimum-stability": "dev",
   "require": {
-    "craftcms/cms": "~3.0.0-beta.28"
+    "craftcms/cms": "^3.0.0-beta.28"
   },
   "autoload": {
     "psr-4": {
@@ -16,7 +16,7 @@
     "email": "endurant@example.com"
   },
   "extra": {
-    "handle": "donationsFree",
+    "handle": "donations-free",
     "name": "Free Braintree Donation System",
     "developer": "endurant",
     "developerUrl": "https://endurant.org",

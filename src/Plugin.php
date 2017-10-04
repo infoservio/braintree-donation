@@ -5,7 +5,7 @@ namespace endurant\donationsFree;
 use Craft;
 use endurant\donationsFree\models\Settings;
 
-class Plugin extends craft\base\Plugin
+class Plugin extends \craft\base\Plugin
 {
     public function init()
     {
@@ -25,7 +25,7 @@ class Plugin extends craft\base\Plugin
      */
     protected function settingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('donationsFree/settings', [
+        return Craft::$app->getView()->renderTemplate('donations-free/settings', [
             'settings' => $this->getSettings()
         ]);
     }
