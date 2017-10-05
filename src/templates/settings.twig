@@ -14,12 +14,49 @@
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\donationsfree\\DonationsfreeAsset") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\donationsfree\\DonationsFreeAsset") %}
+
+<h3>
+    API credentials are unique account identifiers that must be added to your code before you can process payments via the API. Think of them as your username and password to payment processing.
+    This is your user-specific public identifier. Each user associated with your Braintree gateway will have their own public key.
+
+    To find your keys:
+
+    1. Log into either the production Control Panel or the sandbox Control Panel, depending on which environment you are working in
+    2. Navigate to Account > My User
+    3. Under API Keys, Tokenization Keys, Encryption Keys, click View Authorizations
+
+    You'll find your keys under the API Keys section at the top. If no API keys appear, click Generate New API Key.
+</h3>
 
 {{ forms.textField({
-    label: 'Some Field',
-    instructions: 'Enter some setting here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: settings['someAttribute']})
+    label: 'Braintree Environment',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btEnvironment',
+    name: 'btEnvironment',
+    value: settings['btEnvironment']})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Merchant Id',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btMerchantId',
+    name: 'btMerchantId',
+    value: settings['btMerchantId']})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Public Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPublicKey',
+    name: 'btPublicKey',
+    value: settings['btPublicKey']})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Private Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPrivateKey',
+    name: 'btPrivateKey',
+    value: settings['btPrivateKey']})
 }}

@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationsfreeAsset extends AssetBundle
+class DonationsFreeAsset extends AssetBundle
 {
     // Public Methods
     // =========================================================================

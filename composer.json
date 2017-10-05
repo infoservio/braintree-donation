@@ -2,7 +2,7 @@
     "name": "endurant/donations-free",
     "description": "Free Braintree Donation System",
     "type": "craft-plugin",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "keywords": [
         "craft",
         "cms",
@@ -41,6 +41,10 @@
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "???"
+        "changelogUrl": "???",
+        "components": {
+            "donate": "endurant\\donationsfree\\services\\Donate"
+        },
+        "class": "endurant\\donationsfree\\DonationsFree"
     }
 }

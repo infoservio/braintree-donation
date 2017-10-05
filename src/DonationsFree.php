@@ -13,7 +13,7 @@ namespace endurant\donationsfree;
 use endurant\donationsfree\models\Settings;
 
 use Craft;
-// use craft\base\Plugin;
+use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 
@@ -37,7 +37,7 @@ use yii\base\Event;
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-class Plugin extends \craft\base\Plugin
+class DonationsFree extends Plugin
 {
     // Static Properties
     // =========================================================================

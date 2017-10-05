@@ -23,8 +23,8 @@
  */
 
 return [
-
-    // This controls blah blah blah
-    "someAttribute" => true,
-
+    "btEnvironment" => true,
+    "btMerchantId" => true,
+    "btPublicKey" => true,
+    "btPrivateKey" => true
 ];
