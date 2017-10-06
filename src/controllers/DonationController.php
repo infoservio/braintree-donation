@@ -46,7 +46,7 @@ class DonationController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['donate', 'pay'];
 
     // Public Methods
     // =========================================================================
@@ -70,10 +70,15 @@ class DonationController extends Controller
      *
      * @return mixed
      */
-    public function actionDoSomething()
+    public function actionDonate()
     {
-        $result = 'Welcome to the DonateController actionDoSomething() method';
-
-        return $result;
+        $this->requirePostRequest();
     }
+
+    public function actionPay() 
+    {
+        $this->requirePostRequest();
+    }
+
+    
 }

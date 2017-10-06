@@ -15,6 +15,9 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\records\Card as CardRecord;
+use endurant\donationsfree\models\Card;
+
 /**
  * Donate Service
  *
@@ -28,7 +31,7 @@ use craft\base\Component;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationService extends Component
+class CardService extends Component
 {
     // Public Methods
     // =========================================================================
@@ -53,7 +56,15 @@ class DonationService extends Component
         return $result;
     }
 
-    public function saveDonate() {
-        
+    public function saveCard(Card $card) 
+    {
+        $cardRecord = new CardRecord();
+        $cardRecord->setAttributes($card->getAttributes);
+
+        if (!$card->validate() && !$cardRecord->save()) {
+
+        }
+
+        return $cardRecord;
     }
 }

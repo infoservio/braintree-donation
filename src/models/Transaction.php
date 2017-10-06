@@ -37,7 +37,20 @@ class Transaction extends Model
      *
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $id;
+    public $transactionId;
+    public $type;
+    public $cardId;
+    public $amount;
+    public $status;
+    public $projectId;
+    public $projectName;
+    public $success;
+    public $transactionDetails;
+    public $transactionErorrs;
+    public $transactionErrorMessage;
+    public $createdAt;
+    public $updatedAt;
 
     // Public Methods
     // =========================================================================
@@ -55,8 +68,9 @@ class Transaction extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            [['id', 'cardId', 'amount', 'status', 'projectId', 'projectName', 'success'], 'integer'],
+            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
+            [['id', 'cardId', 'amount', 'status', 'success', 'transactionId'], 'required']
         ];
     }
 }

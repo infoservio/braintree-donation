@@ -37,7 +37,15 @@ class Card extends Model
      *
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $id;
+    public $tokenId;
+    public $customerId;
+    public $bin;
+    public $last4;
+    public $cardType;
+    public $expirationDate;
+    public $cardholderName;
+    public $customerLocation;
 
     // Public Methods
     // =========================================================================
@@ -55,8 +63,9 @@ class Card extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            [['id', 'customerId', 'bin', 'last4'], 'integer'],
+            [['tokenId', 'cardType', 'expirationDate', 'cardholderName', 'customerLocation'], 'string'],
+            [['tokenId', 'customerId', 'bin', 'last4', 'cardType', 'expirationDate'], 'required']
         ];
     }
 }

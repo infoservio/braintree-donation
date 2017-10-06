@@ -15,6 +15,9 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\records\Customer as CustomerRecord;
+use endurant\donationsfree\models\Customer;
+
 /**
  * Donate Service
  *
@@ -28,32 +31,20 @@ use craft\base\Component;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationService extends Component
+class CustomerService extends Component
 {
     // Public Methods
     // =========================================================================
 
-    /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     Donationsfree::$plugin->donate->exampleService()
-     *
-     * @return mixed
-     */
-    public function exampleService()
+    public function saveCustomer(Customer $customer) 
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (DonationsFree::$plugin->getSettings()->someAttribute) {
-        }
+        $customerRecord = new CustomerRecord();
+        $customer->setAttributes($customer->getAttributes());
 
-        return $result;
-    }
+        if (!$customer->validate() && !$customerRecord->save()) {
 
-    public function saveDonate() {
-        
+        }   
+
+        return $customerRecord; 
     }
 }

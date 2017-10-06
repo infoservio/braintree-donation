@@ -15,8 +15,13 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\models\Customer;
+use endurant\donationsfree\models\Address;
+use endurant\donationsfree\models\Card;
+use endurant\donationsfree\models\Transaction;
+
 /**
- * Donate Service
+ * Donation Service
  *
  * All of your plugin’s business logic should go in services, including saving data,
  * retrieving data, etc. They provide APIs that your controllers, template variables,
@@ -33,27 +38,26 @@ class DonationService extends Component
     // Public Methods
     // =========================================================================
 
-    /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     Donationsfree::$plugin->donate->exampleService()
-     *
-     * @return mixed
-     */
-    public function exampleService()
+    public function donate(array $params) 
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (DonationsFree::$plugin->getSettings()->someAttribute) {
-        }
+        $customer = Customer::init($params);
+        $address = Address::init($params);
+        $card = new Card();
+        $transaction = new Transaction();
 
-        return $result;
-    }
+        $braintreeService = Craft::$app->braintreeService;
 
-    public function saveDonate() {
-        
+        $braintreeService->createCustomer($customer);
+        $braintreeService->createAddress($customer, $address);
+        $braintreeService->createCard($customer, $card, $params->nonce);
+        $braintreeService->createTransaction($customer, $transaction);
+
+        $address = Craft::$app->addressService->saveAddress($address);
+        $customer->addressId = $address->id;
+        $customer = Craft::$app->customerService->saveCustomer($customer);
+        $card->customerId = $customer->id;
+        $card = Craft::$app->cardService->saveCard($card);
+        $transaction->cardId = $card->id;
+        $transaction = Craft::$app->transactionService->saveTransaction($card);
     }
 }

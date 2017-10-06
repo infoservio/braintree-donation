@@ -37,7 +37,13 @@ class Customer extends Model
      *
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $id;
+    public $customerId;
+    public $addressId;
+    public $firstName;
+    public $lastName;
+    public $email;
+    public $phone;
 
     // Public Methods
     // =========================================================================
@@ -55,8 +61,20 @@ class Customer extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            [['id', 'countryId', 'addressId'], 'integer'],
+            [['customerId', 'firstName', 'lastName', 'email', 'phone'], 'string'],
+            [['customerId', 'firstName', 'lastName', 'email', 'phone', 'addressId'], 'required']
         ];
+    }
+
+    public static function init(array $params) 
+    {
+        $customer = new self();
+        $customer->firstName = $params->firstName;
+        $customer->lastName = $params->lastName;
+        $customer->email = $params->email;
+        $customer->phone = $params->phone;
+
+        return $customer;
     }
 }

@@ -23,7 +23,6 @@
     ],
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
-        "guzzlehttp/guzzle": "~6.2",
         "braintree/braintree_php" : "3.6.1"
     },
     "repositories": [
@@ -49,9 +48,9 @@
             "braintreeService": "endurant\\donationsfree\\services\\BraintreeService",
             "cardService": "endurant\\donationsfree\\services\\CardService",
             "customerService": "endurant\\donationsfree\\services\\CustomerService",
+            "addressService": "endurant\\donationsfree\\services\\AddressService",
             "transactionService": "endurant\\donationsfree\\services\\TransactionService",
-            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\braintree\\BraintreeHttpClient",
-            "httpClient": "endurant\\donationsfree\\components\\httpClient\\HttpClient"
+            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\braintree\\BraintreeHttpClient"
         },
         "class": "endurant\\donationsfree\\DonationsFree"
     }

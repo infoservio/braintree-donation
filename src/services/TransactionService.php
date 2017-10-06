@@ -15,6 +15,9 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\records\Transaction as TransactionRecord;
+use endurant\donationsfree\models\Transaction;
+
 /**
  * Donate Service
  *
@@ -28,32 +31,20 @@ use craft\base\Component;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationService extends Component
+class TransactionService extends Component
 {
     // Public Methods
     // =========================================================================
 
-    /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     Donationsfree::$plugin->donate->exampleService()
-     *
-     * @return mixed
-     */
-    public function exampleService()
+    public function saveTransaction(Transaction $transaction)  
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (DonationsFree::$plugin->getSettings()->someAttribute) {
+        $transactionRecord = new TransactionRecord();
+        $transactionRecord->setAttributes($transaction->getAttributes);
+
+        if (!$transaction->validate() && !$transactionRecord->save()) {
+
         }
 
-        return $result;
-    }
-
-    public function saveDonate() {
-        
+        return $transactionRecord;
     }
 }
