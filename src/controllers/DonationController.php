@@ -35,7 +35,7 @@ use craft\web\Controller;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonateController extends Controller
+class DonationController extends Controller
 {
 
     // Protected Properties

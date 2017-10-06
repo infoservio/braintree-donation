@@ -2,7 +2,7 @@
     "name": "endurant/donations-free",
     "description": "Free Braintree Donation System",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.7",
     "keywords": [
         "craft",
         "cms",
@@ -22,7 +22,9 @@
         }
     ],
     "require": {
-        "craftcms/cms": "~3.0.0-beta.23"
+        "craftcms/cms": "~3.0.0-beta.23",
+        "guzzlehttp/guzzle": "~6.2",
+        "braintree/braintree_php" : "3.6.1"
     },
     "repositories": [
         {
@@ -43,7 +45,13 @@
         "hasCpSection": false,
         "changelogUrl": "???",
         "components": {
-            "donate": "endurant\\donationsfree\\services\\Donate"
+            "donationService": "endurant\\donationsfree\\services\\DonationService",
+            "braintreeService": "endurant\\donationsfree\\services\\BraintreeService",
+            "cardService": "endurant\\donationsfree\\services\\CardService",
+            "customerService": "endurant\\donationsfree\\services\\CustomerService",
+            "transactionService": "endurant\\donationsfree\\services\\TransactionService",
+            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\braintree\\BraintreeHttpClient",
+            "httpClient": "endurant\\donationsfree\\components\\httpClient\\HttpClient"
         },
         "class": "endurant\\donationsfree\\DonationsFree"
     }

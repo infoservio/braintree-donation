@@ -28,7 +28,7 @@ use craft\base\Component;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonateService extends Component
+class DonationService extends Component
 {
     // Public Methods
     // =========================================================================
@@ -51,5 +51,9 @@ class DonateService extends Component
         }
 
         return $result;
+    }
+
+    public function saveDonate() {
+        
     }
 }

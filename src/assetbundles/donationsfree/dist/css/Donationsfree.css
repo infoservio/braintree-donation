@@ -9,3 +9,6 @@
  * @package   Donationsfree
  * @since     1.0.0
  */
+.instructions-header {
+    text-align: 'center'
+}
