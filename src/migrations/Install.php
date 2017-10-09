@@ -146,6 +146,19 @@ class Install extends Migration
                 'code' => $this->integer()
             ]);
         }
+
+        if (!$this->tableExists('donations_logs')) {
+            $this->createTable('donations_logs', [
+                'id' => $this->primaryKey(),
+                'pid' => $this->integer(),
+                'culprit' => $this->integet(),
+                'category' => $this->text(),
+                'method' => $this->text(),
+                'message' => $this->text(),
+                'errors' => $this->text(),
+                'createdAt' => $this->date()
+            ]);
+        }
     }
 
     private function addForeignKeys() 
@@ -233,6 +246,7 @@ class Install extends Migration
         $this->dropTable('donations_card');
         $this->dropTable('donations_country');
         $this->dropTable('donations_state');
+        $this->dropTable('donations_logs');
     }
 
     private function insertDefaultData()

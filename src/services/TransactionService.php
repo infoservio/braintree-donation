@@ -17,6 +17,7 @@ use craft\base\Component;
 
 use endurant\donationsfree\records\Transaction as TransactionRecord;
 use endurant\donationsfree\models\Transaction;
+use endurant\donationsfree\models\Log;
 
 /**
  * Donate Service
@@ -41,9 +42,10 @@ class TransactionService extends Component
         $transactionRecord = new TransactionRecord();
         $transactionRecord->setAttributes($transaction->getAttributes);
 
-        if (!$transaction->validate() && !$transactionRecord->save()) {
-
-        }
+        if (!$transactionRecord->save()) {
+            Craft::$app->logService->transactionLog($transactionRecord->getErrors(), $transactionRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
+            return null;
+        } 
 
         return $transactionRecord;
     }

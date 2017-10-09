@@ -17,6 +17,7 @@ use craft\base\Component;
 
 use endurant\donationsfree\records\Card as CardRecord;
 use endurant\donationsfree\models\Card;
+use endurant\donationsfree\models\Log;
 
 /**
  * Donate Service
@@ -61,8 +62,9 @@ class CardService extends Component
         $cardRecord = new CardRecord();
         $cardRecord->setAttributes($card->getAttributes);
 
-        if (!$card->validate() && !$cardRecord->save()) {
-
+        if (!$cardRecord->save()) {
+            Craft::$app->logService->cardLog($cardRecord->getErrors(), $cardRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
+            return null;
         }
 
         return $cardRecord;

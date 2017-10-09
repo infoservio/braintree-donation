@@ -17,6 +17,7 @@ use craft\base\Component;
 
 use endurant\donationsfree\records\Address as AddressRecord;
 use endurant\donationsfree\models\Address;
+use endurant\donationsfree\models\Log;
 
 /**
  * Donate Service
@@ -41,8 +42,9 @@ class AddressService extends Component
         $addressRecord = new AddressRecord();
         $addressRecord->setAttributes($address->getAttributes);
 
-        if (!$address->validate() && !$addressRecord->save()) {
-
+        if (!$addressRecord->save()) {
+            Craft::$app->logService->addressLog($addressRecord->getErrors(), $addressRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
+            return null;
         }
 
         return $addressRecord;

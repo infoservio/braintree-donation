@@ -17,6 +17,7 @@ use craft\base\Component;
 
 use endurant\donationsfree\records\Customer as CustomerRecord;
 use endurant\donationsfree\models\Customer;
+use endurant\donationsfree\models\Log;
 
 /**
  * Donate Service
@@ -41,9 +42,10 @@ class CustomerService extends Component
         $customerRecord = new CustomerRecord();
         $customer->setAttributes($customer->getAttributes());
 
-        if (!$customer->validate() && !$customerRecord->save()) {
-
-        }   
+        if (!$customerRecord->save()) {
+            Craft::$app->logService->customerLog($customerRecord->getErrors(), $customerRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
+            return null;
+        } 
 
         return $customerRecord; 
     }
