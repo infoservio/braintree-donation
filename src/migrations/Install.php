@@ -2,14 +2,15 @@
 namespace endurant\donationsfree\migrations;
 
 use Yii;
+use Craft;
 use craft\db\Migration;
 
 class Install extends Migration
 {
     public $driver;
 
-    private $countryCsvPath = '../assets/countries.csv';
-    private $usaStatesCsvPath = '../assets/usa-states.csv';
+    private $countryCsvPath = __DIR__ . '/../assets/countries.csv';
+    private $usaStatesCsvPath = __DIR__ . '/../assets/usa-states.csv';
 
     // Public Methods
     // =========================================================================
@@ -26,14 +27,13 @@ class Install extends Migration
      */
     public function safeUp()
     {
-        $this->driver = Craft::$app->getConfig()->getDb()->driver;
-        if ($this->createTables()) {
-            // $this->createIndexes();
-            $this->addForeignKeys();
-            // Refresh the db schema caches
-            Craft::$app->db->schema->refresh();
-            $this->insertDefaultData();
-        }
+        $this->createTables();
+        // $this->createIndexes();
+        $this->addForeignKeys();
+        // Refresh the db schema caches
+        Craft::$app->db->schema->refresh();
+
+        $this->insertDefaultData();
 
         return true;
     }
@@ -50,7 +50,6 @@ class Install extends Migration
      */
     public function safeDown()
     {
-        $this->driver = Craft::$app->getConfig()->getDb()->driver;
         $this->removeForeignKeys();
         $this->removeTables();
 
@@ -70,8 +69,8 @@ class Install extends Migration
                 'cardId' => $this->integer(),
                 'amount' => $this->integer(),
                 'status' => $this->integer(),
-                'projectId' => $this->integer()->null(),
-                'projectName' => $this->integer()->null(),
+                'projectId' => $this->integer(),
+                'projectName' => $this->string(50)->null(),
                 'success' => $this->boolean(),
                 'transactionDetails' => $this->text()->null(),
                 'transactionErrors' => $this->text()->null(),
@@ -100,22 +99,23 @@ class Install extends Migration
                 'id' => $this->primaryKey(),
                 'customerId' => $this->string(36),
                 'addressId' => $this->integer(),
-                'firstName' => $this->string(100),
-                'lastName' => $this->string(100),
-                'email' => $this->text()
+                'firstName' => $this->string(50),
+                'lastName' => $this->string(50),
+                'email' => $this->string(50),
+                'phone' => $this->string(50)
             ]);
         }
 
         if (!$this->tableExists('donations_address')) {
             $this->createTable('donations_address', [
                 'id' => $this->primaryKey(),
-                'company' => $this->text(),
+                'company' => $this->string(50),
                 'countryId' => $this->integer(),
-                'region' => $this->text()->null(),
-                'city' => $this->text()->null(),
+                'region' => $this->string(50),
+                'city' => $this->string(50),
                 'postalCode' => $this->integer()->null(),
-                'streetAddress' => $this->text(),
-                'extendedAddress' => $this->text()
+                'streetAddress' => $this->string(100),
+                'extendedAddress' => $this->string(100)
             ]);
         }
 
@@ -134,16 +134,22 @@ class Install extends Migration
         if (!$this->tableExists('donations_country')) {
             $this->createTable('donations_country', [
                 'id' => $this->primaryKey(),
-                'name' => $this->integer(),
-                'code' => $this->integer()
+                'name' => $this->string(50),
+                'alpha2' => $this->string(2),
+                'alpha3' => $this->string(3),
+                'countryCode' => $this->integer(),
+                'region' => $this->string(50),
+                'subRegion' => $this->string(50),
+                'regionCode' => $this->integer(50),
+                'subRegionCode' => $this->integer()
             ]);
         }
 
         if (!$this->tableExists('donations_state')) {
             $this->createTable('donations_state', [
                 'id' => $this->primaryKey(),
-                'name' => $this->integer(),
-                'code' => $this->integer()
+                'name' => $this->string(50),
+                'code' => $this->string(2)
             ]);
         }
 
@@ -151,7 +157,7 @@ class Install extends Migration
             $this->createTable('donations_logs', [
                 'id' => $this->primaryKey(),
                 'pid' => $this->integer(),
-                'culprit' => $this->integet(),
+                'culprit' => $this->integer(),
                 'category' => $this->text(),
                 'method' => $this->text(),
                 'message' => $this->text(),
@@ -164,12 +170,11 @@ class Install extends Migration
     private function addForeignKeys() 
     {
         $this->addForeignKey(
-            'fk-dontaions-transaction-card',
+            'fk-donations-transaction-card',
             'donations_transaction',
             'cardId',
             'donations_card',
-            'id',
-            'SET NULL'
+            'id'
         );
 
         $this->addForeignKey(
@@ -177,8 +182,7 @@ class Install extends Migration
             'donations_card',
             'customerId',
             'donations_customer',
-            'id',
-            'CASCADE'
+            'id'
         );
 
         $this->addForeignKey(
@@ -186,8 +190,7 @@ class Install extends Migration
             'donations_recurring_payment',
             'cardId',
             'donations_card',
-            'id',
-            'CASCADE'
+            'id'
         );
 
         $this->addForeignKey(
@@ -195,8 +198,7 @@ class Install extends Migration
             'donations_customer',
             'addressId',
             'donations_address',
-            'id',
-            'SET NULL'
+            'id'
         );
 
         $this->addForeignKey(
@@ -204,15 +206,14 @@ class Install extends Migration
             'donations_address',
             'countryId',
             'donations_country',
-            'id',
-            'SET NULL'
+            'id'
         );
     }
 
     private function removeForeignKeys()
     {
         $this->dropForeignKey(
-            'fk-dontaions-transaction-card',
+            'fk-donations-transaction-card',
             'donations_transaction'
         );
 
@@ -239,14 +240,37 @@ class Install extends Migration
 
     private function removeTables()
     {
-        $this->dropTable('donations_recurring_payment');
-        $this->dropTable('donations_transaction');
-        $this->dropTable('donations_customer');
-        $this->dropTable('donations_address');
-        $this->dropTable('donations_card');
-        $this->dropTable('donations_country');
-        $this->dropTable('donations_state');
-        $this->dropTable('donations_logs');
+        if ($this->tableExists('donations_recurring_payment')) {
+            $this->dropTable('donations_recurring_payment');
+        }
+        
+        if ($this->tableExists('donations_transaction')) {
+            $this->dropTable('donations_transaction');
+        }
+
+        if ($this->tableExists('donations_customer')) {
+            $this->dropTable('donations_customer');
+        }
+
+        if ($this->tableExists('donations_address')) {
+            $this->dropTable('donations_address');
+        }
+
+        if ($this->tableExists('donations_card')) {
+            $this->dropTable('donations_card');
+        }
+
+        if ($this->tableExists('donations_country')) {
+            $this->dropTable('donations_country');
+        }
+
+        if ($this->tableExists('donations_state')) {
+            $this->dropTable('donations_state');
+        }
+
+        if ($this->tableExists('donations_logs')) {
+            $this->dropTable('donations_logs');
+        }
     }
 
     private function insertDefaultData()
@@ -262,26 +286,36 @@ class Install extends Migration
 
     private function insertCountries() 
     {
-        $countries = str_getcsv($this->countryCsvPath);
+        $countries = DonationsFree::$plugin->csvParser->parseCsvFile($this->countryCsvPath);
+        $country = null;
         foreach($countries as &$country) {
             $this->insert('donations_country', [
                 'name' => $country['name'],
-                'code' => $country['alpha-2']
-            ]);
+                'alpha2' => $country['alpha-2'],
+                'alpha3' => $country['alpha-3'],
+                'countryCode' => $country['country-code'],
+                'region' => $country['region'],
+                'subRegion' => $country['sub-region'],
+                'regionCode' => $country['region-code'],
+                'subRegionCode' => $country['sub-region-code']
+            ], false);
         }
         unset($country);
+        unset($countries);
     }
 
     private function insertUsaStates()
     {
-        $usaStates = str_getcsv($this->usaStatesCsvPath);
+        $usaStates = DonationsFree::$plugin->csvParser->parseCsvFile($this->usaStatesCsvPath);
+        $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [
                 'name' => $country['StateName'],
                 'code' => $country['StateCode']
-            ]);
+            ], false);
         }
         unset($state);
+        unset($usaStates);
     }
 
     private function fileExists($path)

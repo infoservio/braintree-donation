@@ -40,11 +40,16 @@ class CustomerService extends Component
     public function saveCustomer(Customer $customer) 
     {
         $customerRecord = new CustomerRecord();
-        $customer->setAttributes($customer->getAttributes());
+        $customerRecord->setAttributes($customer->getAttributes());
 
         if (!$customerRecord->save()) {
-            Craft::$app->logService->customerLog($customerRecord->getErrors(), $customerRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
-            return null;
+            
+            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+                $customerRecord->getErrors(), 
+                $customerRecord->__toString(),
+                 __METHOD__, 
+                 Log::CUSTOMER_LOGS
+            );
         } 
 
         return $customerRecord; 

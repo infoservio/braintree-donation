@@ -32,42 +32,22 @@ use endurant\donationsFree\models\Log;
  */
 class LogService extends Component
 {
+    private $donationLogger;
+
+    public function __constructor() 
+    {
+        $this->donationLogger = DonationsFree::$plugin->donationLogger; 
+    }
+
     // Public Methods
     // =========================================================================
-
-    public function addressLog(array $errors, string $message, string $method, array $culprit) 
+    public function setCategory(string $category)
     {
-        $donationLogger = Craft::$app->donationLogger;
-        $donationLogger->setCategory(Log::ADDRESS_LOGS);
-        $result = $donationLogger->record($errors, $message, $method, $culprit);
-
-        return $result;
+        $this->donationLogger->setCategory($category);
     }
 
-    public function customerLog(array $errors, string $message, string $method, array $culprit) 
+    public function log(array $errors, string $message, string $method, array $culprit) 
     {
-        $donationLogger = Craft::$app->donationLogger;
-        $donationLogger->setCategory(Log::CUSTOMER_LOGS);
-        $result = $donationLogger->record($errors, $message, $method, $culprit);
-
-        return $result;
-    }
-
-    public function cardLog(array $errors, string $message, string $method, array $culprit) 
-    {
-        $donationLogger = Craft::$app->donationLogger;
-        $donationLogger->setCategory(Log::CARD_LOGS);
-        $result = $donationLogger->record($errors, $message, $method, $culprit);
-
-        return $result;
-    }
-
-    public function transactionLog(array $errors, string $message, string $method, array $culprit) 
-    {
-        $donationLogger = Craft::$app->donationLogger;
-        $donationLogger->setCategory(Log::TRANSACTION_LOGS);
-        $result = $donationLogger->record($errors, $message, $method, $culprit);
-
-        return $result;
+        return $this->donationLogger->record($errors, $message, $method, $culprit);
     }
 }

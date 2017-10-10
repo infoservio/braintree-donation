@@ -78,6 +78,12 @@ class DonationController extends Controller
     public function actionPay() 
     {
         $this->requirePostRequest();
+
+        try {
+            // DonationsFree::$plugin->donateService->donate();
+        } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
+
+        }
     }
 
     

@@ -2,7 +2,7 @@
     "name": "endurant/donations-free",
     "description": "Free Braintree Donation System",
     "type": "craft-plugin",
-    "version": "1.0.8",
+    "version": "1.0.7",
     "keywords": [
         "craft",
         "cms",
@@ -52,7 +52,8 @@
             "transactionService": "endurant\\donationsfree\\services\\TransactionService",
             "logService": "endurant\\donationsfree\\services\\LogService",
             "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\braintree\\BraintreeHttpClient",
-            "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger"
+            "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger",
+            "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"
         },
         "class": "endurant\\donationsfree\\DonationsFree"
     }

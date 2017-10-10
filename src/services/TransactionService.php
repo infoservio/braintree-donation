@@ -43,8 +43,13 @@ class TransactionService extends Component
         $transactionRecord->setAttributes($transaction->getAttributes);
 
         if (!$transactionRecord->save()) {
-            Craft::$app->logService->transactionLog($transactionRecord->getErrors(), $transactionRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
-            return null;
+            
+            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+                $transactionRecord->getErrors(), 
+                $transactionRecord->__toString(),
+                 __METHOD__, 
+                 Log::TRANSACTION_LOGS
+            );
         } 
 
         return $transactionRecord;

@@ -43,8 +43,13 @@ class AddressService extends Component
         $addressRecord->setAttributes($address->getAttributes);
 
         if (!$addressRecord->save()) {
-            Craft::$app->logService->addressLog($addressRecord->getErrors(), $addressRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
-            return null;
+            
+            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+                $addressRecord->getErrors(), 
+                $addressRecord->__toString(),
+                 __METHOD__, 
+                 Log::ADDRESS_LOGS
+            );
         }
 
         return $addressRecord;

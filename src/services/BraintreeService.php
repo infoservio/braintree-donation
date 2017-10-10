@@ -41,11 +41,16 @@ class BraintreeService extends Component
 
     public function createCustomer(Customer &$customer) 
     {
-        $result = Craft::$app->braintreeHttpClient->createCustomer($customer);
+        $result = DonationsFree::$plugin->braintreeHttpClient->createCustomer($customer);
 
         if (!$result->success) {
-            Craft::$app->logService->customerLog($result->errors->deepAll(), $result->message, __METHOD__, Log::BRAINTREE_CULPRIT);
-            return $result;
+            
+            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+                $result->errors->deepAll(), 
+                $result->message,
+                 __METHOD__, 
+                 Log::CUSTOMER_LOGS
+            );
         }
 
         $customer->customerId = $result->customer->id;
@@ -54,11 +59,16 @@ class BraintreeService extends Component
 
     public function createAddress(Customer $customer, Address $address) 
     {
-        $result = Craft::$app->braintreeHttpClient->createAddress($customer, $address);
+        $result = DonationsFree::$plugin->braintreeHttpClient->createAddress($customer, $address);
 
         if (!$result->success) {
-            Craft::$app->logService->addressLog($result->errors->deepAll(), $result->message, __METHOD__, Log::BRAINTREE_CULPRIT);
-            return $result;
+            
+            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+                $result->errors->deepAll(), 
+                $result->message,
+                 __METHOD__, 
+                 Log::ADDRESS_LOGS
+            );
         }
 
         return $result;
@@ -66,11 +76,16 @@ class BraintreeService extends Component
 
     public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce) 
     {
-        $result = Craft::$app->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
+        $result = DonationsFree::$plugin->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
         
         if (!$result->success) {
-            Craft::$app->logService->cardLog($result->errors->deepAll(), $result->message, __METHOD__, Log::BRAINTREE_CULPRIT);
-            return $result;
+            
+            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+                $result->errors->deepAll(), 
+                $result->message,
+                 __METHOD__, 
+                 Log::CARD_LOGS
+            );
         }
 
         $card->tokenId = $result->creditCardDetails->token;
@@ -85,11 +100,16 @@ class BraintreeService extends Component
 
     public function createTransaction(Customer $customer, Transaction &$transaction) 
     {
-        $result = Craft::$app->braintreeHttpClient->createTransaction($customer, $transaction);
+        $result = DonationsFree::$plugin->braintreeHttpClient->createTransaction($customer, $transaction);
 
         if (!$result->success) {
-            Craft::$app->logService->transactionLog($result->errors->deepAll(), $result->message, __METHOD__, Log::BRAINTREE_CULPRIT);
-            return $result;
+            
+            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+                $result->errors->deepAll(), 
+                $result->message,
+                 __METHOD__, 
+                 Log::TRANSACTION_LOGS
+            );
         }
 
         $transaction->success = true;

@@ -39,7 +39,14 @@ class Country extends Model
      */
     public $id;
     public $name;
-    public $code;
+    public $alpha2;
+    public $alpha3;
+    public $countryCode;
+    public $region;
+    public $subRegion;
+    public $regionCode;
+    public $subRegionCode;
+
 
     // Public Methods
     // =========================================================================

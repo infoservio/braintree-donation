@@ -45,19 +45,26 @@ class DonationService extends Component
         $card = new Card();
         $transaction = new Transaction();
 
-        $braintreeService = Craft::$app->braintreeService;
+        $braintreeService = DonationsFree::$plugin->braintreeService;
 
         $braintreeService->createCustomer($customer);
         $braintreeService->createAddress($customer, $address);
         $braintreeService->createCard($customer, $card, $params->nonce);
         $braintreeService->createTransaction($customer, $transaction);
 
-        $address = Craft::$app->addressService->saveAddress($address);
-        $customer->addressId = $address->id;
-        $customer = Craft::$app->customerService->saveCustomer($customer);
-        $card->customerId = $customer->id;
-        $card = Craft::$app->cardService->saveCard($card);
-        $transaction->cardId = $card->id;
-        $transaction = Craft::$app->transactionService->saveTransaction($card);
+        $transaction = Craft::$app->db->beginTransaction();
+        try {
+            $address = DonationsFree::$plugin->addressService->saveAddress($address);
+            $customer->addressId = $address->id;
+            $customer = DonationsFree::$plugin->customerService->saveCustomer($customer);
+            $card->customerId = $customer->id;
+            $card = DonationsFree::$plugin->cardService->saveCard($card);
+            $transaction->cardId = $card->id;
+            $transaction = DonationsFree::$plugin->transactionService->saveTransaction($card);
+
+            $transaction->commit();
+        } catch(\endurant\donationsfree\errors\DbDonationsPluginException $e) {
+            $transaction->rollback();
+        }
     }
 }

@@ -69,6 +69,19 @@ class DonationsFree extends Plugin
         parent::init();
         self::$plugin = $this;
 
+        $this->setComponents([
+            'donationService' => endurant\donationsfree\services\DonationService::class,
+            'braintreeService' => endurant\donationsfree\services\BraintreeService::class,
+            'cardService' => endurant\donationsfree\services\CardService::class,
+            'customerService' => endurant\donationsfree\services\CustomerService::class,
+            'addressService' => endurant\donationsfree\services\AddressService::class,
+            'transactionService' => endurant\donationsfree\services\TransactionService::class,
+            'logService' => endurant\donationsfree\services\LogService::class,
+            'braintreeHttpClient' => endurant\donationsfree\components\httpClient\braintree\BraintreeHttpClient::class,
+            'donationLogger' => endurant\donationsfree\components\logger\Logger::class,
+            'csvParser' => \endurant\donationsfree\components\parser\CsvParser::class,
+        ]);
+
         // Do something after we're installed
         Event::on(
             Plugins::class,

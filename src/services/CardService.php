@@ -63,8 +63,13 @@ class CardService extends Component
         $cardRecord->setAttributes($card->getAttributes);
 
         if (!$cardRecord->save()) {
-            Craft::$app->logService->cardLog($cardRecord->getErrors(), $cardRecord->__toString(), __METHOD__, Log::DB_CULPRIT);
-            return null;
+            
+            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+                $cardRecord->getErrors(), 
+                $cardRecord->__toString(),
+                 __METHOD__, 
+                 Log::CARD_LOGS
+            );
         }
 
         return $cardRecord;
