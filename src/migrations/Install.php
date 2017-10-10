@@ -5,6 +5,8 @@ use Yii;
 use Craft;
 use craft\db\Migration;
 
+use endurant\donationsfree\DonationsFree;
+
 class Install extends Migration
 {
     public $driver;
@@ -310,8 +312,8 @@ class Install extends Migration
         $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [
-                'name' => $country['StateName'],
-                'code' => $country['StateCode']
+                'name' => $state['StateName'],
+                'code' => $state['StateCode']
             ], false);
         }
         unset($state);
