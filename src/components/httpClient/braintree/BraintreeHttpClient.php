@@ -2,6 +2,7 @@
 
 namespace endurant\donationsfree\components\httpClient\braintree;
 
+use braintree\braintree_php\Braintree\Configuration as BraintreeConfiguration;
 use braintree\braintree_php\Braintree\Customer as BraintreeCustomer;
 use braintree\braintree_php\Braintree\Address as BraintreeAddress;
 use braintree\braintree_php\Braintree\PaymentMethod as BraintreeCard;
@@ -14,6 +15,19 @@ use endurant\donationsfree\models\Transaction;
 
 class BraintreeHttpClient extends Component
 {
+    private $settings;
+
+    function __constructor() 
+    {
+        $this->settings = DonationsFree::$plugin->getSettings();
+
+        // Configuration of Braintree
+        BraintreeConfiguration::environment($this->settings->btEnvironment);
+        BraintreeConfiguration::merchantId($this->settings->btMerchantId);
+        BraintreeConfiguration::publicKey($this->settings->btPublicKey);
+        BraintreeConfiguration::privateKey($this->settings->btPrivateKey);
+    }
+
     // Public Methods
     // =========================================================================
 

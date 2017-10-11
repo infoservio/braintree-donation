@@ -80,7 +80,7 @@ class DonationController extends Controller
         $this->requirePostRequest();
 
         try {
-            // DonationsFree::$plugin->donateService->donate();
+            // DonationsFree::$plugin->donateService->donate($params);
         } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
 
         }
