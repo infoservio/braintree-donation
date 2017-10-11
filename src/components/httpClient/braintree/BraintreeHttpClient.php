@@ -15,17 +15,17 @@ use endurant\donationsfree\models\Transaction;
 
 class BraintreeHttpClient extends Component
 {
-    private $settings;
+    private $_settings;
 
     function __constructor() 
     {
-        $this->settings = DonationsFree::$plugin->getSettings();
+        $this->_settings = DonationsFree::$plugin->getSettings();
 
         // Configuration of Braintree
-        BraintreeConfiguration::environment($this->settings->btEnvironment);
-        BraintreeConfiguration::merchantId($this->settings->btMerchantId);
-        BraintreeConfiguration::publicKey($this->settings->btPublicKey);
-        BraintreeConfiguration::privateKey($this->settings->btPrivateKey);
+        BraintreeConfiguration::environment($this->_settings->btEnvironment);
+        BraintreeConfiguration::merchantId($this->_settings->btMerchantId);
+        BraintreeConfiguration::publicKey($this->_settings->btPublicKey);
+        BraintreeConfiguration::privateKey($this->_settings->btPrivateKey);
     }
 
     // Public Methods

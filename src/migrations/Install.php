@@ -11,8 +11,8 @@ class Install extends Migration
 {
     public $driver;
 
-    private $countryCsvPath = __DIR__ . '/../assets/countries.csv';
-    private $usaStatesCsvPath = __DIR__ . '/../assets/usa-states.csv';
+    private $_countryCsvPath = __DIR__ . '/../assets/countries.csv';
+    private $_usaStatesCsvPath = __DIR__ . '/../assets/usa-states.csv';
 
     // Public Methods
     // =========================================================================
@@ -277,18 +277,18 @@ class Install extends Migration
 
     private function insertDefaultData()
     {
-        if ($this->fileExists($this->countryCsvPath)) {
+        if ($this->fileExists($this->_countryCsvPath)) {
             $this->insertCountries();
         }
 
-        if ($this->fileExists($this->usaStatesCsvPath)) {
+        if ($this->fileExists($this->_usaStatesCsvPath)) {
             $this->insertUsaStates();
         }
     }
 
     private function insertCountries() 
     {
-        $countries = DonationsFree::$plugin->csvParser->parseCsvFile($this->countryCsvPath);
+        $countries = DonationsFree::$plugin->csvParser->parseCsvFile($this->_countryCsvPath);
         $country = null;
         foreach($countries as &$country) {
             $this->insert('donations_country', [
@@ -308,7 +308,7 @@ class Install extends Migration
 
     private function insertUsaStates()
     {
-        $usaStates = DonationsFree::$plugin->csvParser->parseCsvFile($this->usaStatesCsvPath);
+        $usaStates = DonationsFree::$plugin->csvParser->parseCsvFile($this->_usaStatesCsvPath);
         $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [

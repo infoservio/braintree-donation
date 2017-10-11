@@ -13,7 +13,7 @@ class DonationsPluginException extends Exception
 
     protected $culprit;
 
-    private $logService;
+    private $_logService;
 
     public function __constructor(array $errors, string $message, string $method, string $category) 
     {
@@ -22,13 +22,13 @@ class DonationsPluginException extends Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->$logService = DonationsFree::$plugin->logService;
+        $this->_logService = DonationsFree::$plugin->logService;
         $this->log($category);
     }
 
     private function log(string $category)
     {
-        $this->$logService->setCategory($category);
-        $this->$logService->log($this->errors, $this->message, $this->method, $this->culprit);
+        $this->_logService->setCategory($category);
+        $this->_logService->log($this->errors, $this->message, $this->method, $this->culprit);
     }
 }

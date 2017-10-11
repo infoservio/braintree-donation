@@ -32,22 +32,22 @@ use endurant\donationsFree\models\Log;
  */
 class LogService extends Component
 {
-    private $donationLogger;
+    private $_donationLogger;
 
     public function __constructor() 
     {
-        $this->donationLogger = DonationsFree::$plugin->donationLogger; 
+        $this->_donationLogger = DonationsFree::$plugin->donationLogger; 
     }
 
     // Public Methods
     // =========================================================================
     public function setCategory(string $category)
     {
-        $this->donationLogger->setCategory($category);
+        $this->_donationLogger->setCategory($category);
     }
 
     public function log(array $errors, string $message, string $method, array $culprit) 
     {
-        return $this->donationLogger->record($errors, $message, $method, $culprit);
+        return $this->_donationLogger->record($errors, $message, $method, $culprit);
     }
 }
