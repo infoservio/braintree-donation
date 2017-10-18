@@ -13,9 +13,10 @@ class DonateForm extends Model
     public function rules() 
     {
         return [
-            'projectName' => [['projectName'], 'string', 'max' => 50, 'message' => 'Project Name cannot be more than 50 characters.'],
-            [['amount', 'projectId'], 'integer', 'integerOnly' => true, 'min' => 0],
-            [['amount', 'projectId'], 'required']
+            [['projectName'], 'string', 'max' => 49, 'message' => 'Project Name cannot be more than 50 characters.'],
+            [['amount'], 'integer', 'integerOnly' => true, 'min' => 1],
+            [['projectId'], 'integer'],
+            [['amount'], 'required']
         ];
     }
 }

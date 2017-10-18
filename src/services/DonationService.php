@@ -40,12 +40,12 @@ class DonationService extends Component
 
     public function donate(array $params) 
     {
-        $customer = Customer::init($params);
-        $address = Address::init($params);
+        $customer = Customer::create($params);
+        $address = Address::create($params);
         $card = new Card();
         $transaction = new Transaction();
 
-        $braintreeService = DonationsFree::$plugin->braintreeService;
+        $braintreeService = DonationsFree::$PLUGIN->braintreeService;
 
         $braintreeService->createCustomer($customer);
         $braintreeService->createAddress($customer, $address);
@@ -54,17 +54,22 @@ class DonationService extends Component
 
         $transaction = Craft::$app->db->beginTransaction();
         try {
-            $address = DonationsFree::$plugin->addressService->saveAddress($address);
+            $address = DonationsFree::$PLUGIN->addressService->saveAddress($address);
             $customer->addressId = $address->id;
-            $customer = DonationsFree::$plugin->customerService->saveCustomer($customer);
+            $customer = DonationsFree::$PLUGIN->customerService->saveCustomer($customer);
             $card->customerId = $customer->id;
-            $card = DonationsFree::$plugin->cardService->saveCard($card);
+            $card = DonationsFree::$PLUGIN->cardService->saveCard($card);
             $transaction->cardId = $card->id;
-            $transaction = DonationsFree::$plugin->transactionService->saveTransaction($card);
+            $transaction = DonationsFree::$PLUGIN->transactionService->saveTransaction($card);
 
             $transaction->commit();
         } catch(\endurant\donationsfree\errors\DbDonationsPluginException $e) {
             $transaction->rollback();
         }
+    }
+
+    public function test()
+    {
+        return json_encode(['name' => 'react']);
     }
 }

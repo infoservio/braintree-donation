@@ -18,18 +18,13 @@ use craft\db\ActiveRecord;
 /**
  * Customer Record
  *
- * ActiveRecord is the base class for classes representing relational data in terms of objects.
- *
- * Active Record implements the [Active Record design pattern](http://en.wikipedia.org/wiki/Active_record).
- * The premise behind Active Record is that an individual [[ActiveRecord]] object is associated with a specific
- * row in a database table. The object's attributes are mapped to the columns of the corresponding table.
- * Referencing an Active Record attribute is equivalent to accessing the corresponding table column for that record.
- *
- * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
+ * @property integer $id
+ * @property string $customerId
+ * @property integer $addressId
+ * @property string $firstName
+ * @property string $lastName
+ * @property string $email
+ * @property string $phone
  */
 class Customer extends ActiveRecord
 {
@@ -51,5 +46,19 @@ class Customer extends ActiveRecord
     public static function tableName()
     {
         return '{{%donations_customer}}';
+    }
+
+    /**
+     * Returns the validation rules for attributes.
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'addressId'], 'integer'],
+            [['customerId', 'firstName', 'lastName', 'phone'], 'string'],
+            ['email', 'email'],
+            [['customerId', 'firstName', 'lastName', 'email', 'phone', 'addressId'], 'required']
+        ];
     }
 }

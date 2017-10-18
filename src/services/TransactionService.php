@@ -40,7 +40,7 @@ class TransactionService extends Component
     public function saveTransaction(Transaction $transaction)  
     {
         $transactionRecord = new TransactionRecord();
-        $transactionRecord->setAttributes($transaction->getAttributes);
+        $transactionRecord->setAttributes($transaction->getAttributes(), false);
 
         if (!$transactionRecord->save()) {
             

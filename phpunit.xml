@@ -1,0 +1,21 @@
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/3.7/phpunit.xsd"
+         bootstrap="tests/_bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningstoException="true"
+         backupGlobals="false"
+         verbose="true">
+    <testsuites>
+        <testsuite name="ServicesTests">
+            <directory>tests/unit/services</directory>
+        </testsuite>
+        <testsuite name="FormsTests">
+            <directory>tests/unit/forms</directory>
+        </testsuite>
+        <testsuite name="RecordsTests">
+            <directory>tests/unit/records</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

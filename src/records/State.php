@@ -52,4 +52,9 @@ class State extends ActiveRecord
     {
         return '{{%donations_state}}';
     }
+
+    public static function getStateById(integer $id)
+    {
+        return self::find()->where(['id' => $id])->one();
+    }
 }

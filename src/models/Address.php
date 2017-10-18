@@ -16,6 +16,7 @@ use Craft;
 use craft\base\Model;
 
 use endurant\donationsfree\records\Country as CountryRecord;
+use endurant\donationsfree\records\State as StateRecord;
 
 /**
  * Customer Model
@@ -42,51 +43,61 @@ class Address extends Model
     public $id;
     public $countryId;
     public $company;
-    public $region;
+    public $stateId;
     public $city;
     public $postalCode;
     public $streetAddress;
     public $extendedAddress;
 
-    // Public Methods
+    // Public Static Methods
     // =========================================================================
-    
+
     /**
-     * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
-     * @return array
+     * @param array $params
+     * @return Address
      */
-    public function rules()
-    {
-        return [
-            [['id', 'postalCode', 'countryId'], 'integer'],
-            [['company', 'countryCode', 'region', 'city', 'streetAddress', 'extendedAddress'], 'string'],
-            [['company', 'countryId', 'streetAddress', 'extendedAddress'], 'required']
-        ];
-    }
-
-    public function getCountry() 
-    {
-        return CountryRecord::find()->where(['id' => $this->countryId])->one();
-    }
-
-    public static function init(array $params) 
+    public static function create(array $params)
     {
         $address = new self();
-        
+
         $address->countryId = $params->countryId;
         $address->company = $params->company;
-        $address->region = $params->region;
+        $address->stateId = $params->stateId;
         $address->city = $params->city;
         $address->postalCode = $params->postalCode;
         $address->streetAddress = $params->streetAddress;
         $address->extendedAddress = $params->extendedAddress;
 
         return $address;
+    }
+
+    // Public Methods
+    // =========================================================================
+    
+    /**
+     * Returns the validation rules for attributes
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'postalCode', 'countryId'], 'integer'],
+            [['company', 'countryCode', 'city', 'streetAddress', 'extendedAddress'], 'string'],
+            [['company', 'countryId', 'city', 'postalCode', 'streetAddress'], 'required']
+        ];
+    }
+
+    public function getCountry()
+    {
+        return CountryRecord::getCountryById($this->countryId);
+    }
+
+    public function getStateName()
+    {
+        if ($this->stateId && !is_string($this->stateId)) {
+            $state = StateRecord::getStateById($this->stateId);
+            return $state->name;
+        }
+        return $this->stateId;
     }
 }

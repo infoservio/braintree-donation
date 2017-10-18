@@ -18,18 +18,14 @@ use craft\db\ActiveRecord;
 /**
  * Address Record
  *
- * ActiveRecord is the base class for classes representing relational data in terms of objects.
- *
- * Active Record implements the [Active Record design pattern](http://en.wikipedia.org/wiki/Active_record).
- * The premise behind Active Record is that an individual [[ActiveRecord]] object is associated with a specific
- * row in a database table. The object's attributes are mapped to the columns of the corresponding table.
- * Referencing an Active Record attribute is equivalent to accessing the corresponding table column for that record.
- *
- * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
+ * @property integer $id
+ * @property integer pid
+ * @property integer $culprit
+ * @property string $category
+ * @property string $method
+ * @property string $errors
+ * @property string $message
+ * @property string $createdAt
  */
 class Log extends ActiveRecord
 {
@@ -51,5 +47,18 @@ class Log extends ActiveRecord
     public static function tableName()
     {
         return '{{%donations_logs}}';
+    }
+
+    /**
+     * Returns the validation rules for attributes.
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'pid', 'culprit'], 'integer'],
+            [['method', 'errors', 'message', 'category'], 'string'],
+            [['pid', 'method', 'errors', 'message'], 'required']
+        ];
     }
 }

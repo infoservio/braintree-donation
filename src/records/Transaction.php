@@ -18,18 +18,19 @@ use craft\db\ActiveRecord;
 /**
  * Transaction Record
  *
- * ActiveRecord is the base class for classes representing relational data in terms of objects.
- *
- * Active Record implements the [Active Record design pattern](http://en.wikipedia.org/wiki/Active_record).
- * The premise behind Active Record is that an individual [[ActiveRecord]] object is associated with a specific
- * row in a database table. The object's attributes are mapped to the columns of the corresponding table.
- * Referencing an Active Record attribute is equivalent to accessing the corresponding table column for that record.
- *
- * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
+ * @property integer $id
+ * @property string $transactionId
+ * @property string $type
+ * @property integer $cardId
+ * @property integer $amount
+ * @property integer $projectId
+ * @property string $projectName
+ * @property boolean $success
+ * @property string $transactionDetails
+ * @property string $transactionErrors
+ * @property string $transactionErrorMessage
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class Transaction extends ActiveRecord
 {
@@ -51,5 +52,21 @@ class Transaction extends ActiveRecord
     public static function tableName()
     {
         return '{{%donations_transaction}}';
+    }
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * Returns the validation rules for attributes.
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'cardId', 'amount', 'status', 'projectId', 'projectName'], 'integer'],
+            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
+            [['id', 'cardId', 'amount', 'status', 'transactionId'], 'required']
+        ];
     }
 }

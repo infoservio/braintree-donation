@@ -60,7 +60,7 @@ class CardService extends Component
     public function saveCard(Card $card) 
     {
         $cardRecord = new CardRecord();
-        $cardRecord->setAttributes($card->getAttributes);
+        $cardRecord->setAttributes($card->getAttributes(), false);
 
         if (!$cardRecord->save()) {
             

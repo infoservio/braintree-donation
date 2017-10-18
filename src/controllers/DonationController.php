@@ -46,7 +46,7 @@ class DonationController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['donate', 'pay'];
+    protected $allowAnonymous = ['donate', 'pay', 'test'];
 
     // Public Methods
     // =========================================================================
@@ -70,12 +70,7 @@ class DonationController extends Controller
      *
      * @return mixed
      */
-    public function actionDonate()
-    {
-        $this->requirePostRequest();
-    }
-
-    public function actionPay() 
+    public function actionPay()
     {
         $this->requirePostRequest();
 
@@ -84,6 +79,11 @@ class DonationController extends Controller
         } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
 
         }
+    }
+
+    public function actionTest()
+    {
+        return DonationsFree::$PLUGIN->donationService->test();
     }
 
     

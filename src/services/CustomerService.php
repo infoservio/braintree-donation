@@ -40,13 +40,13 @@ class CustomerService extends Component
     public function saveCustomer(Customer $customer) 
     {
         $customerRecord = new CustomerRecord();
-        $customerRecord->setAttributes($customer->getAttributes());
+        $customerRecord->setAttributes($customer->getAttributes(), false);
 
         if (!$customerRecord->save()) {
             
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
                 $customerRecord->getErrors(), 
-                $customerRecord->__toString(),
+                json_encode($customerRecord->toArray()),
                  __METHOD__, 
                  Log::CUSTOMER_LOGS
             );

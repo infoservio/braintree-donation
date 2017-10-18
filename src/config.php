@@ -26,5 +26,5 @@ return [
     "btEnvironment" => true,
     "btMerchantId" => true,
     "btPublicKey" => true,
-    "btPrivateKey" => true
+    "btPrivateKey" => true,
 ];

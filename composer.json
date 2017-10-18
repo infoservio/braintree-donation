@@ -11,8 +11,8 @@
         "donations-free"
     ],
     "support": {
-        "docs": "???",
-        "issues": "???"
+        "docs": "http://test",
+        "issues": "http://test"
     },
     "license": "MIT",
     "authors": [
@@ -23,7 +23,8 @@
     ],
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
-        "braintree/braintree_php" : "3.6.1"
+        "braintree/braintree_php" : "3.6.1",
+        "yiisoft/yii2": "^2.0"
     },
     "repositories": [
         {
@@ -56,5 +57,8 @@
             "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"
         },
         "class": "endurant\\donationsfree\\DonationsFree"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
     }
 }

@@ -39,7 +39,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $btEnvironment = '';
+    public $btEnvironment = 'test';
     public $btMerchantId = '';
     public $btPublicKey = '';
     public $btPrivateKey = '';

@@ -52,19 +52,18 @@ class Card extends Model
 
     /**
      * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()
     {
         return [
             [['id', 'customerId', 'bin', 'last4'], 'integer'],
-            [['tokenId', 'cardType', 'expirationDate', 'cardholderName', 'customerLocation'], 'string'],
+            ['cardholderName', 'string'],
+            ['cardholderName', 'string'],
+            ['cardType', 'string', 'max' => 32],
+            ['tokenId', 'string', 'max' => 36],
+            ['expirationDate', 'string', 'length' => 7],
+            ['customerLocation', 'string', 'length' => 2],
             [['tokenId', 'customerId', 'bin', 'last4', 'cardType', 'expirationDate'], 'required']
         ];
     }

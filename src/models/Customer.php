@@ -50,24 +50,19 @@ class Customer extends Model
 
     /**
      * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()
     {
         return [
-            [['id', 'countryId', 'addressId'], 'integer'],
-            [['customerId', 'firstName', 'lastName', 'email', 'phone'], 'string'],
+            [['id', 'addressId'], 'integer'],
+            [['customerId', 'firstName', 'lastName', 'phone'], 'string'],
+            ['email', 'email'],
             [['customerId', 'firstName', 'lastName', 'email', 'phone', 'addressId'], 'required']
         ];
     }
 
-    public static function init(array $params) 
+    public static function create(array $params)
     {
         $customer = new self();
         $customer->firstName = $params->firstName;

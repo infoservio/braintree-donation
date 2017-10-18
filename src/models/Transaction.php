@@ -47,7 +47,7 @@ class Transaction extends Model
     public $projectName;
     public $success;
     public $transactionDetails;
-    public $transactionErorrs;
+    public $transactionErrors;
     public $transactionErrorMessage;
     public $createdAt;
     public $updatedAt;
@@ -57,12 +57,6 @@ class Transaction extends Model
 
     /**
      * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()

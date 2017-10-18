@@ -18,18 +18,15 @@ use craft\db\ActiveRecord;
 /**
  * Card Record
  *
- * ActiveRecord is the base class for classes representing relational data in terms of objects.
- *
- * Active Record implements the [Active Record design pattern](http://en.wikipedia.org/wiki/Active_record).
- * The premise behind Active Record is that an individual [[ActiveRecord]] object is associated with a specific
- * row in a database table. The object's attributes are mapped to the columns of the corresponding table.
- * Referencing an Active Record attribute is equivalent to accessing the corresponding table column for that record.
- *
- * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
+ * @property integer $id;
+ * @property string $tokenId;
+ * @property integer $customerId;
+ * @property integer $bin;
+ * @property integer $last4;
+ * @property string $cardType;
+ * @property string $expirationDate;
+ * @property string $cardholderName;
+ * @property string $customerLocation;
  */
 class Card extends ActiveRecord
 {
@@ -51,5 +48,22 @@ class Card extends ActiveRecord
     public static function tableName()
     {
         return '{{%donations_card}}';
+    }
+
+    /**
+     * Returns the validation rules for attributes.
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'customerId', 'bin', 'last4'], 'integer'],
+            ['cardholderName', 'string'],
+            ['cardType', 'string', 'max' => 32],
+            ['tokenId', 'string', 'max' => 36],
+            ['expirationDate', 'string', 'length' => 7],
+            ['customerLocation', 'string', 'length' => 2],
+            [['tokenId', 'customerId', 'bin', 'last4', 'cardType', 'expirationDate'], 'required']
+        ];
     }
 }

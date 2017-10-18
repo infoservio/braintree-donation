@@ -41,7 +41,7 @@ class BraintreeService extends Component
 
     public function createCustomer(Customer &$customer) 
     {
-        $result = DonationsFree::$plugin->braintreeHttpClient->createCustomer($customer);
+        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCustomer($customer);
 
         if (!$result->success) {
             
@@ -59,7 +59,7 @@ class BraintreeService extends Component
 
     public function createAddress(Customer $customer, Address $address) 
     {
-        $result = DonationsFree::$plugin->braintreeHttpClient->createAddress($customer, $address);
+        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
 
         if (!$result->success) {
             
@@ -76,7 +76,7 @@ class BraintreeService extends Component
 
     public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce) 
     {
-        $result = DonationsFree::$plugin->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
+        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
         
         if (!$result->success) {
             
@@ -88,19 +88,19 @@ class BraintreeService extends Component
             );
         }
 
-        $card->tokenId = $result->creditCardDetails->token;
-        $card->bin = $result->creditCardDetails->last4;
-        $card->cardType = $result->creditCardDetails->cardType;
-        $card->expirationDate = $result->creditCardDetails->expirationDate;
-        $card->cardholderName = $result->creditCardDetails->cardholderName;
-        $card->customerLocation = $result->creditCardDetails->customerLocation;
+        $card->tokenId = $result->paymentMethod->token;
+        $card->bin = $result->paymentMethod->last4;
+        $card->cardType = $result->paymentMethod->cardType;
+        $card->expirationDate = $result->paymentMethod->expirationDate;
+        $card->cardholderName = $result->paymentMethod->cardholderName;
+        $card->customerLocation = $result->paymentMethod->customerLocation;
 
         return $result;
     }
 
     public function createTransaction(Customer $customer, Transaction &$transaction) 
     {
-        $result = DonationsFree::$plugin->braintreeHttpClient->createTransaction($customer, $transaction);
+        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
 
         if (!$result->success) {
             
@@ -112,15 +112,21 @@ class BraintreeService extends Component
             );
         }
 
-        $transaction->success = true;
-        $transaction->type = $result->type;
-        $transaction->amount = $result->amount;
-        $transaction->status = $result->status;
-        $transaction->createdAt = $result->createdAt;
-        $transaction->updatedAt = $result->updatedAt;
+        $transaction->transactionId = $result->transaction->id;
+        $transaction->type = $result->transaction->type;
+        $transaction->amount = $result->transaction->amount;
+        $transaction->status = $result->transaction->status;
+        $transaction->createdAt = $result->transaction->createdAt;
+        $transaction->updatedAt = $result->transaction->updatedAt;
         $transaction->transactionDetails = json_encode($result->transaction);
-        $transaction->transactionErrors = json_encode($result->errors->deepAll());
-        $transaction->transactionErrorMessage = $result->message;
+        $transaction->transactionErrors =
+            (isset($result->transaction->errors)) ?
+                json_encode($result->transaction->errors->deepAll()) :
+                null;
+        $transaction->transactionErrorMessage =
+            (isset($result->transaction->message)) ?
+                $result->transaction->message :
+                null;
 
         return $result;
     }

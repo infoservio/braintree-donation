@@ -57,19 +57,13 @@ class Log extends Model
 
     /**
      * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()
     {
         return [
             [['id', 'pid', 'culprit'], 'integer'],
-            [['method', 'errors', 'message'], 'string'],
+            [['method', 'errors', 'message', 'category'], 'string'],
             [['pid', 'method', 'errors', 'message'], 'required']
         ];
     }

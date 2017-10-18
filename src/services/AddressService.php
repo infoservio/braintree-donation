@@ -40,7 +40,7 @@ class AddressService extends Component
     public function saveAddress(Address $address) 
     {
         $addressRecord = new AddressRecord();
-        $addressRecord->setAttributes($address->getAttributes);
+        $addressRecord->setAttributes($address->getAttributes(), false);
 
         if (!$addressRecord->save()) {
             

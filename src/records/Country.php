@@ -18,18 +18,15 @@ use craft\db\ActiveRecord;
 /**
  * Country Record
  *
- * ActiveRecord is the base class for classes representing relational data in terms of objects.
- *
- * Active Record implements the [Active Record design pattern](http://en.wikipedia.org/wiki/Active_record).
- * The premise behind Active Record is that an individual [[ActiveRecord]] object is associated with a specific
- * row in a database table. The object's attributes are mapped to the columns of the corresponding table.
- * Referencing an Active Record attribute is equivalent to accessing the corresponding table column for that record.
- *
- * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
+ * @property integer $id
+ * @property string $name
+ * @property string $alpha2
+ * @property string $alpha3
+ * @property integer $countryCode
+ * @property string $region
+ * @property string $subRegion
+ * @property integer $regionCode
+ * @property integer $subRegionCode
  */
 class Country extends ActiveRecord
 {
@@ -51,5 +48,28 @@ class Country extends ActiveRecord
     public static function tableName()
     {
         return '{{%donations_country}}';
+    }
+
+    public static function getCountryById(integer $id)
+    {
+        return self::find()->where(['id' => $id])->one();
+    }
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * Returns the validation rules for attributes.
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'countryCode', 'regionCode', 'subRegionCode'], 'integer'],
+            [['name', 'region', 'subRegion'], 'string'],
+            ['alpha2', 'string', 'length' => 2],
+            ['alpha3', 'string', 'length' => 3],
+            [['name', 'alpha2', 'alpha3', 'countryCode', 'region', 'subRegion', 'regionCode', 'subRegionCode'], 'required']
+        ];
     }
 }

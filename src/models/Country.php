@@ -53,20 +53,16 @@ class Country extends Model
 
     /**
      * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
      * @return array
      */
     public function rules()
     {
         return [
-            ['id', 'integer'],
-            [['name', 'code'], 'string'],
-            [['name', 'code'], 'required']
+            [['id', 'countryCode', 'regionCode', 'subRegionCode'], 'integer'],
+            [['name', 'region', 'subRegion'], 'string'],
+            ['alpha2', 'string', 'length' => 2],
+            ['alpha3', 'string', 'length' => 3],
+            [['name', 'alpha2', 'alpha3', 'countryCode', 'region', 'subRegion', 'regionCode', 'subRegionCode'], 'required']
         ];
     }
 }

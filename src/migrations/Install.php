@@ -71,9 +71,8 @@ class Install extends Migration
                 'cardId' => $this->integer(),
                 'amount' => $this->integer(),
                 'status' => $this->integer(),
-                'projectId' => $this->integer(),
+                'projectId' => $this->integer()->null(),
                 'projectName' => $this->string(50)->null(),
-                'success' => $this->boolean(),
                 'transactionDetails' => $this->text()->null(),
                 'transactionErrors' => $this->text()->null(),
                 'transactionErrorMessage' => $this->text()->null(),
@@ -88,10 +87,10 @@ class Install extends Migration
                 'tokenId' => $this->string(36),
                 'customerId' => $this->integer(),
                 'bin' => $this->integer(),
-                'last4' => $this->integer(4),
+                'last4' => $this->integer(),
                 'cardType' => $this->string(32),
                 'expirationDate' => $this->string(7),
-                'cardholderName' => $this->text()->null(),
+                'cardholderName' => $this->string()->null(),
                 'customerLocation' => $this->string(2)->null()
             ]);
         }
@@ -113,11 +112,11 @@ class Install extends Migration
                 'id' => $this->primaryKey(),
                 'company' => $this->string(50),
                 'countryId' => $this->integer(),
-                'region' => $this->string(50),
+                'stateId' => $this->string(50)->null(),
                 'city' => $this->string(50),
-                'postalCode' => $this->integer()->null(),
+                'postalCode' => $this->integer(),
                 'streetAddress' => $this->string(100),
-                'extendedAddress' => $this->string(100)
+                'extendedAddress' => $this->string(100)->null()
             ]);
         }
 
