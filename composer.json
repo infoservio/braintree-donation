@@ -52,7 +52,7 @@
             "addressService": "endurant\\donationsfree\\services\\AddressService",
             "transactionService": "endurant\\donationsfree\\services\\TransactionService",
             "logService": "endurant\\donationsfree\\services\\LogService",
-            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\braintree\\BraintreeHttpClient",
+            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\\braintree\\BraintreeHttpClient",
             "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger",
             "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"
         },

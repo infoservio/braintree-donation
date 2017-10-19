@@ -83,8 +83,19 @@ class DonationController extends Controller
 
     public function actionTest()
     {
-        return DonationsFree::$PLUGIN->donationService->test();
+//        return DonationsFree::$PLUGIN->donationService->test();
+        return $this->renderTemplate('donations-free/test');
     }
 
-    
+    public function actionDonationTest()
+    {
+//        return DonationsFree::$PLUGIN->donationService->test();
+        return $this->renderTemplate('donations-free/donation/test');
+    }
+
+    public function actionDonationTestOk()
+    {
+//        return DonationsFree::$PLUGIN->donationService->test();
+        return $this->renderTemplate('test');
+    }
 }
