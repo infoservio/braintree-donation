@@ -287,7 +287,7 @@ class Install extends Migration
 
     private function insertCountries() 
     {
-        $countries = DonationsFree::$plugin->csvParser->parseCsvFile($this->_countryCsvPath);
+        $countries = DonationsFree::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
         $country = null;
         foreach($countries as &$country) {
             $this->insert('donations_country', [
@@ -307,7 +307,7 @@ class Install extends Migration
 
     private function insertUsaStates()
     {
-        $usaStates = DonationsFree::$plugin->csvParser->parseCsvFile($this->_usaStatesCsvPath);
+        $usaStates = DonationsFree::$PLUGIN->csvParser->parseCsvFile($this->_usaStatesCsvPath);
         $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [
