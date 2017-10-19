@@ -91,7 +91,7 @@ class CustomerRecordTest extends TestCase
      */
     public function testSavingCustomerAddressIdIsNotExistingIntegerInDatabase()
     {
-        $this->customer->addressId = 323213;
+        $this->customer->addressId = 323213343432423;
         $customerRecord = new CustomerRecord();
         $customerRecord->setAttributes($this->customer->getAttributes(), false);
         $customerRecord->save();

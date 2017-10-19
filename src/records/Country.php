@@ -50,7 +50,7 @@ class Country extends ActiveRecord
         return '{{%donations_country}}';
     }
 
-    public static function getCountryById(integer $id)
+    public static function getCountryById(int $id)
     {
         return self::find()->where(['id' => $id])->one();
     }

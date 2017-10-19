@@ -113,17 +113,17 @@ class BraintreeServiceTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException Throwable
      * @group braintreeService
      */
     public function testCreatingBraintreeAddressWithoutCustomerId()
     {
         $braintreeService = new BraintreeHttpClient();
-        $resultAddress = $braintreeService->createAddress($this->customer, $this->address);
-        $this->assertFalse($resultAddress->success);
+        $braintreeService->createAddress($this->customer, $this->address);
     }
 
     /**
+     * @expectedException Error
      * @group braintreeService
      */
     public function testCreatingBraintreeAddressWithoutCountryId()
