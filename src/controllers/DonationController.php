@@ -14,6 +14,7 @@ use endurant\donationsfree\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
+use endurant\donationsfree\assetbundles\Donationsfree\DonationsFreeAssetBundle;
 
 /**
  * Donate Controller
@@ -46,7 +47,7 @@ class DonationController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['donate', 'pay', 'test'];
+    protected $allowAnonymous = ['index', 'pay'];
 
     // Public Methods
     // =========================================================================
@@ -59,9 +60,10 @@ class DonationController extends Controller
      */
     public function actionIndex()
     {
-        $result = 'Welcome to the DonateController actionIndex() method';
-
-        return $result;
+        $view = $this->getView();
+        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+        $view->setTemplatesPath(__DIR__ . '/../templates/donation');
+        return $view->renderTemplate('index');
     }
 
     /**
@@ -79,23 +81,5 @@ class DonationController extends Controller
         } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
 
         }
-    }
-
-    public function actionTest()
-    {
-//        return DonationsFree::$PLUGIN->donationService->test();
-        return $this->renderTemplate('donations-free/test');
-    }
-
-    public function actionDonationTest()
-    {
-//        return DonationsFree::$PLUGIN->donationService->test();
-        return $this->renderTemplate('donations-free/donation/test');
-    }
-
-    public function actionDonationTestOk()
-    {
-//        return DonationsFree::$PLUGIN->donationService->test();
-        return $this->renderTemplate('test');
     }
 }

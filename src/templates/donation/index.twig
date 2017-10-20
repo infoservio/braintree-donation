@@ -1,0 +1,74 @@
+<script src="https://js.braintreegateway.com/web/dropin/1.4.0/js/dropin.js"></script>
+<div class="checkout-panel">
+    <div class="panel-body">
+        <h2 class="title">Checkout</h2>
+        <h2 class="amount">50$</h2>
+        <div class="progress-bar">
+            <div class="step"></div>
+            <div class="step"></div>
+            <div class="step"></div>
+            <div class="step"></div>
+        </div>
+
+        <form id="payForm" action="">
+
+            <div class="tab">
+                <div class="input-fields">
+                    <div class="column-1">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" class="input" required/>
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" class="input" required/>
+                    </div>
+                    <div class="column-2">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" class="input" required/>
+                        <label for="phone">Phone <span class="required">*</span></label>
+                        <input type="text" id="phone" class="input" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab">
+                <div class="input-fields">
+                    <div class="column-1">
+                        <label for="firstName">Country</label>
+                        <select class="input">
+                            <option value="volvo">USA</option>
+                            <option value="saab">Ukraine</option>
+                        </select>
+                        <label for="email">City</label>
+                        <input type="email" id="city" class="input" />
+                        <label for="email">Extended Address</label>
+                        <input type="email" id="extendedAddress" class="input" />
+                    </div>
+                    <div class="column-2">
+                        <label for="lastName">State / Province</label>
+                        <select class="input">
+                            <option value="volvo">Washington</option>
+                            <option value="saab">Colorado</option>
+                        </select>
+                        <label for="phone">Address</label>
+                        <input type="text" id="address" class="input" />
+                        <label for="email">Zip</label>
+                        <input type="email" id="zip" class="input" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab">
+                <div id="dropin-container"></div>
+            </div>
+
+            <div class="tab">
+                <label for="note">Note</label>
+                <textarea placeholder="Please write down your notes..."></textarea>
+            </div>
+
+        </form>
+        <div class="panel-footer">
+            <button type="button" class="btn back-btn">Back</button>
+            <button type="button" class="btn next-btn">Next Step</button>
+        </div>
+    </div>
+</div>
