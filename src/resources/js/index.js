@@ -66,6 +66,16 @@ $(document).ready(function() {
     $('#cancel-btn').addClass('hidden');
 });
 
+    $('#country').change((e) => {
+        if ($('#country').val() !== 'USA') {
+        $('#state-select').addClass('hidden');
+        $('#state-input').removeClass('hidden');
+    } else {
+        $('#state-select').removeClass('hidden');
+        $('#state-input').addClass('hidden');
+    }
+});
+
     braintree.dropin.create({
         authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
         selector: '#dropin-container'
