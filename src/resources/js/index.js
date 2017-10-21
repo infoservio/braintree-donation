@@ -1,12 +1,15 @@
 $(document).ready(function() {
-    let currentTab = 0;
-    let isBraintreeValid = false;
+    var currentTab = 0;
+    var isBraintreeValid = false;
     showTab(currentTab);
     // Radio box border
     $('.method').on('click', function() {
         $('.method').removeClass('blue-border');
         $(this).addClass('blue-border');
     });
+
+    // Validation
+    var $cardInput = $('.input-fields input');
 
     $('.next-btn').click((e) => {
 
@@ -37,6 +40,32 @@ $(document).ready(function() {
 });
 });
 
+    $('#edit-btn').click((e) => {
+        $('#amount').addClass('hidden');
+    $('.edit-amount-input').removeClass('hidden');
+    $('#edit-btn').addClass('hidden');
+    $('#ok-btn').removeClass('hidden');
+    $('#cancel-btn').removeClass('hidden');
+});
+
+    $('#cancel-btn').click((e) => {
+        $('#amount').removeClass('hidden');
+    $('.edit-amount-input').addClass('hidden');
+    $('#edit-btn').removeClass('hidden');
+    $('#ok-btn').addClass('hidden');
+    $('#cancel-btn').addClass('hidden');
+});
+
+    $('#ok-btn').click((e) => {
+        $('#amount').text($('.edit-amount-input').val() + '$');
+
+    $('#amount').removeClass('hidden');
+    $('.edit-amount-input').addClass('hidden');
+    $('#edit-btn').removeClass('hidden');
+    $('#ok-btn').addClass('hidden');
+    $('#cancel-btn').addClass('hidden');
+});
+
     braintree.dropin.create({
         authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
         selector: '#dropin-container'
@@ -53,7 +82,7 @@ $(document).ready(function() {
                 return;
             }
             isBraintreeValid = true;
-        // Submit payload.nonce to your server
+        $('#nonce').val(payload.nonce);
     });
     });
     });
@@ -63,7 +92,7 @@ $(document).ready(function() {
         $('.tab').each((index, item) => {
             if (currentTab === index) {
             $(item).find('input').each((index, input) => {
-                if($(input).attr('required')) {
+                if ($(input).attr('required')) {
                 if ($(input).val() === '') {
                     isValid = false;
                     $(input).addClass('error');
@@ -79,7 +108,7 @@ $(document).ready(function() {
     }
 
     function hideTab(n) {
-        if (n-1 <= 2) {
+        if (n - 1 <= 2) {
             let button = $('.next-btn');
             button.text('Next Step');
             button.type = 'button';
@@ -90,7 +119,7 @@ $(document).ready(function() {
             $(item).hide();
         }
     });
-    }
+    };
 
     function showTab(n) {
         if (n === 3) {
@@ -104,6 +133,6 @@ $(document).ready(function() {
             $(item).show();
         }
     });
-    }
+    };
 
 });

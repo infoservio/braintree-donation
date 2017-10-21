@@ -2,8 +2,16 @@
 <script src="https://js.braintreegateway.com/web/dropin/1.4.0/js/dropin.js"></script>
 <div class="checkout-panel">
     <div class="panel-body">
-        <h2 class="title">Checkout</h2>
-        <h2 class="amount">50$</h2>
+        <div class="panel-body-header">
+            <h2 class="title">Checkout</h2>
+            <div class="amount">
+                <h2 id="amount" class="amount">{{ amount }}$</h2>
+                <input type="number" class="edit-amount-input hidden" name="amount" value="50" />
+                <img id="edit-btn" class="edit-btn" src="https://i.imgur.com/ILbGByI.png" />
+                <img id="ok-btn" class="edit-btn hidden" src="https://i.imgur.com/ILbGByI.png" />
+                <img id="cancel-btn" class="edit-btn hidden" src="https://i.imgur.com/ILbGByI.png" />
+            </div>
+        </div>
         <div class="progress-bar">
             <div class="step"></div>
             <div class="step"></div>

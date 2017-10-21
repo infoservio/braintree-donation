@@ -311,6 +311,44 @@ textarea:focus {
     display: none;
 }
 
+.amount {
+    display: flex;
+}
+
+.edit-btn {
+    width: 40px;
+    height: 40px;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+}
+
+.edit-amount {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.edit-amount-input {
+    font-size: 16px;
+    height: 35px;
+    width: 100px;
+    padding-right: 8px;
+    padding-left: 8px;
+    color: black;
+}
+
+.panel-body-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
 #firstName {
     background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
     background-size: 30px;
