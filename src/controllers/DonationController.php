@@ -14,7 +14,8 @@ use endurant\donationsfree\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
-use endurant\donationsfree\assetbundles\donationsfree\DonationsFreeAsset;
+use endurant\donationsfree\DonationsFreeAssetBundle;
+use endurant\donationsfree\models\forms\DonateForm;
 
 /**
  * Donate Controller
@@ -73,7 +74,7 @@ class DonationController extends Controller
     public function actionIndex()
     {
         $view = $this->getView();
-        $view->registerAssetBundle(DonationsFreeAsset::class);
+        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
         $view->setTemplatesPath(__DIR__ . '/../templates/donation');
         return $view->renderTemplate('index');
     }
