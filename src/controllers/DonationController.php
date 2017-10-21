@@ -14,7 +14,7 @@ use endurant\donationsfree\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
-use endurant\donationsfree\assetbundles\Donationsfree\DonationsFreeAsset;
+use endurant\donationsfree\assetbundles\donationsfree\DonationsFreeAsset;
 
 /**
  * Donate Controller
@@ -38,7 +38,6 @@ use endurant\donationsfree\assetbundles\Donationsfree\DonationsFreeAsset;
  */
 class DonationController extends Controller
 {
-
     // Protected Properties
     // =========================================================================
 
@@ -47,10 +46,23 @@ class DonationController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'pay'];
+    protected $allowAnonymous = ['index', 'pay', 'donate'];
+
+    // Private Properties
+    // =========================================================================
+
+    private $donateForm = null;
 
     // Public Methods
     // =========================================================================
+
+    public function beforeAction($action)
+    {
+        // ...set `$this->enableCsrfValidation` here based on some conditions...
+        // call parent method that will check CSRF if such property is true.
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
 
     /**
      * Handle a request going to our plugin's index action URL,
@@ -81,5 +93,25 @@ class DonationController extends Controller
         } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
 
         }
+    }
+
+    /**
+     * Handle a request going to our plugin's actionDoSomething URL,
+     * e.g.: actions/donations-free/donate/do-something
+     *
+     * @return mixed
+     */
+    public function actionDonate()
+    {
+        $this->requirePostRequest();
+
+        $this->donateForm = new DonateForm();
+        $this->donateForm->setAttributes(Craft::$app->request->post());
+
+        if (!$this->donateForm->validate()) {
+            return $this->donateForm->getErrors();
+        }
+
+        return $this->redirect('/actions/donations-free/donation/index');
     }
 }
