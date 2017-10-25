@@ -34,9 +34,10 @@ class LogService extends Component
 {
     private $_donationLogger;
 
-    public function __constructor() 
+    public function __construct()
     {
-        $this->_donationLogger = DonationsFree::$plugin->donationLogger; 
+        parent::__construct();
+        $this->_donationLogger = DonationsFree::$PLUGIN->donationLogger;
     }
 
     // Public Methods
@@ -46,7 +47,7 @@ class LogService extends Component
         $this->_donationLogger->setCategory($category);
     }
 
-    public function log(array $errors, string $message, string $method, array $culprit) 
+    public function log(array $errors, string $message, string $method, array $culprit)
     {
         return $this->_donationLogger->record($errors, $message, $method, $culprit);
     }

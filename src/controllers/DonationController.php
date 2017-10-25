@@ -96,11 +96,7 @@ class DonationController extends Controller
     {
         $this->requirePostRequest();
 
-        try {
-            // DonationsFree::$plugin->donateService->donate($params);
-        } catch(\endurant\doantionsfree\errors\DonationsPluginException $e) {
-
-        }
+        return json_encode(['name' => 'test']);
     }
 
     /**

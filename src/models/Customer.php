@@ -65,10 +65,10 @@ class Customer extends Model
     public static function create(array $params)
     {
         $customer = new self();
-        $customer->firstName = $params->firstName;
-        $customer->lastName = $params->lastName;
-        $customer->email = $params->email;
-        $customer->phone = $params->phone;
+        $customer->firstName = $params['firstName'];
+        $customer->lastName = $params['lastName'];
+        $customer->email = $params['email'];
+        $customer->phone = $params['phone'];
 
         return $customer;
     }

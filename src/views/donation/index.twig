@@ -10,8 +10,8 @@
         <div class="panel-body-header">
             <h2 class="title">Checkout</h2>
             <div class="amount">
-                <h2 id="amount" class="amount">50$</h2>
-                <input type="number" class="edit-amount-input hidden" name="amount" value="50" />
+                <h2 id="sum" class="amount">{{ amount }}$</h2>
+                <input type="number" class="edit-amount-input hidden" value="{{ amount }}" />
                 <img id="edit-btn" class="edit-btn" src="https://i.imgur.com/ILbGByI.png" />
                 <img id="ok-btn" class="edit-btn hidden" src="https://i.imgur.com/ILbGByI.png" />
                 <img id="cancel-btn" class="edit-btn hidden" src="https://i.imgur.com/ILbGByI.png" />
@@ -24,68 +24,72 @@
             <div class="step"></div>
         </div>
 
-        <form id="payForm" action="">
-
+        <form id="payForm" action="pay" method="post">
+            <input id="amount" class="hidden" name="amount" value="{{ amount }}"/>
             <div class="tab">
                 <div class="input-fields">
                     <div class="column-1">
                         <label for="firstName">First Name <span class="required">*</span></label>
-                        <input type="text" id="firstName" class="input" tabindex=1 required value="das"/>
+                        <input type="text" id="firstName" name="firstName" class="input" tabindex=1 required value="das"/>
                         <label for="email">Email <span class="required">*</span></label>
-                        <input type="email" id="email" class="input" tabindex=3 required value="das@sad.com"/>
+                        <input type="email" id="email" name="email" class="input" tabindex=3 required value="das@sad.com"/>
                     </div>
                     <div class="column-2">
                         <label for="lastName">Last Name <span class="required">*</span></label>
-                        <input type="text" id="lastName" class="input" tabindex=2 required value="das"/>
+                        <input type="text" id="lastName" name="lastName" class="input" tabindex=2 required value="das"/>
                         <label for="phone">Phone <span class="required">*</span></label>
-                        <input type="text" id="phone" class="input" tabindex=4 required value="das"/>
+                        <input type="text" id="phone" name="phone" class="input" tabindex=4 required value="das"/>
                     </div>
                 </div>
             </div>
 
             <div class="tab">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" class="input" tabindex=5/>
                 <div class="input-fields">
                     <div class="column-1">
                         <label for="firstName">Country</label>
-                        <select id="country" class="input">
-                            <option value="USA">USA</option>
-                            <option value="Ukraine">Ukraine</option>
+                        <select id="country" class="input" name="countryId" tabindex=6>
+                            {% for country in countries %}
+                                <option value="{{ country.id }}" {{  defaultCountryId == country.id ? ' selected ' : '' }}">{{ country.name }}</option>
+                            {% endfor %}
                         </select>
                         <label for="email">City</label>
-                        <input type="email" id="city" class="input" />
+                        <input type="text" id="city" name="city" class="input" tabindex=8/>
                         <label for="email">Extended Address</label>
-                        <input type="email" id="extendedAddress" class="input" />
+                        <input type="text" id="extendedAddress" name="extendedAddress" class="input" tabindex=9 />
                     </div>
                     <div class="column-2">
                         <label for="lastName">State / Province</label>
-                        <select id="state-select" class="input">
-                            <option value="volvo">Washington</option>
-                            <option value="saab">Colorado</option>
+                        <select id="state-select" class="input" name="stateId" tabindex=7>
+                            {% for state in states %}
+                                <option value="{{ state.id }}" {{  state.id == 1 ? ' selected ' : '' }}>{{ state.name }}</option>
+                            {% endfor %}
                         </select>
-                        <input id="state-input" type="text" class="input hidden" name="state" />
+                        <input id="state-input" name="state" type="text" class="input hidden" tabindex=7 />
                         <label for="phone">Address</label>
-                        <input type="text" id="address" class="input" />
+                        <input type="text" id="address" name="streetAddress" class="input" tabindex=9 />
                         <label for="email">Zip</label>
-                        <input type="email" id="zip" class="input" />
+                        <input type="text" id="postalCode" name="postalCode" class="input" tabindex=10 />
                     </div>
                 </div>
             </div>
 
             <div class="tab">
                 <div id="dropin-container"></div>
-                <input type="hidden" id="nonce" display="none" />
+                <input type="hidden" id="nonce" display="none" name="nonce" />
             </div>
 
             <div class="tab">
                 <label for="note">Note</label>
-                <textarea placeholder="Please write down your notes..."></textarea>
+                <textarea placeholder="Please write down your notes..." name="note"></textarea>
             </div>
 
+            <div class="panel-footer">
+                <button type="button" class="btn back-btn">Back</button>
+                <button type="button" class="btn next-btn">Next Step</button>
+            </div>
         </form>
-        <div class="panel-footer">
-            <button type="button" class="btn back-btn">Back</button>
-            <button type="button" class="btn next-btn">Next Step</button>
-        </div>
     </div>
 </div>
 </body>

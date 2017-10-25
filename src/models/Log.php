@@ -31,13 +31,13 @@ class Log extends Model
 {
     // Public Properties
     // =========================================================================
-    public const ADDRESS_LOGS = 'donations-address-logs';
-    public const CARD_LOGS = 'donations-card-logs';
-    public const CUSTOMER_LOGS = 'donations-customer-logs';
-    public const TRANSACTION_LOGS = 'donations-transaction-logs';
+    const ADDRESS_LOGS = 'donations-address-logs';
+    const CARD_LOGS = 'donations-card-logs';
+    const CUSTOMER_LOGS = 'donations-customer-logs';
+    const TRANSACTION_LOGS = 'donations-transaction-logs';
 
-    public const BRAINTREE_CULPRIT = ['id' => 1, 'name' => 'braintree'];
-    public const DB_CULPRIT = ['id' => 2, 'name' => 'db'];
+    const BRAINTREE_CULPRIT = ['id' => 1, 'name' => 'braintree'];
+    const DB_CULPRIT = ['id' => 2, 'name' => 'db'];
     /**
      * Some model attribute
      *

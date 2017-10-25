@@ -60,20 +60,20 @@ class Address extends Model
     {
         $address = new self();
 
-        $address->countryId = $params->countryId;
-        $address->company = $params->company;
-        $address->stateId = $params->stateId;
-        $address->city = $params->city;
-        $address->postalCode = $params->postalCode;
-        $address->streetAddress = $params->streetAddress;
-        $address->extendedAddress = $params->extendedAddress;
+        $address->countryId = $params['countryId'];
+        $address->company = $params['company'];
+        $address->stateId = $params['state'] ? $params['state'] : $params['stateId'];
+        $address->city = $params['city'];
+        $address->postalCode = $params['postalCode'];
+        $address->streetAddress = $params['streetAddress'];
+        $address->extendedAddress = $params['extendedAddress'];
 
         return $address;
     }
 
     // Public Methods
     // =========================================================================
-    
+
     /**
      * Returns the validation rules for attributes
      * @return array
@@ -83,7 +83,7 @@ class Address extends Model
         return [
             [['id', 'postalCode', 'countryId'], 'integer'],
             [['company', 'countryCode', 'city', 'streetAddress', 'extendedAddress'], 'string'],
-            [['company', 'countryId', 'city', 'postalCode', 'streetAddress'], 'required']
+            [['countryId', 'city', 'postalCode', 'streetAddress'], 'required']
         ];
     }
 

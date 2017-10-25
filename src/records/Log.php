@@ -19,7 +19,7 @@ use craft\db\ActiveRecord;
  * Address Record
  *
  * @property integer $id
- * @property integer pid
+ * @property integer $pid
  * @property integer $culprit
  * @property string $category
  * @property string $method
@@ -32,7 +32,7 @@ class Log extends ActiveRecord
     // Public Static Methods
     // =========================================================================
 
-     /**
+    /**
      * Declares the name of the database table associated with this AR class.
      * By default this method returns the class name as the table name by calling [[Inflector::camel2id()]]
      * with prefix [[Connection::tablePrefix]]. For example if [[Connection::tablePrefix]] is `tbl_`,

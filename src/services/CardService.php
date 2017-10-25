@@ -51,24 +51,24 @@ class CardService extends Component
     {
         $result = 'something';
         // Check our Plugin's settings for `someAttribute`
-        if (DonationsFree::$plugin->getSettings()->someAttribute) {
+        if (DonationsFree::$PLUGIN->getSettings()->someAttribute) {
         }
 
         return $result;
     }
 
-    public function saveCard(Card $card) 
+    public function saveCard(Card $card)
     {
         $cardRecord = new CardRecord();
         $cardRecord->setAttributes($card->getAttributes(), false);
 
         if (!$cardRecord->save()) {
-            
+
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
-                $cardRecord->getErrors(), 
+                $cardRecord->getErrors(),
                 $cardRecord->__toString(),
-                 __METHOD__, 
-                 Log::CARD_LOGS
+                __METHOD__,
+                Log::CARD_LOGS
             );
         }
 

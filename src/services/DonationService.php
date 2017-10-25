@@ -38,18 +38,19 @@ class DonationService extends Component
     // Public Methods
     // =========================================================================
 
-    public function donate(array $params) 
+    public function donate(array $params)
     {
         $customer = Customer::create($params);
         $address = Address::create($params);
         $card = new Card();
         $transaction = new Transaction();
+        $transaction->amount = $params['amount'];
 
         $braintreeService = DonationsFree::$PLUGIN->braintreeService;
 
         $braintreeService->createCustomer($customer);
         $braintreeService->createAddress($customer, $address);
-        $braintreeService->createCard($customer, $card, $params->nonce);
+        $braintreeService->createCard($customer, $card, $params['nonce']);
         $braintreeService->createTransaction($customer, $transaction);
 
         $transaction = Craft::$app->db->beginTransaction();

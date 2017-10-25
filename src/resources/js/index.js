@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-    var isBraintreeValid = true;
     var isBraintreeCreated = false;
 
     var opts = {
@@ -28,54 +26,40 @@ $(document).ready(function() {
 
     var currentTab = 0;
     showTab(currentTab);
-    // Radio box border
-    $('.method').on('click', function() {
-        $('.method').removeClass('blue-border');
-        $(this).addClass('blue-border');
+
+    $(".next-btn").dblclick(function(e){
+        e.preventDefault();
     });
 
-    // Validation
-    var $cardInput = $('.input-fields input');
+    $(".back-btn").dblclick(function(e){
+        e.preventDefault();
+    });
 
     $('.next-btn').click((e) => {
 
-        if (!validate()) {
+        if (currentTab === 2) {
+        return;
+    }
+
+    if (currentTab === 3) {
+        $('#payForm').submit();
+        return;
+    }
+
+    if (!validate()) {
         return false;
     }
 
-    showSpinner();
-    setTimeout(() => {
-        stopSpinner();
-    $('.step').each((index, item) => {
-        if (!$(item).hasClass('active')) {
-        hideTab(currentTab);
-        currentTab += 1;
-        if (!isBraintreeCreated && currentTab === 2) {
-            isBraintreeCreated = true;
-            createBraintree();
-        }
-        showTab(currentTab);
-        $(item).addClass('active');
-        return false;
-    }
-});
-}, 1000);
+    clickBtn(1);
+
 });
 
     $('.back-btn').click((e) => {
-        $($('.step').get().reverse()).each((index, item) => {
-        if ($(item).hasClass('active')) {
-        hideTab(currentTab);
-        currentTab -= 1;
-        showTab(currentTab);
-        $(item).removeClass('active');
-        return false;
-    }
-});
+        clickBtn(-1);
 });
 
     $('#edit-btn').click((e) => {
-        $('#amount').addClass('hidden');
+        $('#sum').addClass('hidden');
     $('.edit-amount-input').removeClass('hidden');
     $('#edit-btn').addClass('hidden');
     $('#ok-btn').removeClass('hidden');
@@ -83,7 +67,7 @@ $(document).ready(function() {
 });
 
     $('#cancel-btn').click((e) => {
-        $('#amount').removeClass('hidden');
+        $('#sum').removeClass('hidden');
     $('.edit-amount-input').addClass('hidden');
     $('#edit-btn').removeClass('hidden');
     $('#ok-btn').addClass('hidden');
@@ -91,9 +75,12 @@ $(document).ready(function() {
 });
 
     $('#ok-btn').click((e) => {
-        $('#amount').text($('.edit-amount-input').val() + '$');
+        let amount = $('.edit-amount-input').val();
+    $('#sum').text(amount + '$');
+    $('#sum').removeClass('hidden');
 
-    $('#amount').removeClass('hidden');
+    $('#amount').val(amount);
+
     $('.edit-amount-input').addClass('hidden');
     $('#edit-btn').removeClass('hidden');
     $('#ok-btn').addClass('hidden');
@@ -101,7 +88,7 @@ $(document).ready(function() {
 });
 
     $('#country').change((e) => {
-        if ($('#country').val() !== USA) {
+        if ($('#country').val() !== defaultCountryId) {
         $('#state-select').addClass('hidden');
         $('#state-input').removeClass('hidden');
     } else {
@@ -110,34 +97,32 @@ $(document).ready(function() {
     }
 });
 
-    function createBraintree() {
-        braintree.dropin.create({
-            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-            selector: '#dropin-container'
-        }, function(err, instance) {
-            if (err) {
-                isBraintreeValid = false;
-                // An error in the create call is likely due to
-                // incorrect configuration values or network issues
-                return;
-            }
-            $('.btn').click(() => {
-                instance.requestPaymentMethod((err, payload) => {
-                if (err) {
-                    isBraintreeValid = false;
+    braintree.dropin.create({
+        authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+        selector: '#dropin-container'
+    }, function(err, instance) {
+        if (err) {
+            // An error in the create call is likely due to
+            // incorrect configuration values or network issues
+            return;
+        }
+        $('.next-btn').click((e) => {
+            if (currentTab === 2) {
+            instance.requestPaymentMethod((err, payload) => {
+                if(err) {
                     // An appropriate error will be shown in the UI
                     return;
                 }
-                isBraintreeValid = true;
-            alert(payload.nonce);
-            $('#nonce').val(payload.nonce);
+                $('#nonce').val(payload.nonce);
+            clickBtn(1);
         });
-        });
-        });
-    }
+        }
+    });
+    })
 
     function validate() {
         let isValid = true;
+        let isBraintreeValid = true;
 
         $('.tab').each((index, item) => {
             if (currentTab === index) {
@@ -163,19 +148,46 @@ $(document).ready(function() {
         });
         }
     });
-
-        if (!isBraintreeValid) {
-            isValid = false;
-        }
-
         return isValid;
+    }
+
+    function clickBtn(next) {
+        if (next === -1) {
+            $($('.step').get().reverse()).each((index, item) => {
+                if ($(item).hasClass('active')) {
+                changeTab(next);
+                $(item).removeClass('active');
+                return false;
+            }
+        });
+        } else {
+            $(".btn").attr('disabled', 'disabled');
+            showSpinner();
+            setTimeout(() => {
+                $(".btn").removeAttr('disabled');
+            stopSpinner();
+            $('.step').each((index, item) => {
+                if (!$(item).hasClass('active')) {
+                changeTab(next);
+                $(item).addClass('active');
+                return false;
+            }
+        });
+        }, 1000);
+        }
+    }
+
+    function changeTab(next) {
+        hideTab(currentTab);
+        currentTab += next;
+        showTab(currentTab);
     }
 
     function hideTab(n) {
         if (n - 1 <= 2) {
             let button = $('.next-btn');
             button.text('Next Step');
-            button.type = 'button';
+            button.attr('type', 'button');
         }
 
         $('.tab').each((index, item) => {
@@ -189,11 +201,15 @@ $(document).ready(function() {
         if (n === 3) {
             let button = $('.next-btn');
             button.text('Submit');
-            button.type = 'submit';
+            button.attr('type', 'submit');
         }
 
         $('.tab').each((index, item) => {
-            if (index === n) {
+            if (index > 3) {
+            return false;
+        }
+
+        if (index === n) {
             $(item).show();
         }
     });
