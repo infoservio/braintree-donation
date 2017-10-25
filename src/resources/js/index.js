@@ -1,6 +1,32 @@
 $(document).ready(function() {
+
+    var isBraintreeValid = true;
+    var isBraintreeCreated = false;
+
+    var opts = {
+        lines: 12, // The number of lines to draw
+        length: 18, // The length of each line
+        width: 6, // The line thickness
+        radius: 30, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#f62f5e', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+    };
+
+    var target = document.body;
+    var spinner = new Spinner(opts);
+
+
     var currentTab = 0;
-    var isBraintreeValid = false;
     showTab(currentTab);
     // Radio box border
     $('.method').on('click', function() {
@@ -17,15 +43,23 @@ $(document).ready(function() {
         return false;
     }
 
+    showSpinner();
+    setTimeout(() => {
+        stopSpinner();
     $('.step').each((index, item) => {
         if (!$(item).hasClass('active')) {
         hideTab(currentTab);
         currentTab += 1;
+        if (!isBraintreeCreated && currentTab === 2) {
+            isBraintreeCreated = true;
+            createBraintree();
+        }
         showTab(currentTab);
         $(item).addClass('active');
         return false;
     }
 });
+}, 1000);
 });
 
     $('.back-btn').click((e) => {
@@ -67,7 +101,7 @@ $(document).ready(function() {
 });
 
     $('#country').change((e) => {
-        if ($('#country').val() !== 'USA') {
+        if ($('#country').val() !== USA) {
         $('#state-select').addClass('hidden');
         $('#state-input').removeClass('hidden');
     } else {
@@ -76,29 +110,35 @@ $(document).ready(function() {
     }
 });
 
-    braintree.dropin.create({
-        authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-        selector: '#dropin-container'
-    }, function(err, instance) {
-        if (err) {
-            // An error in the create call is likely due to
-            // incorrect configuration values or network issues
-            return;
-        }
-        $('.btn').click(() => {
-            instance.requestPaymentMethod((err, payload) => {
+    function createBraintree() {
+        braintree.dropin.create({
+            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+            selector: '#dropin-container'
+        }, function(err, instance) {
             if (err) {
-                // An appropriate error will be shown in the UI
+                isBraintreeValid = false;
+                // An error in the create call is likely due to
+                // incorrect configuration values or network issues
                 return;
             }
-            isBraintreeValid = true;
-        $('#nonce').val(payload.nonce);
-    });
-    });
-    });
+            $('.btn').click(() => {
+                instance.requestPaymentMethod((err, payload) => {
+                if (err) {
+                    isBraintreeValid = false;
+                    // An appropriate error will be shown in the UI
+                    return;
+                }
+                isBraintreeValid = true;
+            alert(payload.nonce);
+            $('#nonce').val(payload.nonce);
+        });
+        });
+        });
+    }
 
     function validate() {
         let isValid = true;
+
         $('.tab').each((index, item) => {
             if (currentTab === index) {
             $(item).find('input').each((index, input) => {
@@ -108,11 +148,25 @@ $(document).ready(function() {
                     $(input).addClass('error');
                 } else {
                     $(input).removeClass('error');
+
+                    if ($(input).attr('id') == 'email') {
+                        if (validateEmail($(input).val())) {
+                            isValid = true;
+                            $(input).removeClass('error');
+                        } else {
+                            isValid = false;
+                            $(input).addClass('error');
+                        }
+                    }
                 }
             }
         });
         }
     });
+
+        if (!isBraintreeValid) {
+            isValid = false;
+        }
 
         return isValid;
     }
@@ -129,7 +183,7 @@ $(document).ready(function() {
             $(item).hide();
         }
     });
-    };
+    }
 
     function showTab(n) {
         if (n === 3) {
@@ -143,6 +197,26 @@ $(document).ready(function() {
             $(item).show();
         }
     });
-    };
+    }
+
+    function showSpinner() {
+        spinner.spin(target);
+        $('.overlay').show();
+    }
+
+    function stopSpinner() {
+        spinner.stop(target);
+        $('.overlay').hide();
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function validatePhone(phone) {
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+        return re.test(phone);
+    }
 
 });

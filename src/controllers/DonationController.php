@@ -14,8 +14,11 @@ use endurant\donationsfree\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
+use craft\helpers\ArrayHelper;
 use endurant\donationsfree\DonationsFreeAssetBundle;
 use endurant\donationsfree\models\forms\DonateForm;
+use endurant\donationsfree\records\Country;
+use endurant\donationsfree\records\State;
 
 /**
  * Donate Controller
@@ -49,11 +52,6 @@ class DonationController extends Controller
      */
     protected $allowAnonymous = ['index', 'pay', 'donate'];
 
-    // Private Properties
-    // =========================================================================
-
-    private $donateForm = null;
-
     // Public Methods
     // =========================================================================
 
@@ -73,10 +71,19 @@ class DonationController extends Controller
      */
     public function actionIndex()
     {
+        $countries = ArrayHelper::toArray(Country::find()->all());
+        $states = ArrayHelper::toArray(State::find()->all());
+        $amount = Craft::$app->session->get('donation')['amount'];
+
         $view = $this->getView();
+
+        $view->setTemplatesPath($this->getViewPath());
+        $view->resolveTemplate('index');
+
+        // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
-        $view->setTemplatesPath(__DIR__ . '/../templates/donation');
-        return $view->renderTemplate('index');
+
+        return $this->renderTemplate('index', ['amount' => $amount, 'countries' => $countries, 'states' => $states]);
     }
 
     /**
@@ -106,12 +113,14 @@ class DonationController extends Controller
     {
         $this->requirePostRequest();
 
-        $this->donateForm = new DonateForm();
-        $this->donateForm->setAttributes(Craft::$app->request->post());
+        $donateForm = new DonateForm();
+        $donateForm->setAttributes(Craft::$app->request->post());
 
-        if (!$this->donateForm->validate()) {
-            return $this->donateForm->getErrors();
+        if (!$donateForm->validate()) {
+            return $donateForm->getErrors();
         }
+
+        Craft::$app->session->set('donation', $donateForm);
 
         return $this->redirect('/actions/donations-free/donation/index');
     }

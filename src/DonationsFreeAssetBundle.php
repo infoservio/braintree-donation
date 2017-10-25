@@ -43,22 +43,26 @@ class DonationsFreeAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = "@endurant/donationsfree/resources";
-
-        // define the dependencies
-        $this->depends = [
-            CpAsset::class,
-        ];
+        $this->sourcePath = '@endurant/donationsfree/resources/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
             'js/index.js',
+            'https://js.braintreegateway.com/web/dropin/1.4.0/js/dropin.js',
+            'https://spin.js.org/spin.min.js'
         ];
 
         $this->css = [
             'css/style.css',
         ];
+
+        $this->depends = [
+            'yii\web\YiiAsset',
+            'yii\web\JqueryAsset',
+        ];
+
+        $this->publishOptions = ['forceCopy' => true];
 
         parent::init();
     }
