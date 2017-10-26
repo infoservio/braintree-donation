@@ -181,8 +181,8 @@ $(document).ready(function() {
         $('#resultEmail').text($('#email').val());
         $('#resultPhone').text($('#phone').val());
         $('#resultCompany').text($('#company').val());
-        $('#resultCountry').text($('#country').text());
-        $('#resultState').text($('#state').text());
+        $('#resultCountry').text($('#country').val());
+        $('#resultState').text($('#state').val());
         $('#resultCity').text($('#city').val());
         $('#resultAddress').text($('#address').val());
         $('#resultPostalCode').text($('#postalCode').val());
