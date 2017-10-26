@@ -19,10 +19,8 @@ use craft\helpers\ArrayHelper;
 use endurant\donationsfree\DonationsFreeAssetBundle;
 use endurant\donationsfree\errors\DonationsPluginException;
 use endurant\donationsfree\models\forms\DonateForm;
-use endurant\donationsfree\models\Log;
 use endurant\donationsfree\records\Country;
 use endurant\donationsfree\records\State;
-use endurant\donationsfree\services\LogService;
 
 /**
  * Donate Controller
@@ -77,7 +75,10 @@ class DonationController extends Controller
     {
         $countries = ArrayHelper::toArray(Country::find()->all());
         $states = ArrayHelper::toArray(State::find()->all());
+        $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
         $amount = Craft::$app->session->get('donation')['amount'];
+        $projectId = Craft::$app->session->get('donation')['projectId'];
+        $projectName = Craft::$app->session->get('donation')['projectName'];
 
         $view = $this->getView();
 
@@ -89,9 +90,12 @@ class DonationController extends Controller
 
         return $this->renderTemplate('index', [
             'amount' => $amount,
+            'defaultCountryId' => $defaultCountryId,
             'countries' => $countries,
             'states' => $states,
-            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken()
+            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
+            'projectId' => $projectId,
+            'projectName' => $projectName
         ]);
     }
 

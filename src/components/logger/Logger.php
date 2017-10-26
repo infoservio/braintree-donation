@@ -94,7 +94,7 @@ class Logger implements ILogger
     {
         $log = new Log();
         $log->pid = $this->processId;
-        $log->culprit = $culprit['id'];
+        $log->culprit = intval($culprit['id']);
         $log->category = $this->category;
         $log->method = $method;
         $log->message = $message;

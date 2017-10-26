@@ -32,7 +32,7 @@ class Country extends ActiveRecord
 {
     // Public Static Methods
     // =========================================================================
-
+    const DEFAULT_COUNTRY_ID = 236;
     /**
      * Declares the name of the database table associated with this AR class.
      * By default this method returns the class name as the table name by calling [[Inflector::camel2id()]]
@@ -47,7 +47,7 @@ class Country extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_country}}';
+        return '{{donations_country}}';
     }
 
     public static function getCountryById(int $id)

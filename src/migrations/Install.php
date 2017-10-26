@@ -61,7 +61,7 @@ class Install extends Migration
     // Private Methods
     // =========================================================================
 
-    private function createTables() 
+    private function createTables()
     {
         if (!$this->tableExists('donations_transaction')) {
             $this->createTable('donations_transaction', [
@@ -69,8 +69,8 @@ class Install extends Migration
                 'transactionId' => $this->text(),
                 'type' => $this->text()->null(),
                 'cardId' => $this->integer(),
-                'amount' => $this->integer(),
-                'status' => $this->integer(),
+                'amount' => $this->float(),
+                'status' => $this->string(50),
                 'projectId' => $this->integer()->null(),
                 'projectName' => $this->string(50)->null(),
                 'transactionDetails' => $this->text()->null(),
@@ -87,7 +87,7 @@ class Install extends Migration
                 'id' => $this->primaryKey(),
                 'tokenId' => $this->string(36),
                 'customerId' => $this->integer(),
-                'bin' => $this->integer(),
+                'bin' => $this->string(4),
                 'last4' => $this->string(4),
                 'cardType' => $this->string(32),
                 'expirationDate' => $this->string(7),
@@ -183,7 +183,7 @@ class Install extends Migration
         }
     }
 
-    private function addForeignKeys() 
+    private function addForeignKeys()
     {
         $this->addForeignKey(
             'fk-donations-transaction-card',
@@ -259,7 +259,7 @@ class Install extends Migration
         if ($this->tableExists('donations_recurring_payment')) {
             $this->dropTable('donations_recurring_payment');
         }
-        
+
         if ($this->tableExists('donations_transaction')) {
             $this->dropTable('donations_transaction');
         }
@@ -300,7 +300,7 @@ class Install extends Migration
         }
     }
 
-    private function insertCountries() 
+    private function insertCountries()
     {
         $countries = DonationsFree::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
         $country = null;

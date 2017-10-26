@@ -50,7 +50,7 @@ class Card extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_card}}';
+        return '{{donations_card}}';
     }
 
     /**
@@ -66,7 +66,7 @@ class Card extends ActiveRecord
             ['tokenId', 'string', 'max' => 36],
             ['expirationDate', 'string', 'length' => 7],
             ['customerLocation', 'string', 'length' => 2],
-            [['tokenId', 'customerId', 'bin', 'last4', 'cardType', 'expirationDate'], 'required']
+            [['tokenId', 'customerId', 'bin', 'cardType', 'expirationDate'], 'required']
         ];
     }
 }

@@ -44,7 +44,10 @@ class DonationService extends Component
         $address = Address::create($params);
         $card = new Card();
         $transaction = new Transaction();
-        $transaction->amount = $params['amount'];
+        $transaction->amount = intval($params['amount']);
+        $transaction->projectId = intval($params['projectId']);
+        $transaction->projectName = $params['projectName'];
+        $transaction->note = $params['note'];
 
         $braintreeService = DonationsFree::$PLUGIN->braintreeService;
 
@@ -61,16 +64,11 @@ class DonationService extends Component
         $card->customerId = $customer->id;
         $card = DonationsFree::$PLUGIN->cardService->saveCard($card);
         $transaction->cardId = $card->id;
-        $transaction = DonationsFree::$PLUGIN->transactionService->saveTransaction($card);
+        $transaction = DonationsFree::$PLUGIN->transactionService->saveTransaction($transaction);
 
 //            $transaction->commit();
 //        } catch(\endurant\donationsfree\errors\DbDonationsPluginException $e) {
 //            $transaction->rollback();
 //        }
-    }
-
-    public function test()
-    {
-        return json_encode(['name' => 'react']);
     }
 }

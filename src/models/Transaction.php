@@ -45,7 +45,7 @@ class Transaction extends Model
     public $status;
     public $projectId;
     public $projectName;
-    public $success;
+    public $note;
     public $transactionDetails;
     public $transactionErrors;
     public $transactionErrorMessage;
@@ -60,8 +60,9 @@ class Transaction extends Model
     public function rules()
     {
         return [
-            [['id', 'cardId', 'amount', 'status', 'projectId', 'projectName', 'success'], 'integer'],
-            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
+            [['id', 'cardId', 'status', 'projectId', 'projectName', 'success'], 'integer'],
+            ['amount', 'double'],
+            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage', 'note'], 'string'],
             [['id', 'cardId', 'amount', 'status', 'success', 'transactionId'], 'required']
         ];
     }

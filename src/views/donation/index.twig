@@ -24,6 +24,8 @@
 
         <form id="payForm" action="pay" method="post">
             <input id="amount" class="hidden" name="amount" value="{{ amount }}"/>
+            <input id="projectId" class="hidden" name="projectId" value="{{ projectId }}"/>
+            <input id="projectName" class="hidden" name="projectName" value="{{ projectName }}"/>
             <div class="tab">
                 <div class="input-fields">
                     <div class="column-1">
@@ -42,33 +44,33 @@
             </div>
 
             <div class="tab">
-                <label for="company">Company</label>
-                <input type="text" id="company" name="company" class="input" tabindex=5/>
+                <label for="company">Company <span class="required">*</span></label>
+                <input type="text" id="company" name="company" class="input" required tabindex=5 />
                 <div class="input-fields">
                     <div class="column-1">
-                        <label for="firstName">Country</label>
+                        <label for="firstName">Country <span class="required">*</span></label>
                         <select id="country" class="input" name="countryId" tabindex=6>
                             {% for country in countries %}
                                 <option value="{{ country.id }}" {{  defaultCountryId == country.id ? ' selected ' : '' }}">{{ country.name }}</option>
                             {% endfor %}
                         </select>
-                        <label for="email">City</label>
-                        <input type="text" id="city" name="city" class="input" tabindex=8/>
-                        <label for="email">Extended Address</label>
-                        <input type="text" id="extendedAddress" name="extendedAddress" class="input" tabindex=9 />
+                        <label for="email">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" class="input" required tabindex=8/>
+                        <label for="email">Postal Code <span class="required">*</span></label>
+                        <input type="text" id="postalCode" name="postalCode" class="input" required tabindex=10 />
                     </div>
                     <div class="column-2">
-                        <label for="lastName">State / Province</label>
+                        <label for="lastName">State / Province <span class="required">*</span></label>
                         <select id="state-select" class="input" name="stateId" tabindex=7>
                             {% for state in states %}
                                 <option value="{{ state.id }}" {{  state.id == 1 ? ' selected ' : '' }}>{{ state.name }}</option>
                             {% endfor %}
                         </select>
                         <input id="state-input" name="state" type="text" class="input hidden" tabindex=7 />
-                        <label for="phone">Address</label>
-                        <input type="text" id="address" name="streetAddress" class="input" tabindex=9 />
-                        <label for="email">Zip</label>
-                        <input type="text" id="postalCode" name="postalCode" class="input" tabindex=10 />
+                        <label for="phone">Address <span class="required">*</span></label>
+                        <input type="text" id="address" name="streetAddress" class="input" required tabindex=9 />
+                        <label for="email">Extended Address</label>
+                        <input type="text" id="extendedAddress" name="extendedAddress" class="input" tabindex=11 />
                     </div>
                 </div>
             </div>
@@ -79,8 +81,33 @@
             </div>
 
             <div class="tab">
-                <label for="note">Note</label>
-                <textarea placeholder="Please write down your notes..." name="note"></textarea>
+                <h3>Please, check your data:</h3>
+                <div>
+                    <div>
+                        <label>First Name: </label>
+                        <span id="resultFirstName"></span>
+                        <label>Last Name: </label>
+                        <span id="resultLastName"></span>
+                        <label>Email: </label>
+                        <span id="resultEmail"></span>
+                        <label>Phone: </label>
+                        <span id="resultPhone"></span>
+                        <label>Company: </label>
+                        <span id="resultCompany"></span>
+                        <label>Country: </label>
+                        <span id="resultCountry"></span>
+                        <label>State: </label>
+                        <span id="resultState"></span>
+                        <label>City: </label>
+                        <span id="resultCity"></span>
+                        <label>Address: </label>
+                        <span id="resultAddress"></span>
+                        <label>Postal Code: </label>
+                        <span id="resultPostalCode"></span>
+                        <label>Extended Address: </label>
+                        <span id="resultExtendedAddress"></span>
+                    </div>
+                </div>
             </div>
 
             <div class="panel-footer">

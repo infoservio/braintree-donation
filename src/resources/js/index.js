@@ -114,7 +114,10 @@ $(document).ready(function() {
                     return;
                 }
                 $('#nonce').val(payload.nonce);
-            clickBtn(1);
+
+                createResultPage();
+
+                clickBtn(1);
         });
         }
     });
@@ -127,7 +130,8 @@ $(document).ready(function() {
         $('.tab').each((index, item) => {
             if (currentTab === index) {
             $(item).find('input').each((index, input) => {
-                if ($(input).attr('required')) {
+                console.log($(input).attr('id'));
+            if ($(input).attr('required')) {
                 if ($(input).val() === '') {
                     isValid = false;
                     $(input).addClass('error');
@@ -143,12 +147,46 @@ $(document).ready(function() {
                             $(input).addClass('error');
                         }
                     }
+
+                    if ($(input).attr('id') == 'phone') {
+                        if (validatePhone($(input).val())) {
+                            isValid = true;
+                            $(input).removeClass('error');
+                        } else {
+                            isValid = false;
+                            $(input).addClass('error');
+                        }
+                    }
+
+                    if ($(input).attr('id') == 'postalCode') {
+                        if (validatePostalCode($(input).val())) {
+                            isValid = true;
+                            $(input).removeClass('error');
+                        } else {
+                            isValid = false;
+                            $(input).addClass('error');
+                        }
+                    }
                 }
             }
         });
         }
     });
         return isValid;
+    }
+
+    function createResultPage() {
+        $('#resultFirstName').text($('#firstName').val());
+        $('#resultLastName').text($('#lastName').val());
+        $('#resultEmail').text($('#email').val());
+        $('#resultPhone').text($('#phone').val());
+        $('#resultCompany').text($('#company').val());
+        $('#resultCountry').text($('#country').text());
+        $('#resultState').text($('#state').text());
+        $('#resultCity').text($('#city').val());
+        $('#resultAddress').text($('#address').val());
+        $('#resultPostalCode').text($('#postalCode').val());
+        $('#resultExtendedAddress').text($('#extendedAddress').val());
     }
 
     function clickBtn(next) {
@@ -233,6 +271,11 @@ $(document).ready(function() {
     function validatePhone(phone) {
         var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
         return re.test(phone);
+    }
+
+    function validatePostalCode(postalCode) {
+        var re = /^\d{5}(?:[-\s]\d{4})?$/;
+        return re.test(postalCode);
     }
 
 });

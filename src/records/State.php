@@ -50,7 +50,7 @@ class State extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_state}}';
+        return '{{donations_state}}';
     }
 
     public static function getStateById(integer $id)

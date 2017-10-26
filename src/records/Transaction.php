@@ -25,7 +25,8 @@ use craft\db\ActiveRecord;
  * @property integer $amount
  * @property integer $projectId
  * @property string $projectName
- * @property boolean $success
+ * @property string $note
+ * @property string $status
  * @property string $transactionDetails
  * @property string $transactionErrors
  * @property string $transactionErrorMessage
@@ -52,7 +53,7 @@ class Transaction extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_transaction}}';
+        return '{{donations_transaction}}';
     }
 
     // Public Methods
@@ -65,9 +66,10 @@ class Transaction extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'cardId', 'amount', 'status', 'projectId', 'projectName'], 'integer'],
-            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
-            [['id', 'cardId', 'amount', 'status', 'transactionId'], 'required']
+            [['cardId', 'projectId'], 'integer'],
+            ['amount', 'double'],
+            [['status', 'projectName', 'transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage', 'note'], 'string'],
+            [['cardId', 'amount', 'status', 'transactionId'], 'required']
         ];
     }
 }

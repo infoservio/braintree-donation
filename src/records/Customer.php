@@ -48,7 +48,7 @@ class Customer extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_customer}}';
+        return '{{donations_customer}}';
     }
 
     /**

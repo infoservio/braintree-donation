@@ -48,7 +48,7 @@ class Log extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%donations_logs}}';
+        return '{{donations_logs}}';
     }
 
     /**
