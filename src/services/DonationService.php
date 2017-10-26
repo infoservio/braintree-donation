@@ -47,7 +47,6 @@ class DonationService extends Component
         $transaction->amount = intval($params['amount']);
         $transaction->projectId = intval($params['projectId']);
         $transaction->projectName = $params['projectName'];
-        $transaction->note = $params['note'];
 
         $braintreeService = DonationsFree::$PLUGIN->braintreeService;
 
