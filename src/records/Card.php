@@ -18,15 +18,18 @@ use craft\db\ActiveRecord;
 /**
  * Card Record
  *
- * @property integer $id;
- * @property string $tokenId;
- * @property integer $customerId;
- * @property integer $bin;
- * @property integer $last4;
- * @property string $cardType;
- * @property string $expirationDate;
- * @property string $cardholderName;
- * @property string $customerLocation;
+ * @property integer $id
+ * @property string $tokenId
+ * @property integer $customerId
+ * @property integer $bin
+ * @property integer $last4
+ * @property string $cardType
+ * @property string $expirationDate
+ * @property string $cardholderName
+ * @property string $customerLocation
+ * @property string $dateCreated
+ * @property string $dateUpdated
+ * @property string $uid
  */
 class Card extends ActiveRecord
 {

@@ -26,6 +26,9 @@ use craft\db\ActiveRecord;
  * @property string $postalCode
  * @property string $streetAddress
  * @property string $extendedAddress
+ * @property string $dateCreated
+ * @property string $dateUpdated
+ * @property string $uid
  */
 class Address extends ActiveRecord
 {

@@ -3,5 +3,5 @@ namespace endurant\donationsfree\components\logger;
 
 interface ILogger
 {
-    public function record(array $errors, string $meesage, string $method, array $culprit);
+    public function record(array $errors, string $message, string $method, array $culprit);
 }

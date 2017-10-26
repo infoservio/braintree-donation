@@ -25,6 +25,9 @@ use craft\db\ActiveRecord;
  * @property string $lastName
  * @property string $email
  * @property string $phone
+ * @property string $dateCreated
+ * @property string $dateUpdated
+ * @property string $uid
  */
 class Customer extends ActiveRecord
 {

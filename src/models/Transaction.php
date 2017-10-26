@@ -49,8 +49,6 @@ class Transaction extends Model
     public $transactionDetails;
     public $transactionErrors;
     public $transactionErrorMessage;
-    public $createdAt;
-    public $updatedAt;
 
     // Public Methods
     // =========================================================================

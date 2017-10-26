@@ -50,7 +50,6 @@ class Log extends Model
     public $method;
     public $errors;
     public $message;
-    public $createdAt;
 
     // Public Methods
     // =========================================================================

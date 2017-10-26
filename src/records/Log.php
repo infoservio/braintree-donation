@@ -25,7 +25,9 @@ use craft\db\ActiveRecord;
  * @property string $method
  * @property string $errors
  * @property string $message
- * @property string $createdAt
+ * @property string $dateCreated
+ * @property string $dateUpdated
+ * @property string $uid
  */
 class Log extends ActiveRecord
 {

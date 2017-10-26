@@ -29,8 +29,9 @@ use craft\db\ActiveRecord;
  * @property string $transactionDetails
  * @property string $transactionErrors
  * @property string $transactionErrorMessage
- * @property string $createdAt
- * @property string $updatedAt
+ * @property string $dateCreated
+ * @property string $dateUpdated
+ * @property string $uid
  */
 class Transaction extends ActiveRecord
 {

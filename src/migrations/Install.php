@@ -76,8 +76,9 @@ class Install extends Migration
                 'transactionDetails' => $this->text()->null(),
                 'transactionErrors' => $this->text()->null(),
                 'transactionErrorMessage' => $this->text()->null(),
-                'createdAt' => $this->date(),
-                'updatedAt' => $this->date()
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
@@ -91,7 +92,10 @@ class Install extends Migration
                 'cardType' => $this->string(32),
                 'expirationDate' => $this->string(7),
                 'cardholderName' => $this->string()->null(),
-                'customerLocation' => $this->string(2)->null()
+                'customerLocation' => $this->string(2)->null(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
@@ -103,7 +107,10 @@ class Install extends Migration
                 'firstName' => $this->string(50),
                 'lastName' => $this->string(50),
                 'email' => $this->string(50),
-                'phone' => $this->string(50)
+                'phone' => $this->string(50),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
@@ -116,7 +123,10 @@ class Install extends Migration
                 'city' => $this->string(50),
                 'postalCode' => $this->integer(),
                 'streetAddress' => $this->string(100),
-                'extendedAddress' => $this->string(100)->null()
+                'extendedAddress' => $this->string(100)->null(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
@@ -128,7 +138,10 @@ class Install extends Migration
                 'amount' => $this->integer(),
                 'status' => $this->integer(),
                 'lastDateDonation' => $this->date(),
-                'nextDateDonation' => $this->date()
+                'nextDateDonation' => $this->date(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
@@ -163,7 +176,9 @@ class Install extends Migration
                 'method' => $this->text(),
                 'message' => $this->text(),
                 'errors' => $this->text(),
-                'createdAt' => $this->date()
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
     }
