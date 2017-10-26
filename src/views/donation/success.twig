@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>{% block head %}{% endblock %}</head>
+<body>
+<div class="overlay">
+</div>
+<div class="checkout-panel">
+    <div class="panel-body">
+        <div class="panel-body-header">
+            <h2 class="title">Success Donation</h2>
+        </div>
+        <div>
+            {{ successText }}
+        </div>
+        <a href="/">Return back</a>
+    </div>
+</div>
+<script>
+    var btAuthorization = '{{ btAuthorization }}';
+</script>
+</body>
+</html>

@@ -77,6 +77,7 @@ class DonationController extends Controller
         $states = ArrayHelper::toArray(State::find()->all());
         $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
         $amount = Craft::$app->session->get('donation')['amount'];
+        $amount = ($amount) ? $amount : 50;
         $projectId = Craft::$app->session->get('donation')['projectId'];
         $projectName = Craft::$app->session->get('donation')['projectName'];
 
