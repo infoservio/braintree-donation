@@ -45,7 +45,7 @@ class CustomerService extends Component
         if (!$customerRecord->save()) {
             
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
-                $customerRecord->getErrors(), 
+                $customerRecord->errors,
                 json_encode($customerRecord->toArray()),
                  __METHOD__, 
                  Log::CUSTOMER_LOGS

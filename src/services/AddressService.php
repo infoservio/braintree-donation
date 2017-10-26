@@ -37,18 +37,18 @@ class AddressService extends Component
     // Public Methods
     // =========================================================================
 
-    public function saveAddress(Address $address) 
+    public function saveAddress(Address $address)
     {
         $addressRecord = new AddressRecord();
         $addressRecord->setAttributes($address->getAttributes(), false);
 
         if (!$addressRecord->save()) {
-            
+
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
-                $addressRecord->getErrors(), 
-                $addressRecord->__toString(),
-                 __METHOD__, 
-                 Log::ADDRESS_LOGS
+                $addressRecord->errors,
+                json_encode($addressRecord->toArray()),
+                __METHOD__,
+                Log::ADDRESS_LOGS
             );
         }
 

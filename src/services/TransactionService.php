@@ -37,20 +37,20 @@ class TransactionService extends Component
     // Public Methods
     // =========================================================================
 
-    public function saveTransaction(Transaction $transaction)  
+    public function saveTransaction(Transaction $transaction)
     {
         $transactionRecord = new TransactionRecord();
         $transactionRecord->setAttributes($transaction->getAttributes(), false);
 
         if (!$transactionRecord->save()) {
-            
+
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
-                $transactionRecord->getErrors(), 
-                $transactionRecord->__toString(),
-                 __METHOD__, 
-                 Log::TRANSACTION_LOGS
+                $transactionRecord->errors,
+                json_encode($transactionRecord->toArray()),
+                __METHOD__,
+                Log::TRANSACTION_LOGS
             );
-        } 
+        }
 
         return $transactionRecord;
     }

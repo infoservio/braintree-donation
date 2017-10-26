@@ -22,7 +22,7 @@ use craft\db\ActiveRecord;
  * @property string $tokenId
  * @property integer $customerId
  * @property integer $bin
- * @property integer $last4
+ * @property string $last4
  * @property string $cardType
  * @property string $expirationDate
  * @property string $cardholderName

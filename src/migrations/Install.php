@@ -88,7 +88,7 @@ class Install extends Migration
                 'tokenId' => $this->string(36),
                 'customerId' => $this->integer(),
                 'bin' => $this->integer(),
-                'last4' => $this->integer(),
+                'last4' => $this->string(4),
                 'cardType' => $this->string(32),
                 'expirationDate' => $this->string(7),
                 'cardholderName' => $this->string()->null(),

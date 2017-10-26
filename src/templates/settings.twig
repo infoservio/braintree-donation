@@ -14,7 +14,7 @@
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\donationsfree\\DonationsFreeAsset") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\DonationsFreeAssetBundle") %}
 <h2 class="instructions-header">Instructions</h2>
 <div>
     API credentials are unique account identifiers that must be added to your code before you can process payments via the API. Think of them as your username and password to payment processing.
@@ -32,42 +32,52 @@
 </div>
 
 {{ forms.textField({
-        label: 'Braintree Environment',
-        instructions: 'Get this parameter from your braintree account.',
-        id: 'btEnvironment',
-        name: 'btEnvironment',
-        value: settings['btEnvironment'],
-        required: true,
-        element: true
-    })
+    label: 'Braintree Environment',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btEnvironment',
+    name: 'btEnvironment',
+    value: settings['btEnvironment'],
+    required: true,
+    element: true
+})
 }}
 
 {{ forms.textField({
-        label: 'Braintree Merchant Id',
-        instructions: 'Get this parameter from your braintree account.',
-        id: 'btMerchantId',
-        name: 'btMerchantId',
-        value: settings['btMerchantId'],
-        required: true
-    })
+    label: 'Braintree Merchant Id',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btMerchantId',
+    name: 'btMerchantId',
+    value: settings['btMerchantId'],
+    required: true
+})
 }}
 
 {{ forms.textField({
-        label: 'Braintree Public Key',
-        instructions: 'Get this parameter from your braintree account.',
-        id: 'btPublicKey',
-        name: 'btPublicKey',
-        value: settings['btPublicKey'],
-        required: true
-    })
+    label: 'Braintree Public Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPublicKey',
+    name: 'btPublicKey',
+    value: settings['btPublicKey'],
+    required: true
+})
 }}
 
 {{ forms.textField({
-        label: 'Braintree Private Key',
-        instructions: 'Get this parameter from your braintree account.',
-        id: 'btPrivateKey',
-        name: 'btPrivateKey',
-        value: settings['btPrivateKey'],
-        required: true
-    })
+    label: 'Braintree Private Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPrivateKey',
+    name: 'btPrivateKey',
+    value: settings['btPrivateKey'],
+    required: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Authorization Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btAuthorization',
+    name: 'btAuthorization',
+    value: settings['btAuthorization'],
+    required: true
+})
 }}

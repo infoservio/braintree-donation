@@ -39,17 +39,17 @@ class BraintreeService extends Component
     // Public Methods
     // =========================================================================
 
-    public function createCustomer(Customer &$customer) 
+    public function createCustomer(Customer &$customer)
     {
         $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCustomer($customer);
 
         if (!$result->success) {
-            
+
             throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
-                $result->errors->deepAll(), 
+                $result->errors->deepAll(),
                 $result->message,
-                 __METHOD__, 
-                 Log::CUSTOMER_LOGS
+                __METHOD__,
+                Log::CUSTOMER_LOGS
             );
         }
 
@@ -57,34 +57,34 @@ class BraintreeService extends Component
         return $result;
     }
 
-    public function createAddress(Customer $customer, Address $address) 
+    public function createAddress(Customer $customer, Address $address)
     {
         $result = DonationsFree::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
 
         if (!$result->success) {
-            
+
             throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
-                $result->errors->deepAll(), 
+                $result->errors->deepAll(),
                 $result->message,
-                 __METHOD__, 
-                 Log::ADDRESS_LOGS
+                __METHOD__,
+                Log::ADDRESS_LOGS
             );
         }
 
         return $result;
     }
 
-    public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce) 
+    public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce)
     {
         $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
-        
+
         if (!$result->success) {
-            
+
             throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
-                $result->errors->deepAll(), 
+                $result->errors->deepAll(),
                 $result->message,
-                 __METHOD__, 
-                 Log::CARD_LOGS
+                __METHOD__,
+                Log::CARD_LOGS
             );
         }
 
@@ -98,17 +98,17 @@ class BraintreeService extends Component
         return $result;
     }
 
-    public function createTransaction(Customer $customer, Transaction &$transaction) 
+    public function createTransaction(Customer $customer, Transaction &$transaction)
     {
         $result = DonationsFree::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
 
         if (!$result->success) {
-            
+
             throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
-                $result->errors->deepAll(), 
+                $result->errors->deepAll(),
                 $result->message,
-                 __METHOD__, 
-                 Log::TRANSACTION_LOGS
+                __METHOD__,
+                Log::TRANSACTION_LOGS
             );
         }
 
@@ -116,8 +116,6 @@ class BraintreeService extends Component
         $transaction->type = $result->transaction->type;
         $transaction->amount = $result->transaction->amount;
         $transaction->status = $result->transaction->status;
-        $transaction->createdAt = $result->transaction->createdAt;
-        $transaction->updatedAt = $result->transaction->updatedAt;
         $transaction->transactionDetails = json_encode($result->transaction);
         $transaction->transactionErrors =
             (isset($result->transaction->errors)) ?

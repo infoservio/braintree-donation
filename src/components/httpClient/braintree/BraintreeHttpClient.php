@@ -5,6 +5,7 @@ namespace endurant\donationsfree\components\httpClient\braintree;
 use endurant\donationsfree\DonationsFree;
 use yii\base\Component;
 
+use Braintree\ClientToken as BraintreeClientToken;
 use Braintree\Configuration as BraintreeConfiguration;
 use Braintree\Customer as BraintreeCustomer;
 use Braintree\Address as BraintreeAddress;
@@ -22,6 +23,7 @@ class BraintreeHttpClient extends Component
 
     function __construct()
     {
+        parent::__construct();
 //        $this->_settings = DonationsFree::$PLUGIN->getSettings();
         $publicKey = 'qnykwwxnpy23d4kx';
         $privateKey = '63c0cce28a3cc034e75f6dea9109d29a';
@@ -38,7 +40,12 @@ class BraintreeHttpClient extends Component
     // Public Methods
     // =========================================================================
 
-    public function createCustomer(Customer $customer) 
+    public function generateToken()
+    {
+        return BraintreeClientToken::generate();
+    }
+
+    public function createCustomer(Customer $customer)
     {
         $result = BraintreeCustomer::create([
             'firstName' => $customer->firstName,
@@ -50,7 +57,7 @@ class BraintreeHttpClient extends Component
         return $result;
     }
 
-    public function createAddress(Customer $customer, Address $address) 
+    public function createAddress(Customer $customer, Address $address)
     {
         $country = $address->getCountry();
         $result = BraintreeAddress::create([
@@ -63,12 +70,12 @@ class BraintreeHttpClient extends Component
             'postalCode'        => $address->postalCode,
             'countryName'       => ($country) ? $country->name : null,
             'countryCodeAlpha2' => ($country) ? $country->alpha2 : null
-        ]);  
+        ]);
 
         return $result;
     }
 
-    public function createCard(Customer $customer, string $paymentMethodNonce) 
+    public function createCard(Customer $customer, string $paymentMethodNonce)
     {
         $result = BraintreeCard::create([
             'customerId' => $customer->customerId,
@@ -78,7 +85,7 @@ class BraintreeHttpClient extends Component
         return $result;
     }
 
-    public function createTransaction(Customer $customer, Transaction $transaction) 
+    public function createTransaction(Customer $customer, Transaction $transaction)
     {
         $result = BraintreeTransaction::sale([
             'amount' => $transaction->amount,

@@ -15,14 +15,14 @@ class DonationsPluginException extends Exception
 
     private $_logService;
 
-    public function __constructor(array $errors, string $message, string $method, string $category) 
+    public function __construct(array $errors, string $message, string $method, string $category)
     {
         parent::__construct();
         $this->errors = $errors;
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = DonationsFree::$plugin->logService;
+        $this->_logService = DonationsFree::$PLUGIN->logService;
         $this->log($category);
     }
 

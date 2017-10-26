@@ -65,8 +65,8 @@ class CardService extends Component
         if (!$cardRecord->save()) {
 
             throw new \endurant\donationsfree\errors\DbDonationsPluginException(
-                $cardRecord->getErrors(),
-                $cardRecord->__toString(),
+                $cardRecord->errors,
+                json_encode($cardRecord->toArray()),
                 __METHOD__,
                 Log::CARD_LOGS
             );

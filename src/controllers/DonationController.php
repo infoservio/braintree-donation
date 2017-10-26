@@ -10,15 +10,19 @@
 
 namespace endurant\donationsfree\controllers;
 
+use Braintree\ClientToken;
 use endurant\donationsfree\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
 use craft\helpers\ArrayHelper;
 use endurant\donationsfree\DonationsFreeAssetBundle;
+use endurant\donationsfree\errors\DonationsPluginException;
 use endurant\donationsfree\models\forms\DonateForm;
+use endurant\donationsfree\models\Log;
 use endurant\donationsfree\records\Country;
 use endurant\donationsfree\records\State;
+use endurant\donationsfree\services\LogService;
 
 /**
  * Donate Controller
@@ -83,7 +87,12 @@ class DonationController extends Controller
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
 
-        return $this->renderTemplate('index', ['amount' => $amount, 'countries' => $countries, 'states' => $states]);
+        return $this->renderTemplate('index', [
+            'amount' => $amount,
+            'countries' => $countries,
+            'states' => $states,
+            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken()
+        ]);
     }
 
     /**
@@ -96,7 +105,17 @@ class DonationController extends Controller
     {
         $this->requirePostRequest();
 
-        return json_encode(['name' => 'test']);
+        try {
+            DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
+        } catch (DonationsPluginException $e) {
+            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+        } catch (\Exception $e) {
+            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+        } catch (\Error $e) {
+            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+        }
+
+        return json_encode(true);
     }
 
     /**

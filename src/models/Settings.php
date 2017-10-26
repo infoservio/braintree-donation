@@ -39,10 +39,11 @@ class Settings extends Model
      *
      * @var string
      */
-    public $btEnvironment = 'test';
+    public $btEnvironment = '';
     public $btMerchantId = '';
     public $btPublicKey = '';
     public $btPrivateKey = '';
+    public $btAuthorization = 'sandbox_55kjsy7h_5qgymkb253ndj9yh';
 
     // Public Methods
     // =========================================================================
@@ -60,8 +61,8 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey'], 'string'],
-            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey'], 'required'],
+            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization'], 'string'],
+            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization'], 'required'],
         ];
     }
 }
