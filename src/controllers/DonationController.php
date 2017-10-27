@@ -143,7 +143,7 @@ class DonationController extends Controller
 
         return $this->renderTemplate('success', [
             'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
-            'baseUrl' => Craft::$app->session->get('baseUrl')
+            'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
         ]);
     }
 
