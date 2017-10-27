@@ -45,7 +45,6 @@ class Transaction extends Model
     public $status;
     public $projectId;
     public $projectName;
-    public $note;
     public $transactionDetails;
     public $transactionErrors;
     public $transactionErrorMessage;
@@ -62,7 +61,7 @@ class Transaction extends Model
         return [
             [['id', 'cardId', 'status', 'projectId', 'projectName', 'success'], 'integer'],
             ['amount', 'double'],
-            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage', 'note'], 'string'],
+            [['transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
             [['id', 'cardId', 'amount', 'status', 'success', 'transactionId'], 'required']
         ];
     }

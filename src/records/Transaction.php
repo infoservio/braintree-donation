@@ -25,7 +25,6 @@ use craft\db\ActiveRecord;
  * @property integer $amount
  * @property integer $projectId
  * @property string $projectName
- * @property string $note
  * @property string $status
  * @property string $transactionDetails
  * @property string $transactionErrors
@@ -68,7 +67,7 @@ class Transaction extends ActiveRecord
         return [
             [['cardId', 'projectId'], 'integer'],
             ['amount', 'double'],
-            [['status', 'projectName', 'transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage', 'note'], 'string'],
+            [['status', 'projectName', 'transactionId', 'type', 'transactionDetails', 'transactionErrors', 'transactionErrorMessage'], 'string'],
             [['cardId', 'amount', 'status', 'transactionId'], 'required']
         ];
     }

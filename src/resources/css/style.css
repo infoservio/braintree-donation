@@ -360,6 +360,47 @@ textarea:focus {
     opacity: 0.7;
 }
 
+.container {
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:stretch;
+}
+
+.left {order:1; }
+.middle {order:3; flex-basis: 30% }
+.right {order:2; }
+
+.one-line-content {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.label {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media screen and (min-width:600px) {
+    .container {
+        flex-wrap:nowrap;
+    }
+
+    .left {
+        flex-basis:200px;
+        order:1;
+    }
+    .middle {
+        flex-basis:1px;
+        order:2;
+    }
+    .right {
+        flex-basis:200px;
+        order:3;
+    }
+}
+
 #firstName {
     background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
     background-size: 30px;
