@@ -80,36 +80,48 @@
                 <input type="hidden" id="nonce" display="none" name="nonce" />
             </div>
 
-            <div class="tab">
+            <div class="tab finish">
                 <h3>Please, check your data:</h3>
                 <div class="container">
                     <div class="left">
+                        <h4>Contact Info</h4>
                         <label>First Name: </label>
-                        <span id="resultFirstName"></span>
+                        <div class="value" id="resultFirstName"></div>
                         <label>Last Name: </label>
-                        <span id="resultLastName"></span>
+                        <div class="value" id="resultLastName"></div>
                         <label>Email: </label>
-                        <span id="resultEmail"></span>
+                        <div class="value" id="resultEmail"></div>
                         <label>Phone: </label>
-                        <span id="resultPhone"></span>
-                        <label>Company: </label>
-                        <span id="resultCompany"></span>
-                        <label>Country: </label>
-                        <span id="resultCountry"></span>
+                        <div class="value" id="resultPhone"></div>
+
                     </div>
 
-                    <div class="middle"></div>
+                    <div class="middle">
+                        <h4>Company Info</h4>
+                        <label>Company: </label>
+                        <div class="value" id="resultCompany"></div>
+
+                    </div>
                     <div class="right">
-                        <label>State: </label>
-                        <span id="resultState"></span>
-                        <label>City: </label>
-                        <span id="resultCity"></span>
-                        <label>Address: </label>
-                        <span id="resultAddress"></span>
-                        <label>Postal Code: </label>
-                        <span id="resultPostalCode"></span>
-                        <label>Extended Address: </label>
-                        <span id="resultExtendedAddress"></span>
+                        <h4>Address Info</h4>
+                        <div class="container">
+                            <div>
+                                <label class="top">Country: </label>
+                                <div class="value" id="resultCountry"></div>
+                                <label>State: </label>
+                                <div class="value" id="resultState"></div>
+                                <label>City: </label>
+                                <div class="value" id="resultCity"></div>
+                            </div>
+                            <div>
+                                <label class="top">Address: </label>
+                                <div class="value" id="resultAddress"></div>
+                                <label>Postal Code: </label>
+                                <div class="value" id="resultPostalCode"></div>
+                                <label>Extended Address: </label>
+                                <div class="value" id="resultExtendedAddress"></div></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -122,7 +134,8 @@
     </div>
 </div>
 <script>
-    var btAuthorization = '{{ btAuthorization }}';
+    var btAuthorization = '{{ btAuthorization }}',
+        defaultCountryId = {{ defaultCountryId }}
 </script>
 </body>
 </html>

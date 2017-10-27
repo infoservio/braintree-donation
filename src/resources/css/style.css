@@ -364,18 +364,29 @@ textarea:focus {
     display:flex;
     flex-wrap:wrap;
     flex-direction:row;
-    justify-content:flex-start;
+    justify-content:space-between;
     align-items:stretch;
+}
+
+.finish {
+    margin-left:20px;
+    margin-bottom: 20px;
+}
+
+.value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+.top {
+    margin-top: 0;
 }
 
 .left {order:1; }
 .middle {order:3; flex-basis: 30% }
 .right {order:2; }
-
-.one-line-content {
-    overflow: hidden;
-    white-space: nowrap;
-}
 
 .label {
     overflow: hidden;
@@ -392,11 +403,10 @@ textarea:focus {
         order:1;
     }
     .middle {
-        flex-basis:1px;
         order:2;
     }
     .right {
-        flex-basis:200px;
+        flex-basis:300px;
         order:3;
     }
 }

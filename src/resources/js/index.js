@@ -42,7 +42,10 @@ $(document).ready(function() {
     }
 
     if (currentTab === 3) {
-        $('#payForm').submit();
+        showSpinner();
+        $('#payForm').submit(() => {
+            stopSpinner();
+    });
         return;
     }
 
@@ -115,9 +118,9 @@ $(document).ready(function() {
                 }
                 $('#nonce').val(payload.nonce);
 
-                createResultPage();
+            createResultPage();
 
-                clickBtn(1);
+            clickBtn(1);
         });
         }
     });
@@ -176,13 +179,15 @@ $(document).ready(function() {
     }
 
     function createResultPage() {
+        let state = ($('#state-select').hasClass('hidden') ? ($('#state-input').val()) : $('#state-select option:selected').text());
+
         $('#resultFirstName').text($('#firstName').val());
         $('#resultLastName').text($('#lastName').val());
         $('#resultEmail').text($('#email').val());
         $('#resultPhone').text($('#phone').val());
         $('#resultCompany').text($('#company').val());
-        $('#resultCountry').text($('#country').val());
-        $('#resultState').text($('#state').val());
+        $('#resultCountry').text($('#country option:selected').text());
+        $('#resultState').text(state);
         $('#resultCity').text($('#city').val());
         $('#resultAddress').text($('#address').val());
         $('#resultPostalCode').text($('#postalCode').val());

@@ -24,17 +24,13 @@ class BraintreeHttpClient extends Component
     function __construct()
     {
         parent::__construct();
-//        $this->_settings = DonationsFree::$PLUGIN->getSettings();
-        $publicKey = 'qnykwwxnpy23d4kx';
-        $privateKey = '63c0cce28a3cc034e75f6dea9109d29a';
-        $merchantId = '6y9jvbyw3dm7fx6w';
-        $environment = 'sandbox';
+        $this->_settings = DonationsFree::$PLUGIN->getSettings();
 
         // Configuration of Braintree
-        BraintreeConfiguration::environment($environment/*$this->_settings->btEnvironment*/);
-        BraintreeConfiguration::merchantId($merchantId/*$this->_settings->btMerchantId*/);
-        BraintreeConfiguration::publicKey($publicKey/*$this->_settings->btPublicKey*/);
-        BraintreeConfiguration::privateKey($privateKey/*$this->_settings->btPrivateKey*/);
+        BraintreeConfiguration::environment($this->_settings->btEnvironment);
+        BraintreeConfiguration::merchantId($this->_settings->btMerchantId);
+        BraintreeConfiguration::publicKey($this->_settings->btPublicKey);
+        BraintreeConfiguration::privateKey($this->_settings->btPrivateKey);
     }
 
     // Public Methods

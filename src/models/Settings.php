@@ -39,10 +39,10 @@ class Settings extends Model
      *
      * @var string
      */
-    public $btEnvironment = '';
-    public $btMerchantId = '';
-    public $btPublicKey = '';
-    public $btPrivateKey = '';
+    public $btEnvironment = 'sandbox';
+    public $btMerchantId = '5qgymkb253ndj9yh';
+    public $btPublicKey = 'wpg443bzspqx8drp';
+    public $btPrivateKey = 'a0adccfd375d9ed363d1819c3c59b8f7';
     public $btAuthorization = 'sandbox_55kjsy7h_5qgymkb253ndj9yh';
 
     // Public Methods

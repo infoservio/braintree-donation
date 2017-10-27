@@ -73,6 +73,10 @@ class DonationController extends Controller
      */
     public function actionIndex()
     {
+        if ($params = Craft::$app->request->post()) {
+            return json_encode(['rest']);
+        }
+
         $countries = ArrayHelper::toArray(Country::find()->all());
         $states = ArrayHelper::toArray(State::find()->all());
         $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
