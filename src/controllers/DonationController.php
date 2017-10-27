@@ -114,17 +114,37 @@ class DonationController extends Controller
     {
         $this->requirePostRequest();
 
+        $view = $this->getView();
+
+        $view->setTemplatesPath($this->getViewPath());
+        $view->resolveTemplate('index');
+
+        // Include all the JS and CSS stuff
+        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+
         try {
             DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
         } catch (DonationsPluginException $e) {
-            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+            return $this->renderTemplate('error', [
+                'errorText' => $e->getMessage(),
+                'baseUrl' => Craft::$app->session->get('baseUrl')
+            ]);
         } catch (\Exception $e) {
-            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+            return $this->renderTemplate('error', [
+                'errorText' => $e->getMessage(),
+                'baseUrl' => Craft::$app->session->get('baseUrl')
+            ]);
         } catch (\Error $e) {
-            return json_encode([$e->getTraceAsString(), $e->getMessage(), Craft::$app->request->post()]);
+            return $this->renderTemplate('error', [
+                'errorText' => $e->getMessage(),
+                'baseUrl' => Craft::$app->session->get('baseUrl')
+            ]);
         }
 
-        return json_encode(true);
+        return $this->renderTemplate('success', [
+            'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
+            'baseUrl' => Craft::$app->session->get('baseUrl')
+        ]);
     }
 
     /**
@@ -145,6 +165,7 @@ class DonationController extends Controller
         }
 
         Craft::$app->session->set('donation', $donateForm);
+        Craft::$app->session->set('baseUrl', Craft::$app->request->baseUrl);
 
         return $this->redirect('/actions/donations-free/donation/index');
     }

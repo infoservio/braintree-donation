@@ -3,20 +3,17 @@
 <body>
 <div class="overlay">
 </div>
-<div class="checkout-panel">
+<div class="error-panel">
+    <div class="error-logo"></div>
     <div class="panel-body">
         <div class="panel-body-header">
-            <h2 class="title">Error Donation</h2>
+            <h2 class="title">Donation was failed</h2>
         </div>
         <div>
             {{ errorText }}
         </div>
-        <a href="/">Try again</a>
-        <a href="/">Return back</a>
+        <a href="{{ baseUrl }}">Return back to the page</a>
     </div>
 </div>
-<script>
-    var btAuthorization = '{{ btAuthorization }}';
-</script>
 </body>
 </html>

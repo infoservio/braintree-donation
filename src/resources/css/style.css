@@ -22,6 +22,34 @@ body {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
 }
 
+.success-panel {
+    display: flex;
+    flex-direction: column;
+    width: 520px;
+    height: 383px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+}
+
+.success-logo {
+    background: transparent url('../img/success.png') no-repeat;
+    background-size: 128px;
+    width: 128px;
+    height: 128px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -64px;
+}
+
+.error-panel {
+    display: flex;
+    flex-direction: column;
+    width: 520px;
+    height: 383px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+}
+
 .panel-body {
     padding: 45px 80px 0;
     flex: 1;
