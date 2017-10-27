@@ -316,13 +316,41 @@ textarea:focus {
 }
 
 .edit-btn {
+    background: white url('../img/edit.png') no-repeat;
+    background-size: 25px;
+    width: 25px;
+    height: 25px;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+}
+
+.ok-btn {
+    background: white url('../img/ok.png') no-repeat;
+    background-size: 40px;
     width: 40px;
     height: 40px;
     margin-top: -5px;
     margin-left: 5px;
 }
 
-.edit-btn:hover {
+.ok-btn:hover {
+    transform: scale(1.1);
+}
+
+.cancel-btn {
+    background: white url('../img/cancel.png') no-repeat;
+    background-size: 25px;
+    width: 25px;
+    height: 25px;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.cancel-btn:hover {
     transform: scale(1.1);
 }
 
@@ -412,21 +440,21 @@ textarea:focus {
 }
 
 #firstName {
-    background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
+    background: white url('../img/user.png') no-repeat 97%;
     background-size: 30px;
 }
 
 #lastName {
-    background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
+    background: white url('../img/user.png') no-repeat 97%;
     background-size: 30px;
 }
 
 #phone {
-    background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
-    background-size: 30px;
+    background: white url('../img/phone.png') no-repeat 97%;
+    background-size: 20px;
 }
 
 #email {
-    background: white url('https://i.imgur.com/ILbGByI.png') no-repeat 97%;
+    background: white url('../img/email.png') no-repeat 97%;
     background-size: 30px;
 }
