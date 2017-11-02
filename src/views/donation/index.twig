@@ -1,5 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-<head>{% block head %}{% endblock %}</head>
+<head>
+    <meta name="viewport" content="width=device-width">
+    {% block head %}{% endblock %}
+</head>
 <body>
 <div class="overlay">
 </div>
@@ -28,15 +31,20 @@
             <input id="projectName" class="hidden" name="projectName" value="{{ projectName }}"/>
             <div class="tab">
                 <div class="input-fields">
-                    <div class="column-1">
+                    <div class="field">
                         <label for="firstName">First Name <span class="required">*</span></label>
                         <input type="text" id="firstName" name="firstName" class="input" tabindex=1 required/>
+                        
+                    </div>
+                    <div class="field">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" class="input" tabindex=2 required/>
+                    </div>
+                    <div class="field">
                         <label for="email">Email <span class="required">*</span></label>
                         <input type="email" id="email" name="email" class="input" tabindex=3 required/>
                     </div>
-                    <div class="column-2">
-                        <label for="lastName">Last Name <span class="required">*</span></label>
-                        <input type="text" id="lastName" name="lastName" class="input" tabindex=2 required/>
+                    <div class="field">
                         <label for="phone">Phone <span class="required">*</span></label>
                         <input type="text" id="phone" name="phone" class="input" tabindex=4 required/>
                     </div>
@@ -51,7 +59,7 @@
                         <label for="firstName">Country <span class="required">*</span></label>
                         <select id="country" class="input" name="countryId" tabindex=6>
                             {% for country in countries %}
-                                <option value="{{ country.id }}" {{  defaultCountryId == country.id ? ' selected ' : '' }}">{{ country.name }}</option>
+                                <option value="{{ country.id }}" {{  defaultCountryId == country.id ? ' selected ' : '' }}>{{ country.name }}</option>
                             {% endfor %}
                         </select>
                         <label for="email">City <span class="required">*</span></label>
