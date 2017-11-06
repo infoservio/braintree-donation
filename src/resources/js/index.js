@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var isBraintreeCreated = false;
 
     var opts = {
@@ -27,83 +27,98 @@ $(document).ready(function() {
     var currentTab = 0;
     showTab(currentTab);
 
-    $(".next-btn").dblclick(function(e){
+    $('.success-logo').attr('src', '../img/success.png');
+
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+            $('.next-btn').click();
+        }
+    });
+
+    $(".next-btn").dblclick(function (e) {
         e.preventDefault();
     });
 
-    $(".back-btn").dblclick(function(e){
+    $(".back-btn").dblclick(function (e) {
         e.preventDefault();
     });
 
     $('.next-btn').click((e) => {
 
         if (currentTab === 2) {
-        return;
-    }
+            return;
+        }
 
-    if (currentTab === 3) {
-        showSpinner();
-        $('#payForm').submit(() => {
-            stopSpinner();
+        if (currentTab === 3) {
+            console.log('submit');
+            showSpinner();
+            $('#payForm').submit();
+            return;
+        }
+
+        if (!validate()) {
+            return false;
+        }
+
+        clickBtn(1);
+
     });
-        return;
-    }
-
-    if (!validate()) {
-        return false;
-    }
-
-    clickBtn(1);
-
-});
 
     $('.back-btn').click((e) => {
         clickBtn(-1);
-});
+    });
 
     $('#edit-btn').click((e) => {
         $('#sum').addClass('hidden');
-    $('.edit-amount-input').removeClass('hidden');
-    $('#edit-btn').addClass('hidden');
-    $('#ok-btn').removeClass('hidden');
-    $('#cancel-btn').removeClass('hidden');
-});
+        $('.edit-amount-input').removeClass('hidden');
+        $('#edit-btn').addClass('hidden');
+        $('#ok-btn').removeClass('hidden');
+        $('#cancel-btn').removeClass('hidden');
+    });
 
     $('#cancel-btn').click((e) => {
         $('#sum').removeClass('hidden');
-    $('.edit-amount-input').addClass('hidden');
-    $('#edit-btn').removeClass('hidden');
-    $('#ok-btn').addClass('hidden');
-    $('#cancel-btn').addClass('hidden');
-});
+        $('.edit-amount-input').addClass('hidden');
+        $('#edit-btn').removeClass('hidden');
+        $('#ok-btn').addClass('hidden');
+        $('#cancel-btn').addClass('hidden');
+    });
 
     $('#ok-btn').click((e) => {
         let amount = $('.edit-amount-input').val();
-    $('#sum').text(amount + '$');
-    $('#sum').removeClass('hidden');
+        if (amount <= 0) {
+            $('.edit-amount-input').addClass('error');
+            return;
+        }
+        $('.edit-amount-input').removeClass('error');
+        $('#sum').text(amount + '$');
+        $('#sum').removeClass('hidden');
 
-    $('#amount').val(amount);
+        $('#amount').val(amount);
 
-    $('.edit-amount-input').addClass('hidden');
-    $('#edit-btn').removeClass('hidden');
-    $('#ok-btn').addClass('hidden');
-    $('#cancel-btn').addClass('hidden');
-});
+        $('.edit-amount-input').addClass('hidden');
+        $('#edit-btn').removeClass('hidden');
+        $('#ok-btn').addClass('hidden');
+        $('#cancel-btn').addClass('hidden');
+    });
 
     $('#country').change((e) => {
-        if ($('#country').val() !== defaultCountryId) {
-        $('#state-select').addClass('hidden');
-        $('#state-input').removeClass('hidden');
-    } else {
-        $('#state-select').removeClass('hidden');
-        $('#state-input').addClass('hidden');
-    }
-});
+        if ($('#country').val() == defaultCountryId) {
+            $('#state-select').removeClass('hidden');
+            $('#state-input').addClass('hidden');
+        } else {
+            $('#state-select').addClass('hidden');
+            $('#state-input').removeClass('hidden');
+        }
+    });
 
     braintree.dropin.create({
         authorization: btAuthorization,
-        selector: '#dropin-container'
-    }, function(err, instance) {
+        container: '#dropin-container',
+        paypal: {
+            flow: 'vault'
+        }
+    }, function (err, instance) {
         if (err) {
             // An error in the create call is likely due to
             // incorrect configuration values or network issues
@@ -111,19 +126,19 @@ $(document).ready(function() {
         }
         $('.next-btn').click((e) => {
             if (currentTab === 2) {
-            instance.requestPaymentMethod((err, payload) => {
-                if(err) {
-                    // An appropriate error will be shown in the UI
-                    return;
-                }
-                $('#nonce').val(payload.nonce);
+                instance.requestPaymentMethod((err, payload) => {
+                    if (err) {
+                        // An appropriate error will be shown in the UI
+                        return;
+                    }
+                    $('#nonce').val(payload.nonce);
 
-            createResultPage();
+                    createResultPage();
 
-            clickBtn(1);
+                    clickBtn(1);
+                });
+            }
         });
-        }
-    });
     })
 
     function validate() {
@@ -132,49 +147,49 @@ $(document).ready(function() {
 
         $('.tab').each((index, item) => {
             if (currentTab === index) {
-            $(item).find('input').each((index, input) => {
-                console.log($(input).attr('id'));
-            if ($(input).attr('required')) {
-                if ($(input).val() === '') {
-                    isValid = false;
-                    $(input).addClass('error');
-                } else {
-                    $(input).removeClass('error');
-
-                    if ($(input).attr('id') == 'email') {
-                        if (validateEmail($(input).val())) {
-                            isValid = true;
-                            $(input).removeClass('error');
-                        } else {
+                $(item).find('input').each((index, input) => {
+                    console.log($(input).attr('id'));
+                    if ($(input).attr('required')) {
+                        if ($(input).val() === '') {
                             isValid = false;
                             $(input).addClass('error');
-                        }
-                    }
-
-                    if ($(input).attr('id') == 'phone') {
-                        if (validatePhone($(input).val())) {
-                            isValid = true;
-                            $(input).removeClass('error');
                         } else {
-                            isValid = false;
-                            $(input).addClass('error');
-                        }
-                    }
-
-                    if ($(input).attr('id') == 'postalCode') {
-                        if (validatePostalCode($(input).val())) {
-                            isValid = true;
                             $(input).removeClass('error');
-                        } else {
-                            isValid = false;
-                            $(input).addClass('error');
+
+                            if ($(input).attr('id') == 'email') {
+                                if (validateEmail($(input).val())) {
+                                    isValid = true;
+                                    $(input).removeClass('error');
+                                } else {
+                                    isValid = false;
+                                    $(input).addClass('error');
+                                }
+                            }
+
+                            if ($(input).attr('id') == 'phone') {
+                                if (validatePhone($(input).val())) {
+                                    isValid = true;
+                                    $(input).removeClass('error');
+                                } else {
+                                    isValid = false;
+                                    $(input).addClass('error');
+                                }
+                            }
+
+                            if ($(input).attr('id') == 'postalCode') {
+                                if (validatePostalCode($(input).val())) {
+                                    isValid = true;
+                                    $(input).removeClass('error');
+                                } else {
+                                    isValid = false;
+                                    $(input).addClass('error');
+                                }
+                            }
                         }
                     }
-                }
+                });
             }
         });
-        }
-    });
         return isValid;
     }
 
@@ -191,32 +206,33 @@ $(document).ready(function() {
         $('#resultCity').text($('#city').val());
         $('#resultAddress').text($('#address').val());
         $('#resultPostalCode').text($('#postalCode').val());
-        $('#resultExtendedAddress').text($('#extendedAddress').val());
+        let extendedAddress = $('#extendedAddress').val() ? $('#extendedAddress').val() : '-';
+        $('#resultExtendedAddress').text(extendedAddress);
     }
 
     function clickBtn(next) {
         if (next === -1) {
             $($('.step').get().reverse()).each((index, item) => {
                 if ($(item).hasClass('active')) {
-                changeTab(next);
-                $(item).removeClass('active');
-                return false;
-            }
-        });
+                    changeTab(next);
+                    $(item).removeClass('active');
+                    return false;
+                }
+            });
         } else {
             $(".btn").attr('disabled', 'disabled');
             showSpinner();
             setTimeout(() => {
                 $(".btn").removeAttr('disabled');
-            stopSpinner();
-            $('.step').each((index, item) => {
-                if (!$(item).hasClass('active')) {
-                changeTab(next);
-                $(item).addClass('active');
-                return false;
-            }
-        });
-        }, 1000);
+                stopSpinner();
+                $('.step').each((index, item) => {
+                    if (!$(item).hasClass('active')) {
+                        changeTab(next);
+                        $(item).addClass('active');
+                        return false;
+                    }
+                });
+            }, 1000);
         }
     }
 
@@ -235,9 +251,9 @@ $(document).ready(function() {
 
         $('.tab').each((index, item) => {
             if (index === n) {
-            $(item).hide();
-        }
-    });
+                $(item).hide();
+            }
+        });
     }
 
     function showTab(n) {
@@ -249,13 +265,13 @@ $(document).ready(function() {
 
         $('.tab').each((index, item) => {
             if (index > 3) {
-            return false;
-        }
+                return false;
+            }
 
-        if (index === n) {
-            $(item).show();
-        }
-    });
+            if (index === n) {
+                $(item).show();
+            }
+        });
     }
 
     function showSpinner() {

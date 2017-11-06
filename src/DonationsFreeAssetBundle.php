@@ -49,7 +49,7 @@ class DonationsFreeAssetBundle extends AssetBundle
         // when this asset bundle is registered
         $this->js = [
             'js/index.js',
-            'https://js.braintreegateway.com/web/dropin/1.4.0/js/dropin.js',
+            'https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js'
         ];
 

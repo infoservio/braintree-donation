@@ -66,7 +66,7 @@ class Card extends ActiveRecord
             ['tokenId', 'string', 'max' => 36],
             ['expirationDate', 'string', 'length' => 7],
             ['customerLocation', 'string', 'length' => 2],
-            [['tokenId', 'customerId', 'bin', 'cardType', 'expirationDate'], 'required']
+            [['tokenId', 'customerId'], 'required']
         ];
     }
 }

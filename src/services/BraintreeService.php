@@ -88,12 +88,15 @@ class BraintreeService extends Component
             );
         }
 
-        $card->tokenId = $result->paymentMethod->token;
-        $card->bin = $result->paymentMethod->last4;
-        $card->cardType = $result->paymentMethod->cardType;
-        $card->expirationDate = $result->paymentMethod->expirationDate;
-        $card->cardholderName = $result->paymentMethod->cardholderName;
-        $card->customerLocation = $result->paymentMethod->customerLocation;
+        $paymentMethod = $result->paymentMethod;
+
+        $card->tokenId = $paymentMethod->token;
+        $card->bin = isset($paymentMethod->bin) ? $paymentMethod->bin : null;
+        $card->last4 = isset($paymentMethod->last4) ? $paymentMethod->last4 : '';
+        $card->cardType = isset($paymentMethod->cardType) ? $paymentMethod->cardType : null;
+        $card->expirationDate = isset($paymentMethod->expirationDate) ? $paymentMethod->expirationDate : null;
+        $card->cardholderName = isset($paymentMethod->cardholderName) ? $paymentMethod->cardholderName : null;
+        $card->customerLocation = isset($paymentMethod->customerLocation) ? $paymentMethod->customerLocation : null;
 
         return $result;
     }

@@ -65,7 +65,7 @@ class Card extends Model
             ['expirationDate', 'string', 'length' => 7],
             ['customerLocation', 'string', 'length' => 2],
             ['last4', 'string', 'length' => 4],
-            [['tokenId', 'customerId', 'bin', 'last4', 'cardType', 'expirationDate'], 'required']
+            [['tokenId', 'customerId'], 'required']
         ];
     }
 }

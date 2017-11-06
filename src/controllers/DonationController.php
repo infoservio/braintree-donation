@@ -52,7 +52,7 @@ class DonationController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'pay', 'donate'];
+    protected $allowAnonymous = ['pay', 'donate', 'success', 'error'];
 
     // Public Methods
     // =========================================================================
@@ -65,43 +65,28 @@ class DonationController extends Controller
         return parent::beforeAction($action);
     }
 
-    /**
-     * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/donations-free/donate
-     *
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        if ($params = Craft::$app->request->post()) {
-            return json_encode(['rest']);
-        }
-
-        $countries = ArrayHelper::toArray(Country::find()->all());
-        $states = ArrayHelper::toArray(State::find()->all());
-        $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
-        $amount = Craft::$app->session->get('donation')['amount'];
-        $amount = ($amount) ? $amount : 50;
-        $projectId = Craft::$app->session->get('donation')['projectId'];
-        $projectName = Craft::$app->session->get('donation')['projectName'];
-
-        $view = $this->getView();
+    public function actionSuccess() 
+    {$view = $this->getView();
 
         $view->setTemplatesPath($this->getViewPath());
-        $view->resolveTemplate('index');
-
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+       return $this->renderTemplate('success', [
+                'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
+                'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+            ]);
+    }
 
-        return $this->renderTemplate('index', [
-            'amount' => $amount,
-            'defaultCountryId' => $defaultCountryId,
-            'countries' => $countries,
-            'states' => $states,
-            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
-            'projectId' => $projectId,
-            'projectName' => $projectName
-        ]);
+    public function actionError() 
+    {$view = $this->getView();
+
+        $view->setTemplatesPath($this->getViewPath());
+        // Include all the JS and CSS stuff
+        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+        return $this->renderTemplate('error', [
+                    'errorText' => ['error' => 'test'],
+                    'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+                ]);
     }
 
     /**
@@ -112,38 +97,59 @@ class DonationController extends Controller
      */
     public function actionPay()
     {
-        $this->requirePostRequest();
-
         $view = $this->getView();
 
         $view->setTemplatesPath($this->getViewPath());
-        $view->resolveTemplate('index');
-
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
 
-        try {
-            DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
-        } catch (DonationsPluginException $e) {
-            return $this->renderTemplate('error', [
-                'errorText' => $e->getMessage(),
-                'baseUrl' => Craft::$app->session->get('baseUrl')
-            ]);
-        } catch (\Exception $e) {
-            return $this->renderTemplate('error', [
-                'errorText' => $e->getMessage(),
-                'baseUrl' => Craft::$app->session->get('baseUrl')
-            ]);
-        } catch (\Error $e) {
-            return $this->renderTemplate('error', [
-                'errorText' => $e->getMessage(),
-                'baseUrl' => Craft::$app->session->get('baseUrl')
+        if ($params = Craft::$app->request->post()) {
+            $baseUrl = Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/';
+            $view->resolveTemplate('error');
+            try {
+                DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
+            } catch (DonationsPluginException $e) {
+                return $this->renderTemplate('error', [
+                    'errorText' => $e->message,
+                    'baseUrl' => $baseUrl
+                ]);
+            } catch (\Exception $e) {
+                return $this->renderTemplate('error', [
+                    'errorText' => $e->getMessage(),
+                    'baseUrl' => $baseUrl
+                ]);
+            } catch (\Error $e) {
+                return $this->renderTemplate('error', [
+                    'errorText' => $e->getMessage(),
+                    'baseUrl' => $baseUrl
+                ]);
+            }
+
+            $view->resolveTemplate('success');
+            return $this->renderTemplate('success', [
+                'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
+                'baseUrl' => $baseUrl
             ]);
         }
 
-        return $this->renderTemplate('success', [
-            'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
-            'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+        $countries = ArrayHelper::toArray(Country::find()->all());
+        $states = ArrayHelper::toArray(State::find()->all());
+        $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
+        $amount = Craft::$app->session->get('donation')['amount'];
+        $amount = ($amount) ? $amount : 50;
+        $projectId = Craft::$app->session->get('donation')['projectId'];
+        $projectName = Craft::$app->session->get('donation')['projectName'];
+
+        $view->resolveTemplate('index');
+
+        return $this->renderTemplate('index', [
+            'amount' => $amount,
+            'defaultCountryId' => $defaultCountryId,
+            'countries' => $countries,
+            'states' => $states,
+            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
+            'projectId' => $projectId,
+            'projectName' => $projectName
         ]);
     }
 
@@ -167,6 +173,6 @@ class DonationController extends Controller
         Craft::$app->session->set('donation', $donateForm);
         Craft::$app->session->set('baseUrl', Craft::$app->request->baseUrl);
 
-        return $this->redirect('/actions/donations-free/donation/index');
+        return $this->redirect('/actions/donations-free/donation/pay');
     }
 }
