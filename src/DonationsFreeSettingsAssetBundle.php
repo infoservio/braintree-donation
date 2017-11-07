@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationsFreeAssetBundle extends AssetBundle
+class DonationsFreeSettingsAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -48,19 +48,7 @@ class DonationsFreeAssetBundle extends AssetBundle
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/index.js',
             'js/jscolor.js',
-            'https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js',
-        ];
-
-        $this->css = [
-            'css/style.css',
-        ];
-
-        $this->depends = [
-            'yii\web\YiiAsset',
-            'yii\web\JqueryAsset',
         ];
 
         $this->publishOptions = ['forceCopy' => true];

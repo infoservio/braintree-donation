@@ -149,7 +149,8 @@ class DonationController extends Controller
             'states' => $states,
             'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
             'projectId' => $projectId,
-            'projectName' => $projectName
+            'projectName' => $projectName,
+            'mainColor' => DonationsFree::$PLUGIN->getSettings()->color
         ]);
     }
 

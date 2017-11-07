@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // set main color
+    document.body.style.setProperty('--main-color', mainColor);
+
     var isBraintreeCreated = false;
 
     var opts = {
@@ -9,7 +12,7 @@ $(document).ready(function () {
         corners: 1, // Corner roundness (0..1)
         rotate: 0, // The rotation offset
         direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#f62f5e', // #rgb or #rrggbb or array of colors
+        color: mainColor, // #rgb or #rrggbb or array of colors
         speed: 1, // Rounds per second
         trail: 60, // Afterglow percentage
         shadow: false, // Whether to render a shadow

@@ -45,6 +45,7 @@ class Settings extends Model
     public $btPrivateKey = 'a0adccfd375d9ed363d1819c3c59b8f7';
     public $btAuthorization = 'sandbox_55kjsy7h_5qgymkb253ndj9yh';
     public $successText = 'Success Text';
+    public $color = 'f62f5e';
 
     // Public Methods
     // =========================================================================

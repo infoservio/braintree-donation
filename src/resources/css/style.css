@@ -1,3 +1,7 @@
+:root {
+    --main-color: #f62f5e;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -99,7 +103,7 @@ body {
 }
 
 .step:first-child {
-    background-color: #f62f5e;
+    background-color: var(--main-color);
 }
 
 .step:after {
@@ -120,7 +124,7 @@ body {
 }
 
 .step:first-child:before {
-    color: #f62f5e;
+    color: var(--main-color);
 }
 
 .step:last-child:after {
@@ -128,23 +132,23 @@ body {
 }
 
 .step.active {
-    background-color: #f62f5e;
+    background-color: var(--main-color);
 }
 
 .step.active:after {
-    background-color: #f62f5e;
+    background-color: var(--main-color);
 }
 
 .step.active:before {
-    color: #f62f5e;
+    color: var(--main-color);
 }
 
 .step.active + .step {
-    background-color: #f62f5e;
+    background-color: var(--main-color);
 }
 
 .step.active + .step:before {
-    color: #f62f5e;
+    color: var(--main-color);
 }
 
 .step:nth-child(1):before {
@@ -308,13 +312,13 @@ textarea:focus {
 }
 
 .back-btn {
-    color: #f62f5e;
+    color: var(--main-color);
     background: #fff;
 }
 
 .next-btn {
     color: #fff;
-    background: #f62f5e;
+    background: var(--main-color);
 }
 
 .btn:hover {
@@ -334,7 +338,7 @@ textarea:focus {
 }
 
 .warning {
-    border-color: #f62f5e;
+    border-color: var(--main-color);
 }
 
 .tab {

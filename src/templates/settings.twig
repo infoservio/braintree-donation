@@ -14,7 +14,7 @@
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("endurant\\donationsfree\\DonationsFreeAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\DonationsFreeSettingsAssetBundle") %}
 <h2 class="instructions-header">Instructions</h2>
 <div>
     API credentials are unique account identifiers that must be added to your code before you can process payments via the API. Think of them as your username and password to payment processing.
@@ -91,3 +91,33 @@
     required: true
 })
 }}
+
+{{ forms.textField({
+    label: 'Main Color',
+    instructions: 'This color will be used for buttons, spinner and slider steps.',
+    id: 'color',
+    name: 'color',
+    value: settings['color'],
+    required: true
+})
+}}
+
+<script>
+    let input = document.getElementById('settings-color');
+    input.className += ' jscolor';
+</script>
+
+
+<!-- Trigger/Open The Modal 
+<button id="myBtn">Open Modal</button>
+
+
+<div id="myModal" class="modal">
+
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>-->
