@@ -45,8 +45,12 @@ $(document).ready(function () {
 
     $('.next-btn').click((e) => {
 
-        if (currentTab === 2) {
+        if (currentTab === 0) {
             return;
+        }
+
+        if (currentTab === 2) {
+            createResultPage();
         }
 
         if (currentTab === 3) {
@@ -69,6 +73,13 @@ $(document).ready(function () {
     });
 
     $('#edit-btn').click((e) => {
+        // init
+        let amount = $('#sum').text();
+        amount = amount.replace('$', '');
+        $('.edit-amount-input').val(amount);
+        $('.edit-amount-input').removeClass('error');
+
+
         $('#sum').addClass('hidden');
         $('.edit-amount-input').removeClass('hidden');
         $('#edit-btn').addClass('hidden');
@@ -106,9 +117,11 @@ $(document).ready(function () {
         if ($('#country').val() == defaultCountryId) {
             $('#state-select').removeClass('hidden');
             $('#state-input').addClass('hidden');
+            $('#state-input').removeAttr('required');
         } else {
             $('#state-select').addClass('hidden');
             $('#state-input').removeClass('hidden');
+            $('#state-input').attr('required', true);
         }
     });
 
@@ -124,16 +137,17 @@ $(document).ready(function () {
             // incorrect configuration values or network issues
             return;
         }
+        
         $('.next-btn').click((e) => {
-            if (currentTab === 2) {
+            if (currentTab === 0) {
                 instance.requestPaymentMethod((err, payload) => {
                     if (err) {
                         // An appropriate error will be shown in the UI
+                        $('.payment-error').removeClass('hidden');
                         return;
                     }
+                    $('.payment-error').addClass('hidden');
                     $('#nonce').val(payload.nonce);
-
-                    createResultPage();
 
                     clickBtn(1);
                 });
@@ -142,46 +156,45 @@ $(document).ready(function () {
     })
 
     function validate() {
-        let isValid = true;
-        let isBraintreeValid = true;
+        let isValid = [];
 
         $('.tab').each((index, item) => {
             if (currentTab === index) {
                 $(item).find('input').each((index, input) => {
-                    console.log($(input).attr('id'));
                     if ($(input).attr('required')) {
                         if ($(input).val() === '') {
-                            isValid = false;
+                            console.log({name: $(input).attr('id'), value: $(input).val()});
+                            isValid[index] = false;
                             $(input).addClass('error');
                         } else {
                             $(input).removeClass('error');
 
                             if ($(input).attr('id') == 'email') {
                                 if (validateEmail($(input).val())) {
-                                    isValid = true;
+                                    isValid[index] = true;
                                     $(input).removeClass('error');
                                 } else {
-                                    isValid = false;
+                                    isValid[index] = false;
                                     $(input).addClass('error');
                                 }
                             }
 
                             if ($(input).attr('id') == 'phone') {
                                 if (validatePhone($(input).val())) {
-                                    isValid = true;
+                                    isValid[index] = true;
                                     $(input).removeClass('error');
                                 } else {
-                                    isValid = false;
+                                    isValid[index] = false;
                                     $(input).addClass('error');
                                 }
                             }
 
                             if ($(input).attr('id') == 'postalCode') {
                                 if (validatePostalCode($(input).val())) {
-                                    isValid = true;
+                                    isValid[index] = true;
                                     $(input).removeClass('error');
                                 } else {
-                                    isValid = false;
+                                    isValid[index] = false;
                                     $(input).addClass('error');
                                 }
                             }
@@ -190,7 +203,12 @@ $(document).ready(function () {
                 });
             }
         });
-        return isValid;
+        let result = true;
+        isValid.forEach(item => {
+            if (!item)
+                result = item;
+        });
+        return result;
     }
 
     function createResultPage() {
@@ -200,12 +218,15 @@ $(document).ready(function () {
         $('#resultLastName').text($('#lastName').val());
         $('#resultEmail').text($('#email').val());
         $('#resultPhone').text($('#phone').val());
-        $('#resultCompany').text($('#company').val());
         $('#resultCountry').text($('#country option:selected').text());
         $('#resultState').text(state);
         $('#resultCity').text($('#city').val());
         $('#resultAddress').text($('#address').val());
         $('#resultPostalCode').text($('#postalCode').val());
+        
+        let company = $('#company').val() ? $('#company').val() : '-';
+        $('#resultCompany').text(company);
+
         let extendedAddress = $('#extendedAddress').val() ? $('#extendedAddress').val() : '-';
         $('#resultExtendedAddress').text(extendedAddress);
     }

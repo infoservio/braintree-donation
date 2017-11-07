@@ -25,7 +25,7 @@ class PayForm extends Model
             [['streetAddress', 'extendedAddress'], 'string', 'max' => 100 ],
             [['email'], 'email'],
             [['countryId', 'postalCode'], 'integer', 'min' => 1],
-            [['firstName', 'lastName', 'phone', 'countryId', 'email', 'company', 'stateId', 'city', 'streetAddress', 'postalCode'], 'required']
+            [['firstName', 'lastName', 'phone', 'countryId', 'email', 'stateId', 'city', 'streetAddress', 'postalCode'], 'required']
         ];
     }
 }

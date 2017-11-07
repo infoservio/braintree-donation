@@ -29,6 +29,13 @@
             <input id="amount" class="hidden" name="amount" value="{{ amount }}"/>
             <input id="projectId" class="hidden" name="projectId" value="{{ projectId }}"/>
             <input id="projectName" class="hidden" name="projectName" value="{{ projectName }}"/>
+
+            <div class="tab">
+                <p class="payment-error alert alert-danger hidden ">Please, fill this step</p>
+                <div id="dropin-container"></div>
+                <input type="hidden" id="nonce" display="none" name="nonce" />
+            </div>
+
             <div class="tab">
                 <div class="input-fields">
                     <div class="field">
@@ -52,8 +59,8 @@
             </div>
 
             <div class="tab">
-                <label for="company">Company <span class="required">*</span></label>
-                <input type="text" id="company" name="company" class="input" required tabindex=5 />
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" class="input" tabindex=5 />
                 <div class="input-fields">
                     <div class="field">
                         <label for="firstName">Country <span class="required">*</span></label>
@@ -89,11 +96,6 @@
                         <input type="text" id="extendedAddress" name="extendedAddress" class="input" tabindex=11 />
                     </div>
                 </div>
-            </div>
-
-            <div class="tab">
-                <div id="dropin-container"></div>
-                <input type="hidden" id="nonce" display="none" name="nonce" />
             </div>
 
             <div class="tab finish">

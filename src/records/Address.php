@@ -57,7 +57,7 @@ class Address extends ActiveRecord
         return [
             [['id', 'postalCode', 'countryId'], 'integer'],
             [['company', 'city', 'streetAddress', 'extendedAddress'], 'string'],
-            [['company', 'countryId', 'city', 'postalCode', 'streetAddress'], 'required']
+            [['countryId', 'city', 'postalCode', 'streetAddress'], 'required']
         ];
     }
 

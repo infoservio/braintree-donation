@@ -58,7 +58,7 @@ class BraintreeHttpClient extends Component
         $country = $address->getCountry();
         $result = BraintreeAddress::create([
             'customerId'        => $customer->customerId,
-            'company'           => $address->company,
+            'company'           => ($address->company) ? $address->company : '',
             'streetAddress'     => $address->streetAddress,
             'extendedAddress'   => $address->extendedAddress,
             'locality'          => $address->city,
