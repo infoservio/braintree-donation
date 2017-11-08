@@ -66,7 +66,8 @@ class DonationController extends Controller
     }
 
     public function actionSuccess() 
-    {$view = $this->getView();
+    {
+        $view = $this->getView();
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
@@ -78,7 +79,8 @@ class DonationController extends Controller
     }
 
     public function actionError() 
-    {$view = $this->getView();
+    {
+        $view = $this->getView();
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
