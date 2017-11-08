@@ -87,9 +87,19 @@
 {{ forms.textareaField({
     label: 'Success Page',
     instructions: 'Success message for user after successfull donation.',
-    id: 'editor',
-    name: 'successText',
+    id: 'success-page',
+    name: 'succcessPage',
     value: settings['successText'],
+    required: true
+})
+}}
+
+{{ forms.textareaField({
+    label: 'Error Page',
+    instructions: 'Error message for user after failed donation.',
+    id: 'error-page',
+    name: 'errorPage',
+    value: settings['errorText'],
     required: true
 })
 }}
@@ -107,5 +117,6 @@
 <script>
     let input = document.getElementById('settings-color');
     input.className += ' jscolor';
-    CKEDITOR.replace('settings-editor');
+    CKEDITOR.replace('settings-success-page');
+    CKEDITOR.replace('settings-error-page');
 </script>

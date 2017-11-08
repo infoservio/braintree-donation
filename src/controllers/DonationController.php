@@ -72,10 +72,10 @@ class DonationController extends Controller
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
-       return $this->renderTemplate('success', [
-                'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
-                'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
-            ]);
+        return $this->renderTemplate('success', [
+            'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
+            'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+        ]);
     }
 
     public function actionError() 
@@ -86,9 +86,9 @@ class DonationController extends Controller
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
         return $this->renderTemplate('error', [
-                    'errorText' => ['error' => 'test'],
-                    'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
-                ]);
+            'errorText' => DonationsFree::$PLUGIN->getSettings()->errorText,
+            'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+        ]);
     }
 
     /**
@@ -108,30 +108,19 @@ class DonationController extends Controller
         if ($params = Craft::$app->request->post()) {
             $baseUrl = Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/';
             $view->resolveTemplate('error');
+            
             try {
                 DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
             } catch (DonationsPluginException $e) {
-                return $this->renderTemplate('error', [
-                    'errorText' => $e->message,
-                    'baseUrl' => $baseUrl
-                ]);
+                return $this->redirect('/actions/donations-free/donation/error');
             } catch (\Exception $e) {
-                return $this->renderTemplate('error', [
-                    'errorText' => $e->getMessage(),
-                    'baseUrl' => $baseUrl
-                ]);
+                return $this->redirect('/actions/donations-free/donation/error');
             } catch (\Error $e) {
-                return $this->renderTemplate('error', [
-                    'errorText' => $e->getMessage(),
-                    'baseUrl' => $baseUrl
-                ]);
+                return $this->redirect('/actions/donations-free/donation/error');
             }
 
             $view->resolveTemplate('success');
-            return $this->renderTemplate('success', [
-                'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
-                'baseUrl' => $baseUrl
-            ]);
+            return $this->redirect('/actions/donations-free/donation/success');
         }
 
         $countries = ArrayHelper::toArray(Country::find()->all());
