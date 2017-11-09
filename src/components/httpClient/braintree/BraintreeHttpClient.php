@@ -19,6 +19,7 @@ use endurant\donationsfree\models\Transaction;
 
 class BraintreeHttpClient extends Component
 {
+    private $_channel = 'endure_SP_BT';
     private $_settings;
 
     function __construct()
@@ -84,6 +85,7 @@ class BraintreeHttpClient extends Component
     public function createTransaction(Customer $customer, Transaction $transaction)
     {
         $result = BraintreeTransaction::sale([
+            'channel' => $this->_channel,
             'amount' => $transaction->amount,
             'customerId' => $customer->customerId,
             'options' => [
