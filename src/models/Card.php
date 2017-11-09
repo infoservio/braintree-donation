@@ -57,8 +57,7 @@ class Card extends Model
     public function rules()
     {
         return [
-            [['id', 'customerId', 'bin'], 'integer'],
-            ['cardholderName', 'string'],
+            [['id', 'customerId'], 'integer'],
             ['cardholderName', 'string'],
             ['cardType', 'string', 'max' => 32],
             ['tokenId', 'string', 'max' => 36],

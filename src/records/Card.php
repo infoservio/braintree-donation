@@ -60,12 +60,13 @@ class Card extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'customerId', 'bin', 'last4'], 'integer'],
+            [['id', 'customerId'], 'integer'],
             ['cardholderName', 'string'],
             ['cardType', 'string', 'max' => 32],
             ['tokenId', 'string', 'max' => 36],
             ['expirationDate', 'string', 'length' => 7],
             ['customerLocation', 'string', 'length' => 2],
+            ['last4', 'string', 'length' => 4],
             [['tokenId', 'customerId'], 'required']
         ];
     }
