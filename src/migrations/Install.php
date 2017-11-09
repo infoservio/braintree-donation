@@ -148,7 +148,7 @@ class Install extends Migration
         if (!$this->tableExists('donations_country')) {
             $this->createTable('donations_country', [
                 'id' => $this->primaryKey(),
-                'name' => $this->string(50),
+                'name' => $this->string(100),
                 'alpha2' => $this->string(2),
                 'alpha3' => $this->string(3),
                 'countryCode' => $this->integer(),
