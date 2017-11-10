@@ -318,6 +318,12 @@ textarea:focus {
     background: #fff;
 }
 
+.back-btn:disabled {
+    background: #ddd;
+    color: white;
+    cursor: default;
+}
+
 .next-btn {
     color: #fff;
     background: var(--main-color);
@@ -482,6 +488,49 @@ textarea:focus {
     border-color: #f5c6cb;
 }
 
+.back-button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline:0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.svg {
+  padding: 5px;
+}
+
+.go-back {
+    margin-left: -35%;
+    margin-top: 11px;
+    cursor: pointer;
+}
+
+.back-element {
+    margin-top: -5px;
+}
+
+.arrow {
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.arrow:hover polyline,
+.arrow:focus polyline {
+  stroke-width: 6;
+}
+
+.arrow:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+polyline {
+  transition: all 250ms ease-in-out;
+}
+
+
 #firstName {
     background: white url('../img/user.png') no-repeat 97%;
     background-size: 30px;
@@ -503,6 +552,11 @@ textarea:focus {
 }
 
 @media screen and (max-width: 881px) {
+    
+    .go-back {
+        display: none;
+    }
+
     .container {
         flex-wrap: nowrap;
         flex-direction: column;
@@ -728,18 +782,89 @@ textarea:focus {
 }
 
 @media screen and (min-width: 400px) and (max-width: 479px) {
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .edit-btn {
+        background-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .back-element {
+        margin-top: 0;
+    }
+
+    .arrow {
+        margin-top: -5px;
+    }
+
+    .svg {
+        width: 25px;
+        height: 35px;
+    }
+
     .step:after {
         width: 105px;
     }
 }
 
 @media screen and (min-width: 360px) and (max-width: 399px) {
+
+    h2 {
+        font-size: 15px;
+    }
+
+    .back-element {
+        margin-top: 0;
+    }
+
+    .edit-btn {
+        background-size: 15px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .arrow {
+        margin-top: -5px;
+    }
+
+    .svg {
+        width: 20px;
+        height: 30px;
+    }
+
     .step:after {
         width: 92px;
     }
 }
 
 @media screen and (max-width: 359px) {
+    h2 {
+        font-size: 15px;
+    }
+
+    .back-element {
+        margin-top: 0;
+    }
+
+    .edit-btn {
+        background-size: 15px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .arrow {
+        margin-top: -5px;
+    }
+
+    .svg {
+        width: 20px;
+        height: 30px;
+    }
+
     .progress-bar {
         display: none;
     }

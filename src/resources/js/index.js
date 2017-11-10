@@ -263,7 +263,16 @@ $(document).ready(function () {
     function changeTab(next) {
         hideTab(currentTab);
         currentTab += next;
+        disableBackButton();
         showTab(currentTab);
+    }
+
+    function disableBackButton() {
+        if (currentTab > 0) {
+            $('.back-btn').attr('disabled', false);
+        }  else {
+            $('.back-btn').attr('disabled', true);
+        }
     }
 
     function hideTab(n) {

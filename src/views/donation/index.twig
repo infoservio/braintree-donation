@@ -9,6 +9,15 @@
 <div class="checkout-panel">
     <div class="panel-body">
         <div class="panel-body-header">
+            <div class="back-element">
+                <button class="back-button arrow" onclick="history.back(-1)">
+                    <svg class="svg" width="40px" height="50px" viewBox="0 0 50 80" xml:space="preserve">
+                        <polyline fill="none" stroke="#{{ mainColor }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
+                        45.63,75.8 0.375,38.087 45.63,0.375 "/>
+                    </svg> 
+                </button>
+            </div>
+            <span class="go-back" style="color: #{{ mainColor }}"  onclick="history.back(-1)">Go Back</span>
             <h2 class="title">Checkout</h2>
             <div class="amount">
                 <h2 id="sum" class="amount">{{ amount }}$</h2>
@@ -165,7 +174,7 @@
             </div>
 
             <div class="panel-footer">
-                <button type="button" class="btn back-btn">Back</button>
+                <button type="button" class="btn back-btn" disabled>Back</button>
                 <button type="button" class="btn next-btn">Next Step</button>
             </div>
         </form>
