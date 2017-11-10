@@ -1,16 +1,13 @@
 <?php
 
 namespace endurant\donationsfree\errors;
-
-use yii\base\Exception;
 use endurant\donationsfree\DonationsFree;
 
-class DonationsPluginException extends Exception
+class DonationsPluginException extends \Exception
 {
-    public $message;
-    public $method;
-    public $errors;
-
+    protected $message;
+    protected $method;
+    protected $errors;
     protected $culprit;
 
     private $_logService;
@@ -25,8 +22,13 @@ class DonationsPluginException extends Exception
         $this->_logService = DonationsFree::$PLUGIN->logService;
         $this->log($category);
     }
+    
+    public function getErrors() 
+    {
+        return json_encode($this->errors);
+    }
 
-    private function log(string $category)
+    protected function log(string $category)
     {
         $this->_logService->setCategory($category);
         $this->_logService->log($this->errors, $this->message, $this->method, $this->culprit);

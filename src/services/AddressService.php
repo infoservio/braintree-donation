@@ -10,14 +10,12 @@
 
 namespace endurant\donationsfree\services;
 
-use endurant\donationsfree\DonationsFree;
-
-use Craft;
 use craft\base\Component;
 
 use endurant\donationsfree\records\Address as AddressRecord;
 use endurant\donationsfree\models\Address;
 use endurant\donationsfree\models\Log;
+use endurant\donationsfree\errors\DbDonationsPluginException;
 
 /**
  * Donate Service
@@ -44,7 +42,7 @@ class AddressService extends Component
 
         if (!$addressRecord->save()) {
 
-            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+            throw new DbDonationsPluginException(
                 $addressRecord->errors,
                 json_encode($addressRecord->toArray()),
                 __METHOD__,

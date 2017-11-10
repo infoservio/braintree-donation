@@ -2,7 +2,6 @@
 namespace endurant\donationsfree\components\logger;
 
 use Craft;
-use endurant\donationsfree\DonationsFree;
 use endurant\donationsfree\records\Log as LogRecord;
 use endurant\donationsfree\models\Log;
 use endurant\donationsfree\components\Settings;
@@ -94,7 +93,7 @@ class Logger implements ILogger
     {
         $log = new Log();
         $log->pid = $this->processId;
-        $log->culprit = intval($culprit['id']);
+        $log->culprit = intval($culprit);
         $log->category = $this->category;
         $log->method = $method;
         $log->message = $message;
@@ -103,7 +102,7 @@ class Logger implements ILogger
         $logRecord = new LogRecord();
         $logRecord->setAttributes($log->getAttributes());
 
-        if (!$log->validate() && !$logRecord->save()) {
+        if (!$logRecord->save()) {
             return json_encode([$log->getErrors(), $logRecord->getErrors()]);
         }
 
