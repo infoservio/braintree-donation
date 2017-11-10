@@ -502,8 +502,7 @@ textarea:focus {
 }
 
 .go-back {
-    margin-left: -35%;
-    margin-top: 11px;
+    position: absolute;
     cursor: pointer;
 }
 
