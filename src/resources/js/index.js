@@ -58,6 +58,7 @@ $(document).ready(function () {
 
         if (currentTab === 3) {
             console.log('submit');
+            $('.btn').unbind('mouseout');
             showSpinner();
             $('#payForm').submit();
             return;
@@ -66,6 +67,8 @@ $(document).ready(function () {
         if (!validate()) {
             return false;
         }
+
+        $('.next-btn').unbind('mouseout');
 
         clickBtn(1);
 
@@ -244,10 +247,11 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $(".btn").attr('disabled', 'disabled');
+            $('.btn').attr('disabled', 'disabled');
+
             showSpinner();
             setTimeout(() => {
-                $(".btn").removeAttr('disabled');
+                $('.btn').removeAttr('disabled');
                 stopSpinner();
                 $('.step').each((index, item) => {
                     if (!$(item).hasClass('active')) {
