@@ -14,7 +14,7 @@ class DonateForm extends Model
     {
         return [
             [['projectName'], 'string', 'max' => 49, 'message' => 'Project Name cannot be more than 50 characters.'],
-            [['amount'], 'integer', 'integerOnly' => true, 'min' => 1],
+            [['amount'], 'double', 'min' => 0.1],
             [['projectId'], 'integer'],
             [['amount'], 'required']
         ];
