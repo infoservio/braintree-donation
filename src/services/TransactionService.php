@@ -15,6 +15,7 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\errors\DbDonationsPluginException;
 use endurant\donationsfree\records\Transaction as TransactionRecord;
 use endurant\donationsfree\models\Transaction;
 use endurant\donationsfree\models\Log;
@@ -44,7 +45,7 @@ class TransactionService extends Component
 
         if (!$transactionRecord->save()) {
 
-            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+            throw new DbDonationsPluginException(
                 $transactionRecord->errors,
                 json_encode($transactionRecord->toArray()),
                 __METHOD__,

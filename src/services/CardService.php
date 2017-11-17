@@ -15,6 +15,7 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\errors\DbDonationsPluginException;
 use endurant\donationsfree\records\Card as CardRecord;
 use endurant\donationsfree\models\Card;
 use endurant\donationsfree\models\Log;
@@ -64,7 +65,7 @@ class CardService extends Component
 
         if (!$cardRecord->save()) {
 
-            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+            throw new DbDonationsPluginException(
                 $cardRecord->errors,
                 json_encode($cardRecord->toArray()),
                 __METHOD__,

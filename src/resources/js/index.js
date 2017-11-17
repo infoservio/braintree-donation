@@ -332,7 +332,7 @@ $(document).ready(function () {
     }
 
     function validatePostalCode(postalCode) {
-        var re = /^\d{5}(?:[-\s]\d{4})?$/;
+        var re = /^\d{3,5}(?:[-\s]\d{4})?$/;
         return re.test(postalCode);
     }
 

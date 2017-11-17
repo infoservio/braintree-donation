@@ -15,6 +15,7 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\errors\DbDonationsPluginException;
 use endurant\donationsfree\records\Customer as CustomerRecord;
 use endurant\donationsfree\models\Customer;
 use endurant\donationsfree\models\Log;
@@ -44,7 +45,7 @@ class CustomerService extends Component
 
         if (!$customerRecord->save()) {
             
-            throw new \endurant\donationsfree\errors\DbDonationsPluginException(
+            throw new DbDonationsPluginException(
                 $customerRecord->errors,
                 json_encode($customerRecord->toArray()),
                  __METHOD__, 

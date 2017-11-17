@@ -12,10 +12,10 @@ namespace endurant\donationsfree\services;
 
 use craft\base\Component;
 
+use endurant\donationsfree\errors\DbDonationsPluginException;
 use endurant\donationsfree\records\Address as AddressRecord;
 use endurant\donationsfree\models\Address;
 use endurant\donationsfree\models\Log;
-use endurant\donationsfree\errors\DbDonationsPluginException;
 
 /**
  * Donate Service

@@ -15,6 +15,7 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\errors\DbDonationsPluginException;
 use endurant\donationsfree\models\Customer;
 use endurant\donationsfree\models\Address;
 use endurant\donationsfree\models\Card;
@@ -64,7 +65,7 @@ class DonationService extends Component
             $transaction->cardId = $card->id;
             $transaction = DonationsFree::$PLUGIN->transactionService->saveTransaction($transaction);
 
-       } catch(\endurant\donationsfree\errors\DbDonationsPluginException $e) {
+       } catch(DbDonationsPluginException $e) {
            
        }
     }

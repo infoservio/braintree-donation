@@ -15,6 +15,7 @@ use endurant\donationsfree\DonationsFree;
 use Craft;
 use craft\base\Component;
 
+use endurant\donationsfree\errors\BraintreeDonationsPluginException;
 use endurant\donationsfree\models\Customer;
 use endurant\donationsfree\models\Address;
 use endurant\donationsfree\models\Card;
@@ -45,7 +46,7 @@ class BraintreeService extends Component
 
         if (!$result->success) {
 
-            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+            throw new BraintreeDonationsPluginException(
                 $result->errors->deepAll(),
                 $result->message,
                 __METHOD__,
@@ -63,7 +64,7 @@ class BraintreeService extends Component
 
         if (!$result->success) {
 
-            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+            throw new BraintreeDonationsPluginException(
                 $result->errors->deepAll(),
                 $result->message,
                 __METHOD__,
@@ -80,7 +81,7 @@ class BraintreeService extends Component
 
         if (!$result->success) {
 
-            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+            throw new BraintreeDonationsPluginException(
                 $result->errors->deepAll(),
                 $result->message,
                 __METHOD__,
@@ -107,7 +108,7 @@ class BraintreeService extends Component
 
         if (!$result->success) {
 
-            throw new \endurant\donationsfree\errors\BraintreeDonationsPluginException(
+            throw new BraintreeDonationsPluginException(
                 $result->errors->deepAll(),
                 $result->message,
                 __METHOD__,
