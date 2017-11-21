@@ -81,8 +81,8 @@ class Address extends Model
     public function rules()
     {
         return [
-            [['id', 'postalCode', 'countryId'], 'integer'],
-            [['company', 'countryCode', 'city', 'streetAddress', 'extendedAddress'], 'string'],
+            [['id', 'countryId'], 'integer'],
+            [['company', 'city', 'streetAddress', 'extendedAddress', 'postalCode'], 'string'],
             [['countryId', 'city', 'postalCode', 'streetAddress'], 'required']
         ];
     }

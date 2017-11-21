@@ -121,7 +121,7 @@ class Install extends Migration
                 'countryId' => $this->integer(),
                 'stateId' => $this->string(50)->null(),
                 'city' => $this->string(50),
-                'postalCode' => $this->integer(),
+                'postalCode' => $this->string(),
                 'streetAddress' => $this->string(100),
                 'extendedAddress' => $this->string(100)->null(),
                 'dateCreated' => $this->date(),
