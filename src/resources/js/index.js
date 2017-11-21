@@ -195,15 +195,15 @@ $(document).ready(function () {
                                 }
                             }
 
-                            if ($(input).attr('id') == 'postalCode') {
-                                if (validatePostalCode($(input).val())) {
-                                    isValid[index] = true;
-                                    $(input).removeClass('error');
-                                } else {
-                                    isValid[index] = false;
-                                    $(input).addClass('error');
-                                }
-                            }
+                            // if ($(input).attr('id') == 'postalCode') {
+                            //     if (validatePostalCode($(input).val())) {
+                            //         isValid[index] = true;
+                            //         $(input).removeClass('error');
+                            //     } else {
+                            //         isValid[index] = false;
+                            //         $(input).addClass('error');
+                            //     }
+                            // }
                         }
                     }
                 });
@@ -331,9 +331,9 @@ $(document).ready(function () {
         return re.test(phone);
     }
 
-    function validatePostalCode(postalCode) {
-        var re = /^\d{3,5}(?:[-\s]\d{4})?$/;
-        return re.test(postalCode);
-    }
+    // function validatePostalCode(postalCode) {
+    //     var re = /^\d{3,5}(?:[-\s]\d{4})?$/;
+    //     return re.test(postalCode);
+    // }
 
 });
