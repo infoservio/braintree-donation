@@ -42,7 +42,7 @@
         "handle": "donations-free",
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
-        "hasCpSection": false,
+        "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
             "donationService": "endurant\\donationsfree\\services\\DonationService",
@@ -52,6 +52,8 @@
             "addressService": "endurant\\donationsfree\\services\\AddressService",
             "transactionService": "endurant\\donationsfree\\services\\TransactionService",
             "logService": "endurant\\donationsfree\\services\\LogService",
+            "donationsSettingsService": "endurant\\donationsfree\\services\\DonationsSettingsService",
+            "fieldService": "endurant\\donationsfree\\services\\FieldService",
             "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\\braintree\\BraintreeHttpClient",
             "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger",
             "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"

@@ -1,0 +1,67 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\settings\\DonationsFreeSettingsAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\parsley\\ParsleyAssetBundle") %}
+{% set title = "Donations Free Manager"|t('app') %}
+{% block sidebar %}
+    <div class="sidebar-header">
+        <h3>Sidebar Menu</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="active sidebar-item"><a href="settings">Settings Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="fields">Fields Manager</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <ul>
+                {% for key, error in errors %}
+                    <li>{{ key }}: {{ error[0] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" action="settings" id="settings-form">
+        {#<input hidden name="_csrf" />#}
+        <div class="form-group">
+            <label for="inputTemplateName">Success Message</label>
+            <small id="nameHelp" class="form-text text-muted">Success message for user after successfull donation.</small>
+            <textarea name="successText" type="text" class="form-control" id="successText" aria-describedby="nameHelp"
+                   placeholder="Enter Template Name"
+                   data-parsley-required>
+                {{ settings['successText'] }}
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputTemplateSlug">Error Message</label>
+            <small id="errorTextHelp" class="form-text text-muted">Error message for user after failed donation.</small>
+            <textarea name="errorText" type="text" class="form-control" id="errorText" aria-describedby="errorTextHelp"
+                   placeholder="Enter Error Message"
+                   data-parsley-required>
+                {{ settings['errorText'] }}
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputColor">Color</label>
+            <small id="colorHelp" class="form-text text-muted">This color will be used for buttons, spinner and slider steps.'</small>
+            <input id="color" name="color" class="form-control" aria-describedby="colorHelp"
+                   value="{{ settings['color'] }}"
+                      placeholder="Enter color"
+                      data-parsley-required
+                      data-parsley-maxlength="6"
+            />
+        </div>
+        <button type="submit" class="btn btn-primary form-btn pull-right" id="submit-btn">Update</button>
+    </form>
+
+    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+    <script>
+        var input = document.getElementById('color');
+        input.className += ' jscolor';
+        CKEDITOR.replace('successText');
+        CKEDITOR.replace('errorText');
+    </script>
+{% endblock %}

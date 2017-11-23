@@ -1,0 +1,14 @@
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\donations\\DonationsFreeAssetBundle") %}
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta name="viewport" content="width=device-width">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div class="overlay">
+        </div>
+        {% block content %}
+        {{ content is defined ? content }}
+        {% endblock %}
+    </body>
+</html>

@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree;
+namespace endurant\donationsfree\assetbundles\parsley;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationsFreeAssetBundle extends AssetBundle
+class ParsleyAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,24 +43,16 @@ class DonationsFreeAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/donationsfree/resources/';
+        $this->sourcePath = '@endurant/mailmanager/assetbundles/parsley/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/index.js',
-            'js/jscolor.js',
-            'https://js.braintreegateway.com/web/dropin/1.8.0/js/dropin.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js',
+            'js/parsley.js',
         ];
 
         $this->css = [
-            'css/style.css',
-        ];
-
-        $this->depends = [
-            'yii\web\YiiAsset',
-            'yii\web\JqueryAsset',
+            'css/parsley.css'
         ];
 
         $this->publishOptions = ['forceCopy' => true];

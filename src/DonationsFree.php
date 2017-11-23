@@ -15,7 +15,11 @@ use endurant\donationsfree\models\Settings;
 use Craft;
 use craft\base\Plugin;
 use craft\services\Plugins;
+use craft\web\UrlManager;
 use craft\events\PluginEvent;
+use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterCpNavItemsEvent;
+use craft\web\twig\variables\Cp;
 
 use yii\base\Event;
 
@@ -69,35 +73,46 @@ class DonationsFree extends Plugin
         parent::init();
         self::$PLUGIN = $this;
 
-        // Do something after we're installed
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
             function (PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // We were just installed
+                    $this->hasCpSection = true;
+                    $this->hasCpSettings = true;
                 }
             }
         );
 
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- *
- * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
- *
- * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
- * the category to the method (prefixed with the fully qualified class name) where the constant appears.
- *
- * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
- * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
- *
- * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
- */
+        Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
+            if (\Craft::$app->user->identity->admin) {
+                $event->navItems['donations-free'] = [
+                    'label' => 'Donations Manager',
+                    'url' => 'donations-free/settings'
+                ];
+            }
+        });
+
+        // Register our site routes
+//        Event::on(
+//            UrlManager::class,
+//            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+//            function (RegisterUrlRulesEvent $event) {
+//                $event->rules['donations-free/donation/pay'] = '/actions/donations-free/donation/pay';
+//            }
+//        );
+
+        // Register our CP routes
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['donations-free/settings'] = 'donations-free/settings/settings';
+                $event->rules['donations-free/fields'] = 'donations-free/settings/fields';
+            }
+        );
+
         Craft::info(
             Craft::t(
                 'donations-free',
@@ -106,6 +121,16 @@ class DonationsFree extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    public function getCpNavItem()
+    {
+        $item = parent::getCpNavItem();
+        $item['subnav'] = [
+            'settings' => ['label' => 'Settings Manager', 'url' => 'donations-free/settings'],
+            'fields' => ['label' => 'Fields Manager', 'url' => 'donations-free/fields'],
+        ];
+        return $item;
     }
 
     // Protected Methods

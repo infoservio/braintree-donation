@@ -1,3 +1,4 @@
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\donations\\DonationsFreeAssetBundle") %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 <head>
     <meta name="viewport" content="width=device-width">
@@ -6,17 +7,17 @@
 <body>
 <div class="overlay">
 </div>
-<div class="success-panel">
-    <img class="success-logo" />
-    <div class="panel-body">
-        <div class="panel-body-header">
-            <h2 class="title">Success Donation</h2>
+    <div class="success-panel">
+        <img class="success-logo" />
+        <div class="panel-body">
+            <div class="panel-body-header">
+                <h2 class="title">Success Donation</h2>
+            </div>
+            <div>
+                {{ successText | raw }}
+            </div>
+            <a href="{{ baseUrl }}">Return back to the page</a>
         </div>
-        <div>
-            {{ successText | raw }}
-        </div>
-        <a href="{{ baseUrl }}">Return back to the page</a>
     </div>
-</div>
 </body>
 </html>

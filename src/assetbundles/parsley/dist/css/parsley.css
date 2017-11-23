@@ -1,0 +1,7 @@
+.parsley-error {
+    border-color: #d9534f !important;
+}
+
+.parsley-errors-list {
+    color: #d9534f;
+}

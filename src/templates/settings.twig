@@ -14,10 +14,8 @@
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("endurant\\donationsfree\\DonationsFreeSettingsAssetBundle") %}
 <h2 class="instructions-header">Instructions</h2>
 
-<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 <div>
     API credentials are unique account identifiers that must be added to your code before you can process payments via the API. Think of them as your username and password to payment processing.
     This is your user-specific public identifier. Each user associated with your Braintree gateway will have their own public key.
@@ -83,40 +81,3 @@
     required: true
 })
 }}
-
-{{ forms.textareaField({
-    label: 'Success Page',
-    instructions: 'Success message for user after successfull donation.',
-    id: 'successText',
-    name: 'successText',
-    value: settings['successText'],
-    required: true
-})
-}}
-
-{{ forms.textareaField({
-    label: 'Error Page',
-    instructions: 'Error message for user after failed donation.',
-    id: 'errorText',
-    name: 'errorText',
-    value: settings['errorText'],
-    required: true
-})
-}}
-
-{{ forms.textField({
-    label: 'Main Color',
-    instructions: 'This color will be used for buttons, spinner and slider steps.',
-    id: 'color',
-    name: 'color',
-    value: settings['color'],
-    required: true
-})
-}}
-
-<script>
-    let input = document.getElementById('settings-color');
-    input.className += ' jscolor';
-    CKEDITOR.replace('settings-successText');
-    CKEDITOR.replace('settings-errorText');
-</script>

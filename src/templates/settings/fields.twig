@@ -1,0 +1,49 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\fields\\DonationsFreeFieldsAssetBundle") %}
+{% set title = "Donations Fields Manager"|t('app') %}
+{% block sidebar %}
+    <div class="sidebar-header">
+        <h3>Sidebar Menu</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="sidebar-item"><a href="settings">Settings Manager</a></li>
+        <li class="active sidebar-item"><a href="fields">Fields Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <ul>
+                {% for key, error in errors %}
+                    <li>{{ key }}: {{ error[0] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" action="fields" id="settings-form">
+            {% for field in fields %}
+                <div class="container">
+                    <label class="setting-name pull-left">{{ field.name }}</label>
+                    <input type="hidden" name="{{ field.name }}" value=0>
+                    <input type="checkbox" name="{{ field.name }}" id="{{ field.name }}" class="ios-toggle" value=1 />
+                    <label for="{{ field.name }}" class="checkbox-label" data-off="Not Required" data-on="Required"></label>
+                </div>
+                <script>
+                    document.getElementById('{{ field.name }}').checked = {{ field.required }};
+                </script>
+            {% endfor %}
+        <button type="submit" class="btn btn-primary form-btn pull-right" id="submit-btn">Update</button>
+    </form>
+
+    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+    <script>
+        var input = document.getElementById('color');
+        input.className += ' jscolor';
+        CKEDITOR.replace('successText');
+        CKEDITOR.replace('errorText');
+    </script>
+{% endblock %}

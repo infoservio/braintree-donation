@@ -185,15 +185,15 @@ $(document).ready(function () {
                                 }
                             }
 
-                            if ($(input).attr('id') == 'phone') {
-                                if (validatePhone($(input).val())) {
-                                    isValid[index] = true;
-                                    $(input).removeClass('error');
-                                } else {
-                                    isValid[index] = false;
-                                    $(input).addClass('error');
-                                }
-                            }
+                            // if ($(input).attr('id') == 'phone') {
+                            //     if (validatePhone($(input).val())) {
+                            //         isValid[index] = true;
+                            //         $(input).removeClass('error');
+                            //     } else {
+                            //         isValid[index] = false;
+                            //         $(input).addClass('error');
+                            //     }
+                            // }
 
                             // if ($(input).attr('id') == 'postalCode') {
                             //     if (validatePostalCode($(input).val())) {

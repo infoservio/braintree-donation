@@ -181,6 +181,30 @@ class Install extends Migration
                 'uid' => $this->text()
             ]);
         }
+
+        if (!$this->tableExists('donations_field')) {
+            $this->createTable('donations_field', [
+                'id' => $this->primaryKey(),
+                'name' => $this->string(255)->unique(),
+                'title' => $this->string(255),
+                'required' => $this->smallInteger()->defaultValue(1),
+                'show' => $this->smallInteger()->defaultValue(1),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
+
+        if (!$this->tableExists('donations_settings')) {
+            $this->createTable('donations_settings', [
+                'id' => $this->primaryKey(),
+                'name' => $this->string(255)->unique(),
+                'value' => $this->text(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
     }
 
     private function addForeignKeys()
@@ -287,6 +311,14 @@ class Install extends Migration
         if ($this->tableExists('donations_logs')) {
             $this->dropTable('donations_logs');
         }
+
+        if ($this->tableExists('donations_field')) {
+            $this->dropTable('donations_field');
+        }
+
+        if (!$this->tableExists('donations_settings')) {
+            $this->dropTable('donations_settings');
+        }
     }
 
     private function insertDefaultData()
@@ -298,6 +330,9 @@ class Install extends Migration
         if ($this->fileExists($this->_usaStatesCsvPath)) {
             $this->insertUsaStates();
         }
+
+        $this->insertDonationsFieldDefaultValue();
+        $this->insertDonationsSettingsDefaultValue();
     }
 
     private function insertCountries()
@@ -332,6 +367,33 @@ class Install extends Migration
         }
         unset($state);
         unset($usaStates);
+    }
+
+    private function insertDonationsFieldDefaultValue()
+    {
+        $this->insert('donations_field', [
+            'name' => 'phone',
+            'title' => 'Phone',
+            'required' => 0
+        ]);
+    }
+
+    private function insertDonationsSettingsDefaultValue()
+    {
+        $this->insert('donations_settings', [
+            'name' => 'successMessage',
+            'value' => 'Success Message'
+        ]);
+
+        $this->insert('donations_settings', [
+            'name' => 'errorMessage',
+            'value' => 'Error Message'
+        ]);
+
+        $this->insert('donations_settings', [
+            'name' => 'color',
+            'value' => 'F62F5E'
+        ]);
     }
 
     private function fileExists($path)
