@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="inputTemplateName">Success Message</label>
             <small id="nameHelp" class="form-text text-muted">Success message for user after successfull donation.</small>
-            <textarea name="successText" type="text" class="form-control" id="successText" aria-describedby="nameHelp"
+            <textarea name="successMessage" type="text" class="form-control" id="successText" aria-describedby="nameHelp"
                    placeholder="Enter Template Name"
                    data-parsley-required>
                 {{ settings['successMessage'] }}
@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="inputTemplateSlug">Error Message</label>
             <small id="errorTextHelp" class="form-text text-muted">Error message for user after failed donation.</small>
-            <textarea name="errorText" type="text" class="form-control" id="errorText" aria-describedby="errorTextHelp"
+            <textarea name="errorMessage" type="text" class="form-control" id="errorText" aria-describedby="errorTextHelp"
                    placeholder="Enter Error Message"
                    data-parsley-required>
                 {{ settings['errorMessage'] }}

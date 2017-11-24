@@ -33,6 +33,7 @@ class PluginService extends Component
         $settings = DonationsSettings::find()->all();
 
         foreach ($settings as $setting) {
+
             foreach ($post as $k => $v) {
                 if ($setting->name == $k) {
                     $setting->value = $v;
