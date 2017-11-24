@@ -153,23 +153,29 @@ body {
     color: var(--main-color);
 }
 
-.step:nth-child(1):before {
-    content: 'Payment';
-}
+/*.step:nth-child(1):before {*/
+    /*content: 'Payment';*/
+/*}*/
 
-.step:nth-child(2):before {
-    right: -40px;
-    content: 'Contact Info';
-}
+/*.step:nth-child(2):before {*/
+    /*right: -40px;*/
+    /*content: 'Contact Info';*/
+/*}*/
 
-.step:nth-child(3):before {
-    right: -30px;
-    content: 'Address';
-}
+/*.step:nth-child(3):before {*/
+    /*right: -30px;*/
+    /*content: 'Address';*/
+/*}*/
 
-.step:nth-child(4):before {
-    right: 0;
-    content: 'Finish';
+/*.step:nth-child(4):before {*/
+    /*right: 0;*/
+    /*content: 'Finish';*/
+/*}*/
+
+.step-header {
+    top: 40px;
+    position: absolute;
+    color: var(--main-color);
 }
 
 .payment-method {

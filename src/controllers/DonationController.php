@@ -20,7 +20,8 @@ use endurant\donationsfree\assetbundles\donations\DonationsFreeAssetBundle;
 use endurant\donationsfree\errors\DonationsPluginException;
 use endurant\donationsfree\models\forms\DonateForm;
 use endurant\donationsfree\records\Country;
-use endurant\donationsfree\records\Field;
+use endurant\donationsfree\models\Field;
+use endurant\donationsfree\records\DonationsSettings;
 use endurant\donationsfree\records\State;
 
 /**
@@ -73,8 +74,11 @@ class DonationController extends Controller
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+
+        $successMessage = DonationsSettings::find()->where(['name' => 'successMessage'])->one()->value;
+
         return $this->renderTemplate('success', [
-            'successText' => DonationsFree::$PLUGIN->getSettings()->successText,
+            'successMessage' => $successMessage,
             'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
         ]);
     }
@@ -86,8 +90,11 @@ class DonationController extends Controller
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+
+        $errorMessage = DonationsSettings::find()->where(['name' => 'errorMessage'])->one()->value;
+
         return $this->renderTemplate('error', [
-            'errorText' => DonationsFree::$PLUGIN->getSettings()->errorText,
+            'errorMessage' => $errorMessage,
             'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
         ]);
     }
@@ -123,12 +130,13 @@ class DonationController extends Controller
 
         $countries = ArrayHelper::toArray(Country::find()->all());
         $states = ArrayHelper::toArray(State::find()->all());
-        $fields = ArrayHelper::toArray(Field::find()->all());
+        $fields = Field::getFieldsArr();
         $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
         $amount = Craft::$app->session->get('donation')['amount'];
         $amount = ($amount) ? $amount : 50;
         $projectId = Craft::$app->session->get('donation')['projectId'];
         $projectName = Craft::$app->session->get('donation')['projectName'];
+        $color = DonationsSettings::find()->where(['name' => 'color'])->one()->value;
 
         $view->resolveTemplate('index');
 
@@ -140,7 +148,7 @@ class DonationController extends Controller
             'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
             'projectId' => $projectId,
             'projectName' => $projectName,
-            'mainColor' => DonationsFree::$PLUGIN->getSettings()->color,
+            'mainColor' => $color,
             'fields' => $fields
         ]);
     }

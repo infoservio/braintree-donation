@@ -14,6 +14,7 @@ use endurant\donationsfree\Donationsfree;
 
 use Craft;
 use craft\base\Model;
+use endurant\donationsfree\records\Field as FieldRecord;
 
 /**
  * Card Model
@@ -46,6 +47,20 @@ class Field extends Model
     public $title;
     public $required;
     public $show;
+
+    // Public Static Methods
+    // =========================================================================
+
+    public static function getFieldsArr()
+    {
+        $fields = FieldRecord::find()->all();
+        $resultArr = [];
+        foreach ($fields as $field) {
+            $resultArr[$field->name] = $field->getAttributes(['required', 'show']);
+        }
+
+        return $resultArr;
+    }
 
     // Public Methods
     // =========================================================================

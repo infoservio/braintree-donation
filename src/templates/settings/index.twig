@@ -24,7 +24,7 @@
             </ul>
         </div>
     {% endif %}
-    <form method="post" action="settings" id="settings-form">
+    <form method="post" action="" id="settings-form">
         {#<input hidden name="_csrf" />#}
         <div class="form-group">
             <label for="inputTemplateName">Success Message</label>
@@ -32,7 +32,7 @@
             <textarea name="successText" type="text" class="form-control" id="successText" aria-describedby="nameHelp"
                    placeholder="Enter Template Name"
                    data-parsley-required>
-                {{ settings['successText'] }}
+                {{ settings['successMessage'] }}
             </textarea>
         </div>
         <div class="form-group">
@@ -41,7 +41,7 @@
             <textarea name="errorText" type="text" class="form-control" id="errorText" aria-describedby="errorTextHelp"
                    placeholder="Enter Error Message"
                    data-parsley-required>
-                {{ settings['errorText'] }}
+                {{ settings['errorMessage'] }}
             </textarea>
         </div>
         <div class="form-group">

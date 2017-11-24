@@ -87,10 +87,10 @@ class DonationsFree extends Plugin
 
         Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
             if (\Craft::$app->user->identity->admin) {
-                $event->navItems['donations-free'] = [
-                    'label' => 'Donations Manager',
-                    'url' => 'donations-free/settings'
-                ];
+//                $event->navItems['donations-free'] = [
+//                    'label' => 'Donations Manager',
+//                    'url' => 'donations-free/settings'
+//                ];
             }
         });
 
@@ -108,6 +108,7 @@ class DonationsFree extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
+                $event->rules['donations-free'] = 'donations-free/settings/settings';
                 $event->rules['donations-free/settings'] = 'donations-free/settings/settings';
                 $event->rules['donations-free/fields'] = 'donations-free/settings/fields';
             }

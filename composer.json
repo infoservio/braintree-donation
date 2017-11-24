@@ -54,6 +54,7 @@
             "logService": "endurant\\donationsfree\\services\\LogService",
             "donationsSettingsService": "endurant\\donationsfree\\services\\DonationsSettingsService",
             "fieldService": "endurant\\donationsfree\\services\\FieldService",
+            "pluginService": "endurant\\donationsfree\\services\\PluginService",
             "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\\braintree\\BraintreeHttpClient",
             "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger",
             "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"

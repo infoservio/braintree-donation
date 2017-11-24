@@ -13,6 +13,7 @@ namespace endurant\donationsfree\controllers;
 use Craft;
 use craft\web\Controller;
 use endurant\donationsfree\DonationsFree;
+use endurant\donationsfree\models\DonationsSettings;
 use endurant\donationsfree\records\Field;
 
 /**
@@ -60,18 +61,12 @@ class SettingsController extends Controller
 
     public function actionSettings()
     {
-        $settings = DonationsFree::$PLUGIN->getSettings();
         if ($post = Craft::$app->request->post()) {
-
-            $settings->successText = $post['successText'];
-            $settings->errorText = $post['errorText'];
-            $settings->color = $post['color'];
-
-            return $this->renderTemplate('donations-free/settings/index', [
-                'settings' => $settings
-            ]);
+            DonationsFree::$PLUGIN->pluginService->updatePluginSettings($post);
+            return $this->redirect('donations-free/settings');
         }
 
+        $settings = DonationsSettings::getSettingsArr();
         return $this->renderTemplate('donations-free/settings/index', [
             'settings' => $settings
         ]);

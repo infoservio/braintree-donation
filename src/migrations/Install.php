@@ -316,7 +316,7 @@ class Install extends Migration
             $this->dropTable('donations_field');
         }
 
-        if (!$this->tableExists('donations_settings')) {
+        if ($this->tableExists('donations_settings')) {
             $this->dropTable('donations_settings');
         }
     }

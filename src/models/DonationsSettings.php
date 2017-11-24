@@ -14,6 +14,7 @@ use endurant\donationsfree\Donationsfree;
 
 use Craft;
 use craft\base\Model;
+use endurant\donationsfree\records\DonationsSettings as DonationsSettingsRecord;
 
 /**
  * Card Model
@@ -39,6 +40,18 @@ class DonationsSettings extends Model
     public $id;
     public $name;
     public $value;
+
+    public static function getSettingsArr()
+    {
+        $settings = DonationsSettingsRecord::find()->all();
+        $settingsArr = [];
+
+        foreach ($settings as $value) {
+            $settingsArr[$value->name] = $value->value;
+        }
+
+        return $settingsArr;
+    }
 
     // Public Methods
     // =========================================================================

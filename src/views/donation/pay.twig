@@ -29,10 +29,10 @@
                 </div>
             </div>
             <div class="progress-bar">
-                <div class="step"></div>
-                <div class="step"></div>
-                <div class="step"></div>
-                <div class="step"></div>
+                <div class="step"><span class="step-header">Payment</span></div>
+                <div class="step"><span class="step-header">Contact Info</span></div>
+                <div class="step"><span class="step-header">Address</span></div>
+                <div class="step"><span class="step-header">Finish</span></div>
             </div>
 
             <form id="payForm" action="pay" method="post">
@@ -63,11 +63,11 @@
                         </div>
                         <div class="field">
                             <label for="phone">Phone
-                                {% if fields[0].required == 1  %}
+                                {% if fields['phone'].required == 1  %}
                                 <span class="required">*</span>
                                 {% endif %}
                             </label>
-                            <input type="text" id="phone" name="phone" class="input" tabindex=4 {{ fields[0].required == 1 ? 'required' : '' }}/>
+                            <input type="text" id="phone" name="phone" class="input" tabindex=4 {{ fields['phone'].required == 1 ? 'required' : '' }}/>
                         </div>
                     </div>
                 </div>
