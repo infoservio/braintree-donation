@@ -101,7 +101,7 @@ class SettingsController extends Controller
             DonationsFree::$PLUGIN->stepService->update($post);
         }
 
-        $steps = Step::find()->all();
+        $steps = Step::find()->orderBy('order asc')->all();
 
         return $this->renderTemplate('donations-free/settings/steps', [
             'steps' => $steps

@@ -34,8 +34,8 @@ class StepService extends Component
         $steps = Step::find()->all();
 
         foreach ($steps as $step) {
-            if($order = $post[$step->name]) {
-                $step->order = $order;
+            if(isset($post[$step->name])) {
+                $step->order = $post[$step->name];
                 $step->save();
             }
         }

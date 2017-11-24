@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     $('.next-btn').click((e) => {
 
-        if (currentTab === 0) {
+        if (currentTab === paymentOrder) {
             return;
         }
 
@@ -145,7 +145,7 @@ $(document).ready(function () {
         }
         
         $('.next-btn').click((e) => {
-            if (currentTab === 0) {
+            if (currentTab === paymentOrder) {
                 instance.requestPaymentMethod((err, payload) => {
                     if (err) {
                         // An appropriate error will be shown in the UI
@@ -157,6 +157,10 @@ $(document).ready(function () {
 
                     clickBtn(1);
                 });
+            }
+
+            if (currentTab === 2) {
+                createResultPage();
             }
         });
     })
