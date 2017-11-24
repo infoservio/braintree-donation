@@ -1,0 +1,42 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\settings\\DonationsFreeSettingsAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\steps\\DonationsFreeStepsAssetBundle") %}
+{% set title = "Donations Free Manager"|t('app') %}
+{% block sidebar %}
+    <div class="sidebar-header">
+        <h3>Sidebar Menu</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="sidebar-item"><a href="settings">Settings Manager</a></li>
+        <li class="sidebar-item"><a href="fields">Fields Manager</a></li>
+        <li class="active sidebar-item"><a href="steps">Steps Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <h1>Steps Manager</h1>
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <ul>
+                {% for key, error in errors %}
+                    <li>{{ key }}: {{ error[0] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form action="steps" method="post">
+        <div class="order-form">
+            <ul id="sortable">
+                {% for step in steps if step.name != 'finish' %}
+                    <li class="ui-state-default">
+                        <input type="hidden" id="{{ step.name }}" name="{{ step.name }}" value="{{ step.order }}" />
+                        <span>{{ step.title }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}

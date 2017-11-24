@@ -23,6 +23,7 @@ use endurant\donationsfree\records\Country;
 use endurant\donationsfree\models\Field;
 use endurant\donationsfree\records\DonationsSettings;
 use endurant\donationsfree\records\State;
+use endurant\donationsfree\records\Step;
 
 /**
  * Donate Controller
@@ -137,6 +138,7 @@ class DonationController extends Controller
         $projectId = Craft::$app->session->get('donation')['projectId'];
         $projectName = Craft::$app->session->get('donation')['projectName'];
         $color = DonationsSettings::find()->where(['name' => 'color'])->one()->value;
+        $steps = Step::find()->orderBy('order ASC')->all();
 
         $view->resolveTemplate('index');
 
@@ -149,7 +151,8 @@ class DonationController extends Controller
             'projectId' => $projectId,
             'projectName' => $projectName,
             'mainColor' => $color,
-            'fields' => $fields
+            'fields' => $fields,
+            'steps' => $steps
         ]);
     }
 

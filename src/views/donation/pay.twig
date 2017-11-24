@@ -29,10 +29,9 @@
                 </div>
             </div>
             <div class="progress-bar">
-                <div class="step"><span class="step-header">Payment</span></div>
-                <div class="step"><span class="step-header">Contact Info</span></div>
-                <div class="step"><span class="step-header">Address</span></div>
-                <div class="step"><span class="step-header">Finish</span></div>
+                {% for step in steps %}
+                    <div class="step"><span class="step-header">{{ step.title }}</span></div>
+                {% endfor %}
             </div>
 
             <form id="payForm" action="pay" method="post">
@@ -40,143 +39,10 @@
                 <input id="projectId" class="hidden" name="projectId" value="{{ projectId }}"/>
                 <input id="projectName" class="hidden" name="projectName" value="{{ projectName }}"/>
 
-                <div class="tab">
-                    <p class="payment-error alert alert-danger hidden ">Please, fill this step</p>
-                    <div id="dropin-container"></div>
-                    <input type="hidden" id="nonce" display="none" name="nonce" />
-                </div>
-
-                <div class="tab">
-                    <div class="input-fields">
-                        <div class="field">
-                            <label for="firstName">First Name <span class="required">*</span></label>
-                            <input type="text" id="firstName" name="firstName" class="input" tabindex=1 required/>
-
-                        </div>
-                        <div class="field">
-                            <label for="lastName">Last Name <span class="required">*</span></label>
-                            <input type="text" id="lastName" name="lastName" class="input" tabindex=2 required/>
-                        </div>
-                        <div class="field">
-                            <label for="email">Email <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" class="input" tabindex=3 required/>
-                        </div>
-                        <div class="field">
-                            <label for="phone">Phone
-                                {% if fields['phone'].required == 1  %}
-                                <span class="required">*</span>
-                                {% endif %}
-                            </label>
-                            <input type="text" id="phone" name="phone" class="input" tabindex=4 {{ fields['phone'].required == 1 ? 'required' : '' }}/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company" class="input" tabindex=5 />
-                    <div class="input-fields">
-                        <div class="field">
-                            <label for="firstName">Country <span class="required">*</span></label>
-                            <select id="country" class="input" name="countryId" tabindex=6>
-                                {% for country in countries %}
-                                    <option value="{{ country.id }}" {{  defaultCountryId == country.id ? ' selected ' : '' }}>{{ country.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="lastName">State / Province <span class="required">*</span></label>
-                            <select id="state-select" class="input" name="stateId" tabindex=7>
-                                {% for state in states %}
-                                    <option value="{{ state.id }}" {{  state.id == 1 ? ' selected ' : '' }}>{{ state.name }}</option>
-                                {% endfor %}
-                            </select>
-                            <input id="state-input" name="state" type="text" class="input hidden" tabindex=7 />
-                        </div>
-                        <div class="field">
-                            <label for="city">City <span class="required">*</span></label>
-                            <input type="text" id="city" name="city" class="input" required tabindex=8/>
-                        </div>
-                        <div class="field">
-                            <label for="postalCode">Postal Code <span class="required">*</span></label>
-                            <input type="text" id="postalCode" name="postalCode" class="input" required tabindex=9 />
-                        </div>
-                        <div class="field">
-                            <label for="address1">Address 1<span class="required">*</span></label>
-                            <input type="text" id="address" name="streetAddress" class="input" required tabindex=10 />
-                        </div>
-                        <div class="field">
-                            <label for="address2">Address 2</label>
-                            <input type="text" id="extendedAddress" name="extendedAddress" class="input" tabindex=11 />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab finish">
-                    <h3>Please, check your data:</h3>
-                    <div class="container">
-                        <div class="left">
-                            <h4>Contact Info</h4>
-                            <div class="result-item">
-                                <label class="header">First Name: </label>
-                                <div class="value" id="resultFirstName"></div>
-                            </div>
-                            <div class="result-item">
-                                <label class="header">Last Name: </label>
-                                <div class="value" id="resultLastName"></div>
-                            </div>
-                            <div class="result-item">
-                                <label class="header">Email: </label>
-                                <div class="value" id="resultEmail"></div>
-                            </div>
-                            <div class="result-item">
-                                <label class="header">Phone: </label>
-                                <div class="value" id="resultPhone"></div>
-                            </div>
-                        </div>
-
-                        <div class="middle">
-                            <h4>Company Info</h4>
-                            <div class="result-item">
-                                <label class="header">Company: </label>
-                                <div class="value" id="resultCompany"></div>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h4>Address Info</h4>
-                            <div class="container">
-                                <div>
-                                    <div class="result-item">
-                                        <label class="top header">Country: </label>
-                                        <div class="value" id="resultCountry"></div>
-                                    </div>
-                                    <div class="result-item">
-                                        <label class="header">State: </label>
-                                        <div class="value" id="resultState"></div>
-                                    </div>
-                                    <div class="result-item">
-                                        <label class="header">City: </label>
-                                        <div class="value" id="resultCity"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="result-item">
-                                        <label class="top header">Address: </label>
-                                        <div class="value" id="resultAddress"></div>
-                                    </div>
-                                    <div class="result-item">
-                                        <label class="header">Postal Code: </label>
-                                        <div class="value" id="resultPostalCode"></div>
-                                    </div>
-                                    <div class="result-item">
-                                        <label class="header">Extended Address: </label>
-                                        <div class="value" id="resultExtendedAddress"></div></div>
-                                    </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                {% for step in steps %}
+                    {% set templateUrl = './steps/' ~ step.name ~ '.twig' %}
+                    {% include templateUrl %}
+                {% endfor %}
 
                 <div class="panel-footer">
                     <button type="button" class="btn back-btn" disabled>Back</button>

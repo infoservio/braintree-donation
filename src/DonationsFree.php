@@ -111,6 +111,7 @@ class DonationsFree extends Plugin
                 $event->rules['donations-free'] = 'donations-free/settings/settings';
                 $event->rules['donations-free/settings'] = 'donations-free/settings/settings';
                 $event->rules['donations-free/fields'] = 'donations-free/settings/fields';
+                $event->rules['donations-free/steps'] = 'donations-free/settings/steps';
             }
         );
 
@@ -124,15 +125,16 @@ class DonationsFree extends Plugin
         );
     }
 
-    public function getCpNavItem()
-    {
-        $item = parent::getCpNavItem();
-        $item['subnav'] = [
-            'settings' => ['label' => 'Settings Manager', 'url' => 'donations-free/settings'],
-            'fields' => ['label' => 'Fields Manager', 'url' => 'donations-free/fields'],
-        ];
-        return $item;
-    }
+//    public function getCpNavItem()
+//    {
+//        $item = parent::getCpNavItem();
+//        $item['subnav'] = [
+//            'settings' => ['label' => 'Settings Manager', 'url' => 'donations-free/settings'],
+//            'fields' => ['label' => 'Fields Manager', 'url' => 'donations-free/fields'],
+//            'steps' => ['label' => 'Steps Manager', 'url' => 'donations-free/steps'],
+//        ];
+//        return $item;
+//    }
 
     // Protected Methods
     // =========================================================================

@@ -15,6 +15,7 @@ use craft\web\Controller;
 use endurant\donationsfree\DonationsFree;
 use endurant\donationsfree\models\DonationsSettings;
 use endurant\donationsfree\records\Field;
+use endurant\donationsfree\records\Step;
 
 /**
  * Donate Controller
@@ -91,6 +92,19 @@ class SettingsController extends Controller
 
         return $this->renderTemplate('donations-free/settings/fields', [
             'fields' => $fields
+        ]);
+    }
+
+    public function actionSteps()
+    {
+        if ($post = Craft::$app->request->post()) {
+            DonationsFree::$PLUGIN->stepService->update($post);
+        }
+
+        $steps = Step::find()->all();
+
+        return $this->renderTemplate('donations-free/settings/steps', [
+            'steps' => $steps
         ]);
     }
 

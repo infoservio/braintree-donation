@@ -1,0 +1,30 @@
+.ui-draggable, .ui-droppable {
+    background-position: top;
+}
+
+.order-form {
+    max-height: 200px;
+    width: 100%;
+}
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#sortable li {
+    margin: 3px 10px 3px 0;
+    padding: 1px;
+    width: 20%;
+    height: 100px;
+    float: left;
+    font-size: 2em;
+    text-align: center;
+    border: 1px solid #eee;
+    line-height: 90px;
+}
+
+#sortable li span {
+    margin-top: auto;
+    margin-bottom: auto;
+}

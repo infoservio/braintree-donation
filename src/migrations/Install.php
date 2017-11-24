@@ -205,6 +205,18 @@ class Install extends Migration
                 'uid' => $this->text()
             ]);
         }
+
+        if (!$this->tableExists('donations_step')) {
+            $this->createTable('donations_step', [
+                'id' => $this->primaryKey(),
+                'name' => $this->string(255)->unique(),
+                'title' => $this->string(255),
+                'order' => $this->smallInteger(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
     }
 
     private function addForeignKeys()
@@ -319,6 +331,10 @@ class Install extends Migration
         if ($this->tableExists('donations_settings')) {
             $this->dropTable('donations_settings');
         }
+
+        if ($this->tableExists('donations_step')) {
+            $this->dropTable('donations_step');
+        }
     }
 
     private function insertDefaultData()
@@ -333,6 +349,7 @@ class Install extends Migration
 
         $this->insertDonationsFieldDefaultValue();
         $this->insertDonationsSettingsDefaultValue();
+        $this->insertDonationsStepsDefaultValue();
     }
 
     private function insertCountries()
@@ -393,6 +410,33 @@ class Install extends Migration
         $this->insert('donations_settings', [
             'name' => 'color',
             'value' => 'F62F5E'
+        ]);
+    }
+
+    private function insertDonationsStepsDefaultValue()
+    {
+        $this->insert('donations_step', [
+            'name' => 'payment',
+            'title' => 'Payment',
+            'order' => 1
+        ]);
+
+        $this->insert('donations_step', [
+            'name' => 'contact-info',
+            'title' => 'Contact Info',
+            'order' => 2
+        ]);
+
+        $this->insert('donations_step', [
+            'name' => 'address',
+            'title' => 'Address',
+            'order' => 3
+        ]);
+
+        $this->insert('donations_step', [
+            'name' => 'finish',
+            'title' => 'Finish',
+            'order' => 4
         ]);
     }
 
