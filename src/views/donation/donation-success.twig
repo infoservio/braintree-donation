@@ -10,8 +10,8 @@
         <img class="success-logo" />
         <div class="panel-body">
             <div style="display: flex; justify-content: space-between;">
-                <div>
-                <a href="{{ baseUrl }}">Return back to the page</a>
+                <div class="return-back">
+                    <a href="{{ baseUrl }}">Return back to the page</a>
                 </div>
                 <div>
                     <h4><span>$ </span><span  id="success-amount">10000</span></h4>
@@ -26,12 +26,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Project Name</label>
-                        <p>{{ resetForm['projectName'] }}</p>
+                        <label class="donation-name">Project Name</label>
+                        <p class="donation-value">{{ resetForm['projectName'] }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">Project ID</label>
-                        <p for="test">{{ resetForm['projectId'] }}</p>
+                        <label class="donation-name">Project ID</label>
+                        <p class="donation-value">{{ resetForm['projectId'] }}</p>
                     </div>
                 </div>
             </div>
@@ -41,20 +41,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>First Name</label>
-                        <p>{{ resetForm['firstName'] ? resetForm['firstName'] : '-' }}</p>
+                        <label class="donation-name">First Name</label>
+                        <p class="donation-value">{{ resetForm['firstName'] ? resetForm['firstName'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">Last Name</label>
-                        <p for="test">{{ resetForm['lastName'] ? resetForm['lastName'] : '-' }}</p>
+                        <label class="donation-name">Last Name</label>
+                        <p class="donation-value">{{ resetForm['lastName'] ? resetForm['lastName'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label>Email</label>
-                        <p>{{ resetForm['email'] ? resetForm['email'] : '-' }}</p>
+                        <label class="donation-name">Email</label>
+                        <p class="donation-value">{{ resetForm['email'] ? resetForm['email'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">Phone</label>
-                        <p for="test">{{ resetForm['phone'] ? resetForm['phone'] : '-' }}</p>
+                        <label class="donation-name">Phone</label>
+                        <p class="donation-value">{{ resetForm['phone'] ? resetForm['phone'] : '-' }}</p>
                     </div>
                 </div>
             </div>
@@ -64,32 +64,32 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label for="test">Postal Code</label>
-                        <p for="test">{{ resetForm['postalCode'] ? resetForm['postalCode'] : '-' }}</p>
+                        <label class="donation-name">Postal Code</label>
+                        <p class="donation-value">{{ resetForm['postalCode'] ? resetForm['postalCode'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">Country</label>
-                        <p for="test">{{ resetForm['countryId'] ? resetForm['countryId'] : '-' }}</p>
+                        <label class="donation-name">Country</label>
+                        <p class="donation-value">{{ resetForm['countryId'] ? resetForm['countryId'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label>State</label>
-                        <p>{{ resetForm['state']  ? resetForm['state'] : '-' }}</p>
+                        <label class="donation-name">State</label>
+                        <p class="donation-value">{{ resetForm['state']  ? resetForm['state'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">City</label>
-                        <p for="test">{{ resetForm['city'] ? resetForm['city'] : '-' }}</p>
+                        <label class="donation-name">City</label>
+                        <p class="donation-value">{{ resetForm['city'] ? resetForm['city'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label>Address 1</label>
-                        <p>{{ resetForm['streetAddress'] ? resetForm['streetAddress'] : '-' }}</p>
+                        <label class="donation-name">Address 1</label>
+                        <p class="donation-value">{{ resetForm['streetAddress'] ? resetForm['streetAddress'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label for="test">Address 2</label>
-                        <p for="test">{{ resetForm['extendedAddress'] ? resetForm['extendedAddress'] : '-' }}</p>
+                        <label class="donation-name">Address 2</label>
+                        <p class="donation-value">{{ resetForm['extendedAddress'] ? resetForm['extendedAddress'] : '-' }}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label>Company</label>
-                        <p>{{ resetForm['company'] ? resetForm['company'] : '-' }}</p>
+                        <label class="donation-name">Company</label>
+                        <p class="donation-value">{{ resetForm['company'] ? resetForm['company'] : '-' }}</p>
                     </div>
                 </div>
             </div>
