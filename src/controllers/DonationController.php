@@ -78,9 +78,18 @@ class DonationController extends Controller
 
         $successMessage = DonationsSettings::find()->where(['name' => 'successMessage'])->one()->value;
 
+        $resetForm = Craft::$app->session->get('donation');
+        if ($stateId = $resetForm['stateId']) {
+            $resetForm['state'] = State::find()->where(['id' => $stateId])->one()->name;
+        }
+
+        $resetForm['countryId'] = Country::find()->where(['id' => $resetForm['countryId']])->one()->name;
+        unset($resetForm['nonce']);
+
         return $this->renderTemplate('success', [
+            'baseUrl' => (Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'),
             'successMessage' => $successMessage,
-            'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
+            'resetForm' => $resetForm,
         ]);
     }
 
@@ -90,7 +99,7 @@ class DonationController extends Controller
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
-        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+        $view->registerAssetBundle(DonationsFreeGeneralAssetBundle::class);
 
         $errorMessage = DonationsSettings::find()->where(['name' => 'errorMessage'])->one()->value;
 
@@ -112,11 +121,11 @@ class DonationController extends Controller
 
         $view->setTemplatesPath($this->getViewPath());
 
-        if ($params = Craft::$app->request->post()) {
+        if ($post = Craft::$app->request->post()) {
             $view->resolveTemplate('error');
 
             try {
-                DonationsFree::$PLUGIN->donationService->donate(Craft::$app->request->post());
+                DonationsFree::$PLUGIN->donationService->donate($post);
             } catch (DonationsPluginException $e) {
                 return $this->redirect('/actions/donations-free/donation/error');
             } catch (\Exception $e) {
@@ -126,6 +135,7 @@ class DonationController extends Controller
             }
 
             $view->resolveTemplate('success');
+            Craft::$app->session->set('donation', $post);
             return $this->redirect('/actions/donations-free/donation/success');
         }
 

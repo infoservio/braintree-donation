@@ -10,11 +10,74 @@
     <div class="success-panel">
         <img class="success-logo" />
         <div class="panel-body">
-            <div class="panel-body-header">
-                <h2 class="title">Success Donation</h2>
-            </div>
+            <h1 class="title">Success Donation</h1>
             <div>
                 {{ successMessage | raw }}
+            </div>
+            <div class="container">
+                <div class="row">
+                    <h2>Project Information</h2>
+                    <div class="col-sm-6">
+                        <label style="float: left">Project Name</label>
+                        <p>{{ resetForm['projectName'] }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="test">Project ID</label>
+                        <p for="test">{{ resetForm['projectId'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h2>Contact Information</h2>
+                    <div>
+                        <label>First Name</label>
+                        <p>{{ resetForm['firstName'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">Last Name</label>
+                        <p for="test">{{ resetForm['lastName'] }}</p>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <p>{{ resetForm['email'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">Phone</label>
+                        <p for="test">{{ resetForm['phone'] }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2>Address Information</h2>
+                    <div>
+                        <label>Company</label>
+                        <p>{{ resetForm['company'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">Country</label>
+                        <p for="test">{{ resetForm['countryId'] }}</p>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <p>{{ resetForm['state'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">City</label>
+                        <p for="test">{{ resetForm['city'] }}</p>
+                    </div>
+                    <div>
+                        <label>Address 1</label>
+                        <p>{{ resetForm['streetAddress'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">Postal Code</label>
+                        <p for="test">{{ resetForm['postalCode'] }}</p>
+                    </div>
+                    <div>
+                        <label for="test">Address 2</label>
+                        <p for="test">{{ resetForm['extendedAddress'] }}</p>
+                    </div>
+                </div>
             </div>
             <a href="{{ baseUrl }}">Return back to the page</a>
         </div>
