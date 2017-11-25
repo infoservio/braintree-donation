@@ -1,0 +1,23 @@
+.sidebar-item {
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    font-family: Brela, serif;
+}
+
+.active a {
+    color: gray;
+}
+
+.sidebar-icon {
+    float: right;
+    margin-top: -5px;
+}
+
+.sidebar-item:hover {
+    background-color: #fcfcfc;
+}
+
+.sidebar-item a:hover {
+    text-decoration:none;
+}

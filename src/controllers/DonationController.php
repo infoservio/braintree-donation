@@ -17,6 +17,7 @@ use Craft;
 use craft\web\Controller;
 use craft\helpers\ArrayHelper;
 use endurant\donationsfree\assetbundles\donations\DonationsFreeAssetBundle;
+use endurant\donationsfree\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
 use endurant\donationsfree\errors\DonationsPluginException;
 use endurant\donationsfree\models\forms\DonateForm;
 use endurant\donationsfree\records\Country;
@@ -74,7 +75,7 @@ class DonationController extends Controller
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
-        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+        $view->registerAssetBundle(DonationsFreeBootstrapAssetBundle::class);
 
         $successMessage = DonationsSettings::find()->where(['name' => 'successMessage'])->one()->value;
 
@@ -86,7 +87,7 @@ class DonationController extends Controller
         $resetForm['countryId'] = Country::find()->where(['id' => $resetForm['countryId']])->one()->name;
         unset($resetForm['nonce']);
 
-        return $this->renderTemplate('success', [
+        return $this->renderTemplate('donation-success', [
             'baseUrl' => (Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'),
             'successMessage' => $successMessage,
             'resetForm' => $resetForm,
@@ -99,11 +100,11 @@ class DonationController extends Controller
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
-        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
+        $view->registerAssetBundle(DonationsFreeBootstrapAssetBundle::class);
 
         $errorMessage = DonationsSettings::find()->where(['name' => 'errorMessage'])->one()->value;
 
-        return $this->renderTemplate('error', [
+        return $this->renderTemplate('donation-error', [
             'errorMessage' => $errorMessage,
             'baseUrl' => Craft::$app->session->get('baseUrl') ? Craft::$app->session->get('baseUrl') : '/'
         ]);

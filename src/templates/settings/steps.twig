@@ -1,5 +1,6 @@
 {% extends "_layouts/cp" %}
 {% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\settings\\DonationsFreeSettingsAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\sidebar\\SidebarAssetBundle") %}
 {% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\steps\\DonationsFreeStepsAssetBundle") %}
 {% set title = "Donations Free Manager"|t('app') %}
 {% block sidebar %}
@@ -12,6 +13,7 @@
         <li class="sidebar-item"><a href="/admin/donations-free/settings">Settings Manager</a></li>
         <li class="sidebar-item"><a href="/admin/donations-free/fields">Fields Manager</a></li>
         <li class="active sidebar-item"><a href="/admin/donations-free/steps">Steps Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/donations-free/donation-form">Donation Form</a></li>
     </ul>
 {% endblock %}
 {% block content %}
@@ -37,6 +39,6 @@
                 {% endfor %}
             </ul>
         </div>
-        <button type="submit" class="btn btn-primary step-btn">Save</button>
+        <button type="submit" class="btn btn-primary step-btn">Update</button>
     </form>
 {% endblock %}

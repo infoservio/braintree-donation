@@ -112,6 +112,7 @@ class DonationsFree extends Plugin
                 $event->rules['donations-free/settings'] = 'donations-free/settings/settings';
                 $event->rules['donations-free/fields'] = 'donations-free/settings/fields';
                 $event->rules['donations-free/steps'] = 'donations-free/settings/steps';
+                $event->rules['donations-free/donation-form'] = 'donations-free/settings/donation-form';
             }
         );
 

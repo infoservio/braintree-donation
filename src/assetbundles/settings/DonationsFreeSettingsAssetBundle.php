@@ -54,7 +54,6 @@ class DonationsFreeSettingsAssetBundle extends AssetBundle
 
         $this->css = [
             'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',
-            'https://fonts.googleapis.com/icon?family=Material+Icons',
             'css/style.css'
         ];
 

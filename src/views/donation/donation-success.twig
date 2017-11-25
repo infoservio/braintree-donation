@@ -9,6 +9,14 @@
     <div class="success-panel">
         <img class="success-logo" />
         <div class="panel-body">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                <a href="{{ baseUrl }}">Return back to the page</a>
+                </div>
+                <div>
+                    <h4><span>$ </span><span  id="success-amount">10000</span></h4>
+                </div>
+            </div>
             <div class="successMessage">
                 {{ successMessage | raw }}
             </div>
@@ -85,7 +93,6 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ baseUrl }}">Return back to the page</a>
         </div>
     </div>
 </body>

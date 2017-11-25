@@ -1,0 +1,61 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\sidebar\\SidebarAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\prism\\PrismAssetBundle") %}
+{% set title = "Donation Form"|t('app') %}
+{% block sidebar %}
+    <div class="sidebar-header">
+        <h3>Sidebar Menu</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="sidebar-item"><a href="/admin/donations-free/settings">Settings Manager</a></li>
+        <li class="sidebar-item"><a href="/admin/donations-free/fields">Fields Manager</a></li>
+        <li class="sidebar-item"><a href="/admin/donations-free/steps">Steps Manager</a></li>
+        <li class="active sidebar-item"><a href="/admin/donations-free/donation-form">Donation Form <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <h1>Donate Form Example</h1>
+    <pre class="line-numbers">
+        <code class="language-html">
+        {{ '<div class="entry-footer" style="text-align: right">
+			<form id="donate-form" action="/actions/donations-free/donation/donate" method="post">
+				<span class="dollar">$</span><input id="amount" type="number" name="amount" class="donate-field" placeholder="Enter amount here..." min="0" />
+				<input type="hidden" name="projectId" value="1"> <!-- Please fill this hidden field to identificate donation for project -->
+				<input type="hidden" name="projectName" value="Your project name"> <!-- Please fill this hidden field to identificate donation for project -->
+				<input id="donate-btn" class="btn" value="Donate" />
+			</form>
+		</div>'| escape('html') }}
+        </code>
+    </pre>
+    <pre class="line-numbers"><code class="language-css">       .dollar {
+            font-size: 28;
+            margin-right: 10px
+        }
+        .donate-field {
+            font-size: 14px;
+            height: 40px;
+            padding-right: 40px;
+            padding-left: 16px;
+            color: rgba(46, 46, 46, .8);
+            border-radius: 4px;
+            outline: none;
+            border: 1px solid rgb(225, 225, 225);
+        }
+        .btn {
+            font-size: 16px;
+            width: 163px;
+            height: 38px;
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 23px;
+            color: #fff !important;
+            background: #f62f5e !important;
+            padding: 0 !important;
+        }
+    </code></pre>
+{% endblock %}

@@ -1,3 +1,9 @@
+$.fn.digits = function(){
+    return this.each(function(){
+        $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+    })
+};
+
 $(document).ready(function () {
     // set main color
     document.body.style.setProperty('--main-color', mainColor);
@@ -31,6 +37,8 @@ $(document).ready(function () {
     showTab(currentTab);
 
     $('.success-logo').attr('src', '../img/success.png');
+
+    $('#sum').digits();
 
     $(document).keypress(function(e) {
         if(e.which == 13) {
@@ -81,7 +89,8 @@ $(document).ready(function () {
     $('#edit-btn').click((e) => {
         // init
         let amount = $('#sum').text();
-        amount = amount.replace('$', '');
+        amount = amount.replace('$ ', '');
+        amount = amount.replace(/,/g, '');
         $('.edit-amount-input').val(amount);
         $('.edit-amount-input').removeClass('error');
 
@@ -108,7 +117,8 @@ $(document).ready(function () {
             return;
         }
         $('.edit-amount-input').removeClass('error');
-        $('#sum').text(amount + '$');
+        $('#sum').text('$ ' + amount);
+        $('#sum').digits()
         $('#sum').removeClass('hidden');
 
         $('#amount').val(amount);

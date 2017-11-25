@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\assetbundles\general;
+namespace endurant\donationsfree\assetbundles\prism;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationsFreeGeneralAssetBundle extends AssetBundle
+class PrismAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,15 +43,21 @@ class DonationsFreeGeneralAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/donationsfree/assetbundles/general/dist';
+        $this->sourcePath = '@endurant/donationsfree/assetbundles/prism/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
+            'js/clipboard.min.js',
+            'js/prism.js',
         ];
 
         $this->css = [
-            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css',
+            'css/prism.css'
+        ];
+
+        $this->depends = [
+            'yii\web\JqueryAsset',
         ];
 
         $this->publishOptions = ['forceCopy' => true];

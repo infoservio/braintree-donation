@@ -108,8 +108,8 @@ class SettingsController extends Controller
         ]);
     }
 
-    public function actionSend()
+    public function actionDonationForm()
     {
-        $this->requirePostRequest();
+        return $this->renderTemplate('donations-free/settings/donation-form');
     }
 }
