@@ -56,6 +56,10 @@ class DonationsFreeFieldsAssetBundle extends AssetBundle
             'css/style.css'
         ];
 
+        $this->depends = [
+            'yii\web\JqueryAsset',
+        ];
+
         $this->publishOptions = ['forceCopy' => true];
 
         parent::init();
