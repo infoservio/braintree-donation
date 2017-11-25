@@ -99,7 +99,7 @@ class DonationController extends Controller
 
         $view->setTemplatesPath($this->getViewPath());
         // Include all the JS and CSS stuff
-        $view->registerAssetBundle(DonationsFreeGeneralAssetBundle::class);
+        $view->registerAssetBundle(DonationsFreeAssetBundle::class);
 
         $errorMessage = DonationsSettings::find()->where(['name' => 'errorMessage'])->one()->value;
 

@@ -55,6 +55,7 @@ class DonationsFreeAssetBundle extends AssetBundle
 
         $this->css = [
             'css/style.css',
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'
         ];
 
         $this->depends = [
