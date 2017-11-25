@@ -75,20 +75,11 @@ class SettingsController extends Controller
 
     public function actionFields()
     {
-        $fields = Field::find()->all();
         if ($post = Craft::$app->request->post()) {
-            foreach ($post as $key => $value) {
-                $field = Field::find()->where(['name' => $key])->one();
-                $field->required = +$value;
-                $field->save();
-            }
-
-            $fields = Field::find()->all();
-
-            return $this->renderTemplate('donations-free/settings/fields', [
-                'fields' => $fields
-            ]);
+            DonationsFree::$PLUGIN->fieldService->update($post);
         }
+
+        $fields = Field::find()->all();
 
         return $this->renderTemplate('donations-free/settings/fields', [
             'fields' => $fields

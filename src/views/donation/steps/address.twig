@@ -1,6 +1,12 @@
 <div class="tab">
-    <label for="company">Company</label>
-    <input type="text" id="company" name="company" class="input" tabindex=5 />
+    {% if fields['company'].show == 1  %}
+        <label for="company">Company
+            {% if fields['company'].required == 1  %}
+                <span class="required">*</span>
+            {% endif %}
+        </label>
+        <input type="text" id="company" name="company" class="input" tabindex=5 {{ fields['company'].required == 1 ? 'required' : '' }} />
+    {% endif %}
     <div class="input-fields">
         <div class="field">
             <label for="postalCode">Postal Code <span class="required">*</span></label>

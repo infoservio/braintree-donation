@@ -189,6 +189,7 @@ class Install extends Migration
                 'title' => $this->string(255),
                 'required' => $this->smallInteger()->defaultValue(1),
                 'show' => $this->smallInteger()->defaultValue(1),
+                'canHide' => $this->smallInteger()->defaultValue(0),
                 'dateCreated' => $this->date(),
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
@@ -392,6 +393,13 @@ class Install extends Migration
             'name' => 'phone',
             'title' => 'Phone',
             'required' => 0
+        ]);
+
+        $this->insert('donations_field', [
+            'name' => 'company',
+            'title' => 'Company',
+            'required' => 0,
+            'canHide' => 1
         ]);
     }
 

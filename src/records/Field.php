@@ -23,6 +23,7 @@ use craft\db\ActiveRecord;
  * @property string $title
  * @property integer $required
  * @property integer $show
+ * @property integer $canHide
  * @property string $dateCreated
  * @property string $dateUpdated
  * @property string $uid
@@ -56,7 +57,7 @@ class Field extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'show', 'required'], 'integer'],
+            [['id', 'show', 'required', 'canHide'], 'integer'],
             [['name', 'title'], 'string'],
             [['name', 'title'], 'required']
         ];

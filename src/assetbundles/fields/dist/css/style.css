@@ -55,8 +55,8 @@
     -webkit-border-radius:100%;
     -moz-border-radius:100%;
     border-radius:100%;
-    top:0px;
-    left:0px;
+    top:0;
+    left:0;
     right:auto;
     background:white;
     /*box-shadow*/
@@ -115,9 +115,9 @@
     color:rgba(19,191,17,1);
 }
 
-.container {
-    display: flex; /* or inline-flex */
-    width: 100%;
+.box {
+    /*display: flex;*/
+    padding-left: 0 !important;
 }
 
 .pull-right {
@@ -126,8 +126,13 @@
 
 .setting-name {
     font-size: 18px;
+    width: 100px;
 }
 
 .required-field {
     color: #da5a47;
+}
+
+.float-left {
+    float: left;
 }

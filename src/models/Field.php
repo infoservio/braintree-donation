@@ -37,6 +37,9 @@ class Field extends Model
 
     const FIELD_NOT_SHOW = ['id' => 0, 'name' => 'not show'];
     const FIELD_SHOW = ['id' => 1, 'name' => 'show'];
+
+    const FIELD_CANNOT_HIDE = ['id' => 0, 'name' => 'cannot hide'];
+    const FIELD_CAN_HIDE = ['id' => 1, 'name' => 'can hide'];
     /**
      * Some model attribute
      *
@@ -47,6 +50,7 @@ class Field extends Model
     public $title;
     public $required;
     public $show;
+    public $canHide;
 
     // Public Static Methods
     // =========================================================================
@@ -72,7 +76,7 @@ class Field extends Model
     public function rules()
     {
         return [
-            [['id', 'show', 'required'], 'integer'],
+            [['id', 'show', 'required', 'canHide'], 'integer'],
             [['name', 'title'], 'string'],
             [['name', 'title'], 'required']
         ];

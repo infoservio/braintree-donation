@@ -36,15 +36,30 @@ class FieldService extends Component
     // Public Methods
     // =========================================================================
 
-    public function update(Field $field)
+    public function update(array $post)
     {
-        $fieldRecord = new FieldRecord();
-        $fieldRecord->setAttributes($field->getAttributes(), false);
-
-        if (!$fieldRecord->update()) {
-            return ['success' => false, 'errors' => $fieldRecord->getErrors()];
+        $arr = $this->getArrFromPost($post);
+        foreach ($arr as $key => $value) {
+            $field = FieldRecord::find()->where(['name' => $key])->one();
+            $field->required = +$value['required'];
+            if (isset($value['show'])) {
+                $field->show = +$value['show'];
+            }
+            $field->save();
         }
+    }
 
-        return ['success' => true, 'settings' => $fieldRecord];
+    private function getArrFromPost(array $post)
+    {
+        $arr = [];
+        foreach ($post as $key => $value) {
+            $keys = explode('-', $key);
+            if (isset($arr[$keys[0]])) {
+                $arr[$keys[0]][$keys[1]] = $value;
+            } else {
+                $arr[$keys[0]] = [$keys[1] => $value];
+            }
+        }
+        return $arr;
     }
 }

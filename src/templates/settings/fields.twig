@@ -30,24 +30,22 @@
     {% endif %}
     <form method="post" action="fields" id="settings-form">
             {% for field in fields %}
-                <div class="container">
-                    <label class="setting-name pull-left">{{ field.name }}</label>
-                    <input type="hidden" name="{{ field.name }}" value=0>
-                    <input type="checkbox" name="{{ field.name }}" id="{{ field.name }}" class="ios-toggle" value=1 />
-                    <label for="{{ field.name }}" class="checkbox-label" data-off="Not Required" data-on="Required"></label>
+                <div class="box">
+                    <label class="setting-name float-left">{{ field.name }}</label>
+                    <input type="hidden" name="{{ field.name }}-required" value=0>
+                    <input type="checkbox" name="{{ field.name }}-required" id="{{ field.name }}-required" class="ios-toggle" value=1 />
+                    <label for="{{ field.name }}-required" class="checkbox-label" data-off="Not Required" data-on="Required"></label>
+                    {% if field.canHide %}
+                        <input type="hidden" name="{{ field.name }}-show" value=0>
+                        <input type="checkbox" name="{{ field.name }}-show" id="{{ field.name }}-show" class="ios-toggle" value=1 />
+                        <label for="{{ field.name }}-show" class="checkbox-label" data-off="Not Showed" data-on="Showed"></label>
+                    {% endif %}
                 </div>
                 <script>
-                    document.getElementById('{{ field.name }}').checked = {{ field.required }};
+                    document.getElementById('{{ field.name }}-required').checked = {{ field.required }};
+                    document.getElementById('{{ field.name }}-show').checked = {{ field.show }};
                 </script>
             {% endfor %}
-        <button type="submit" class="btn btn-primary form-btn pull-right" id="submit-btn">Update</button>
+        <button type="submit" class="btn btn-primary form-btn" id="submit-btn">Update</button>
     </form>
-
-    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-    <script>
-        var input = document.getElementById('color');
-        input.className += ' jscolor';
-        CKEDITOR.replace('successText');
-        CKEDITOR.replace('errorText');
-    </script>
 {% endblock %}
