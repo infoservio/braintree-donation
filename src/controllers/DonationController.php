@@ -154,8 +154,8 @@ class DonationController extends Controller
             $amount = ($amount) ? $amount : 100;
         }
 
-        $projectId = Craft::$app->session->get('donation')['projectId'];
-        $projectName = Craft::$app->session->get('donation')['projectName'];
+        $projectId = Craft::$app->session->get('donationForm')['projectId'];
+        $projectName = Craft::$app->session->get('donationForm')['projectName'];
         $color = DonationsSettings::find()->where(['name' => 'color'])->one()->value;
         $steps = Step::find()->orderBy('order ASC')->all();
 
