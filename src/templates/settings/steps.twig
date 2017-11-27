@@ -18,16 +18,16 @@
 {% endblock %}
 {% block content %}
     <h1>Steps Manager</h1>
-    {% if errors %}
-        <div class="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong> Change a few things up and try submitting again.
-            <ul>
-                {% for key, error in errors %}
-                    <li>{{ key }}: {{ error[0] }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    {#{% if errors %}#}
+    {#    <div class="alert alert-danger" role="alert">#}
+    {#        <strong>Oh snap!</strong> Change a few things up and try submitting again.#}
+    {#        <ul>#}
+    {#            {% for key, error in errors %}#}
+    {#                <li>{{ key }}: {{ error[0] }}</li>#}
+    {#            {% endfor %}#}
+    {#        </ul>#}
+    {#    </div>#}
+    {#{% endif %}#}
     <form action="steps" method="post">
         <div class="order-form">
             <ul id="sortable">
