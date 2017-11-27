@@ -6,6 +6,7 @@ use craft\base\Model;
 
 class DonateForm extends Model
 {
+    public $fixedAmount;
     public $amount;
     public $projectId;
     public $projectName;
@@ -14,9 +15,8 @@ class DonateForm extends Model
     {
         return [
             [['projectName'], 'string', 'max' => 49, 'message' => 'Project Name cannot be more than 50 characters.'],
-            [['amount'], 'double', 'min' => 0.1],
-            [['projectId'], 'integer'],
-            [['amount'], 'required']
+            [['amount', 'fixedAmount'], 'double', 'min' => 0.1],
+            [['projectId'], 'integer']
         ];
     }
 }

@@ -140,12 +140,20 @@ class DonationController extends Controller
             return $this->redirect('/actions/donations-free/donation/success');
         }
 
+        $fixed = false;
+        $amount = 100;
+
         $countries = ArrayHelper::toArray(Country::find()->all());
         $states = ArrayHelper::toArray(State::find()->all());
         $fields = Field::getFieldsArr();
         $defaultCountryId = Country::DEFAULT_COUNTRY_ID;
-        $amount = Craft::$app->session->get('donation')['amount'];
-        $amount = ($amount) ? $amount : 50;
+        if ($fixedAmount = Craft::$app->session->get('donationForm')['fixedAmount']) {
+            $fixed = true;
+        } else {
+            $amount = Craft::$app->session->get('donationForm')['amount'];
+            $amount = ($amount) ? $amount : 100;
+        }
+
         $projectId = Craft::$app->session->get('donation')['projectId'];
         $projectName = Craft::$app->session->get('donation')['projectName'];
         $color = DonationsSettings::find()->where(['name' => 'color'])->one()->value;
@@ -154,7 +162,8 @@ class DonationController extends Controller
         $view->resolveTemplate('index');
 
         return $this->renderTemplate('pay', [
-            'amount' => $amount,
+            'fixed' => $fixed,
+            'amount' => $fixed ? $fixedAmount : $amount,
             'defaultCountryId' => $defaultCountryId,
             'countries' => $countries,
             'states' => $states,
@@ -184,7 +193,7 @@ class DonationController extends Controller
             return $donateForm->getErrors();
         }
 
-        Craft::$app->session->set('donation', $donateForm);
+        Craft::$app->session->set('donationForm', $donateForm);
         Craft::$app->session->set('baseUrl', Craft::$app->request->baseUrl);
 
         return $this->redirect('/actions/donations-free/donation/pay');
