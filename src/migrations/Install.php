@@ -35,6 +35,8 @@ class Install extends Migration
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
+        $this->insertMailManagerTemplate();
+
         return true;
     }
 
@@ -347,6 +349,20 @@ class Install extends Migration
 
         if ($this->tableExists('donations_step')) {
             $this->dropTable('donations_step');
+        }
+    }
+
+    private function insertMailManagerTemplate()
+    {
+        try {
+            $this->insert('mailmanager_template', [
+                'name' => 'Success Donation Email',
+                'slug' => 'success-donation',
+                'subject' => 'Thank you for donation',
+                'template' => 'Thank you for donation.'
+            ]);
+        } catch (\Exception $e) {
+            // test
         }
     }
 
