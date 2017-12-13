@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\services;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Component;

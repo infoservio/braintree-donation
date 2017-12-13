@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\services;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Component;
@@ -39,6 +39,10 @@ class DonationService extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param array $params
+     * @throws \endurant\braintreedonation\errors\BraintreeDonationsPluginException
+     */
     public function donate(array $params)
     {
         $customer = Customer::create($params);
@@ -49,7 +53,7 @@ class DonationService extends Component
         $transaction->projectId = intval($params['projectId']);
         $transaction->projectName = $params['projectName'];
 
-        $braintreeService = DonationsFree::$PLUGIN->braintreeService;
+        $braintreeService = BraintreeDonation::$PLUGIN->braintree;
 
         $braintreeService->createCustomer($customer);
         $braintreeService->createAddress($customer, $address);
@@ -57,13 +61,13 @@ class DonationService extends Component
         $braintreeService->createTransaction($customer, $transaction);
 
        try {
-            $address = DonationsFree::$PLUGIN->addressService->saveAddress($address);
+            $address = BraintreeDonation::$PLUGIN->address->saveAddress($address);
             $customer->addressId = $address->id;
-            $customer = DonationsFree::$PLUGIN->customerService->saveCustomer($customer);
+            $customer = BraintreeDonation::$PLUGIN->customer->saveCustomer($customer);
             $card->customerId = $customer->id;
-            $card = DonationsFree::$PLUGIN->cardService->saveCard($card);
+            $card = BraintreeDonation::$PLUGIN->card->saveCard($card);
             $transaction->cardId = $card->id;
-            $transaction = DonationsFree::$PLUGIN->transactionService->saveTransaction($transaction);
+            $transaction = BraintreeDonation::$PLUGIN->transaction->saveTransaction($transaction);
 
        } catch(DbDonationsPluginException $e) {
            

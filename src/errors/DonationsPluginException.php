@@ -1,7 +1,7 @@
 <?php
 
 namespace endurant\braintreedonation\errors;
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 class DonationsPluginException extends \Exception
 {
@@ -19,7 +19,7 @@ class DonationsPluginException extends \Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = DonationsFree::$PLUGIN->logService;
+        $this->_logService = BraintreeDonation::$PLUGIN->log;
         $this->log($category);
     }
     

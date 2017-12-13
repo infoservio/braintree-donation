@@ -2,7 +2,7 @@
 
 namespace endurant\braintreedonation\components\httpClient\braintree;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 use yii\base\Component;
 
 use Braintree\ClientToken as BraintreeClientToken;
@@ -25,7 +25,7 @@ class BraintreeHttpClient extends Component
     function __construct()
     {
         parent::__construct();
-        $this->_settings = DonationsFree::$PLUGIN->getSettings();
+        $this->_settings = BraintreeDonation::$PLUGIN->getSettings();
 
         // Configuration of Braintree
         BraintreeConfiguration::environment($this->_settings->btEnvironment);

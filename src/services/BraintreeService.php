@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\services;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Component;
@@ -42,7 +42,7 @@ class BraintreeService extends Component
 
     public function createCustomer(Customer &$customer)
     {
-        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCustomer($customer);
+        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCustomer($customer);
 
         if (!$result->success) {
 
@@ -60,7 +60,7 @@ class BraintreeService extends Component
 
     public function createAddress(Customer $customer, Address $address)
     {
-        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
+        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
 
         if (!$result->success) {
 
@@ -77,7 +77,7 @@ class BraintreeService extends Component
 
     public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce)
     {
-        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
+        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
 
         if (!$result->success) {
 
@@ -104,7 +104,7 @@ class BraintreeService extends Component
 
     public function createTransaction(Customer $customer, Transaction &$transaction)
     {
-        $result = DonationsFree::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
+        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
 
         if (!$result->success) {
 

@@ -12,7 +12,7 @@ namespace endurant\braintreedonation\controllers;
 
 use Craft;
 use craft\web\Controller;
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 use endurant\braintreedonation\models\DonationsSettings;
 use endurant\braintreedonation\records\Field;
 use endurant\braintreedonation\records\Step;
@@ -63,7 +63,7 @@ class SettingsController extends Controller
     public function actionSettings()
     {
         if ($post = Craft::$app->request->post()) {
-            DonationsFree::$PLUGIN->pluginService->updatePluginSettings($post);
+            BraintreeDonation::$PLUGIN->plugin->updatePluginSettings($post);
             return $this->redirect('braintree-donation/settings');
         }
 
@@ -76,7 +76,7 @@ class SettingsController extends Controller
     public function actionFields()
     {
         if ($post = Craft::$app->request->post()) {
-            DonationsFree::$PLUGIN->fieldService->update($post);
+            BraintreeDonation::$PLUGIN->field->update($post);
         }
 
         $fields = Field::find()->all();
@@ -89,7 +89,7 @@ class SettingsController extends Controller
     public function actionSteps()
     {
         if ($post = Craft::$app->request->post()) {
-            DonationsFree::$PLUGIN->stepService->update($post);
+            BraintreeDonation::$PLUGIN->step->update($post);
         }
 
         $steps = Step::find()->orderBy('order asc')->all();

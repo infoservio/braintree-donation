@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\services;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Component;
@@ -52,7 +52,7 @@ class CardService extends Component
     {
         $result = 'something';
         // Check our Plugin's settings for `someAttribute`
-        if (DonationsFree::$PLUGIN->getSettings()->someAttribute) {
+        if (BraintreeDonation::$PLUGIN->getSettings()->someAttribute) {
         }
 
         return $result;

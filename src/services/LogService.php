@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\services;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Component;
@@ -37,7 +37,7 @@ class LogService extends Component
     public function __construct()
     {
         parent::__construct();
-        $this->_donationLogger = DonationsFree::$PLUGIN->donationLogger;
+        $this->_donationLogger = BraintreeDonation::$PLUGIN->donationLogger;
     }
 
     // Public Methods

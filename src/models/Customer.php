@@ -10,7 +10,7 @@
 
 namespace endurant\braintreedonation\models;
 
-use endurant\braintreedonation\Donationsfree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Model;

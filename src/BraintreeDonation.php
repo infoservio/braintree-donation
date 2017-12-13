@@ -10,6 +10,9 @@
 
 namespace endurant\braintreedonation;
 
+use endurant\braintreedonation\components\httpClient\braintree\BraintreeHttpClient;
+use endurant\braintreedonation\components\logger\Logger;
+use endurant\braintreedonation\components\parser\CsvParser;
 use endurant\braintreedonation\models\Settings;
 
 use Craft;
@@ -21,27 +24,40 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 
+use endurant\braintreedonation\services\AddressService;
+use endurant\braintreedonation\services\BraintreeService;
+use endurant\braintreedonation\services\CardService;
+use endurant\braintreedonation\services\CustomerService;
+use endurant\braintreedonation\services\DonationService;
+use endurant\braintreedonation\services\DonationsSettingsService;
+use endurant\braintreedonation\services\FieldService;
+use endurant\braintreedonation\services\LogService;
+use endurant\braintreedonation\services\PluginService;
+use endurant\braintreedonation\services\StepService;
+use endurant\braintreedonation\services\TransactionService;
+use oms\billionglobalserver\services\AnswerService;
 use yii\base\Event;
 
 /**
- * Craft plugins are very much like little applications in and of themselves. We’ve made
- * it as simple as we can, but the training wheels are off. A little prior knowledge is
- * going to be required to write a plugin.
+ * @property AddressService $address
+ * @property BraintreeService $braintree
+ * @property CardService $card
+ * @property CustomerService $customer
+ * @property DonationService $donation
+ * @property DonationsSettingsService $donationSetting
+ * @property FieldService $field
+ * @property LogService $log
+ * @property PluginService $plugin
+ * @property StepService $step
+ * @property TransactionService $transaction
+ * @property BraintreeHttpClient $braintreeHttpClient
+ * @property Logger $donationLogger
+ * @property CsvParser $csvParser
  *
- * For the purposes of the plugin docs, we’re going to assume that you know PHP and SQL,
- * as well as some semi-advanced concepts like object-oriented programming and PHP namespaces.
- *
- * https://craftcms.com/docs/plugins/introduction
- *
- * @author    endurant
- * @package   Donationsfree
- * @since     1.0.0
- *
- * @property Plugin $plugin
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-class DonationsFree extends Plugin
+class BraintreeDonation extends Plugin
 {
     // Static Properties
     // =========================================================================
@@ -50,7 +66,7 @@ class DonationsFree extends Plugin
      * Static property that is an instance of this plugin class so that it can be accessed via
      * DonationsFree::$plugin
      *
-     * @var DonationsFree
+     * @var BraintreeDonation
      */
     public static $PLUGIN;
 

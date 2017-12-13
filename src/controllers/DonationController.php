@@ -11,7 +11,7 @@
 namespace endurant\braintreedonation\controllers;
 
 use Braintree\ClientToken;
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\web\Controller;
@@ -126,12 +126,8 @@ class DonationController extends Controller
             $view->resolveTemplate('error');
 
             try {
-                DonationsFree::$PLUGIN->donationService->donate($post);
-            } catch (DonationsPluginException $e) {
-                return $this->redirect('/actions/braintree-donation/donation/error');
+                BraintreeDonation::$PLUGIN->donation->donate($post);
             } catch (\Exception $e) {
-                return $this->redirect('/actions/braintree-donation/donation/error');
-            } catch (\Error $e) {
                 return $this->redirect('/actions/braintree-donation/donation/error');
             }
 
@@ -167,7 +163,7 @@ class DonationController extends Controller
             'defaultCountryId' => $defaultCountryId,
             'countries' => $countries,
             'states' => $states,
-            'btAuthorization' => DonationsFree::$PLUGIN->braintreeHttpClient->generateToken(),
+            'btAuthorization' => BraintreeDonation::$PLUGIN->braintreeHttpClient->generateToken(),
             'projectId' => $projectId,
             'projectName' => $projectName,
             'mainColor' => $color,
@@ -181,6 +177,7 @@ class DonationController extends Controller
      * e.g.: actions/braintree-donation/donate/do-something
      *
      * @return mixed
+     * @throws \yii\web\BadRequestHttpException
      */
     public function actionDonate()
     {

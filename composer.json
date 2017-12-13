@@ -46,22 +46,22 @@
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "donationService": "endurant\\braintreedonation\\services\\DonationService",
-            "braintreeService": "endurant\\braintreedonation\\services\\BraintreeService",
-            "cardService": "endurant\\braintreedonation\\services\\CardService",
-            "customerService": "endurant\\braintreedonation\\services\\CustomerService",
-            "addressService": "endurant\\braintreedonation\\services\\AddressService",
-            "transactionService": "endurant\\braintreedonation\\services\\TransactionService",
-            "logService": "endurant\\braintreedonation\\services\\LogService",
-            "donationsSettingsService": "endurant\\braintreedonation\\services\\DonationsSettingsService",
-            "fieldService": "endurant\\braintreedonation\\services\\FieldService",
-            "pluginService": "endurant\\braintreedonation\\services\\PluginService",
-            "stepService": "endurant\\braintreedonation\\services\\StepService",
+            "donation": "endurant\\braintreedonation\\services\\DonationService",
+            "braintree": "endurant\\braintreedonation\\services\\BraintreeService",
+            "card": "endurant\\braintreedonation\\services\\CardService",
+            "customer": "endurant\\braintreedonation\\services\\CustomerService",
+            "address": "endurant\\braintreedonation\\services\\AddressService",
+            "transaction": "endurant\\braintreedonation\\services\\TransactionService",
+            "log": "endurant\\braintreedonation\\services\\LogService",
+            "donationSettings": "endurant\\braintreedonation\\services\\DonationsSettingsService",
+            "field": "endurant\\braintreedonation\\services\\FieldService",
+            "plugin": "endurant\\braintreedonation\\services\\PluginService",
+            "step": "endurant\\braintreedonation\\services\\StepService",
             "braintreeHttpClient": "endurant\\braintreedonation\\components\\httpClient\\braintree\\BraintreeHttpClient",
             "donationLogger": "endurant\\braintreedonation\\components\\logger\\Logger",
             "csvParser": "endurant\\braintreedonation\\components\\parser\\CsvParser"
         },
-        "class": "endurant\\braintreedonation\\DonationsFree"
+        "class": "endurant\\braintreedonation\\BraintreeDonation"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"

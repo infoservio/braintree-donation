@@ -5,7 +5,7 @@ use Yii;
 use Craft;
 use craft\db\Migration;
 
-use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\BraintreeDonation;
 
 class Install extends Migration
 {
@@ -352,7 +352,7 @@ class Install extends Migration
 
     private function insertCountries()
     {
-        $countries = DonationsFree::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
+        $countries = BraintreeDonation::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
         $country = null;
         foreach($countries as &$country) {
             $this->insert('donations_country', [
@@ -372,7 +372,7 @@ class Install extends Migration
 
     private function insertUsaStates()
     {
-        $usaStates = DonationsFree::$PLUGIN->csvParser->parseCsvFile($this->_usaStatesCsvPath);
+        $usaStates = BraintreeDonation::$PLUGIN->csvParser->parseCsvFile($this->_usaStatesCsvPath);
         $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [
