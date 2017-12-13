@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -10,8 +10,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-use endurant\donationsfree\models\Customer;
-use endurant\donationsfree\records\Customer as CustomerRecord;
+use endurant\braintreedonation\models\Customer;
+use endurant\braintreedonation\records\Customer as CustomerRecord;
 
 class CustomerRecordTest extends TestCase
 {

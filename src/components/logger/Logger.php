@@ -1,10 +1,10 @@
 <?php
-namespace endurant\donationsfree\components\logger;
+namespace endurant\braintreedonation\components\logger;
 
 use Craft;
-use endurant\donationsfree\records\Log as LogRecord;
-use endurant\donationsfree\models\Log;
-use endurant\donationsfree\components\Settings;
+use endurant\braintreedonation\records\Log as LogRecord;
+use endurant\braintreedonation\models\Log;
+use endurant\braintreedonation\components\Settings;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
 use yii\db\Exception;
@@ -19,7 +19,7 @@ class Logger implements ILogger
 
     public function __construct()
     {
-        $this->category = 'donations-free-logs';
+        $this->category = 'braintree-donation-logs';
         $this->processId = Settings::createProcessID();
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\assetbundles\sidebar;
+namespace endurant\braintreedonation\assetbundles\sidebar;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -43,7 +43,7 @@ class SidebarAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/donationsfree/assetbundles/sidebar/dist/';
+        $this->sourcePath = '@endurant/braintreedonation/assetbundles/sidebar/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered

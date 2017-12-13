@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -10,11 +10,11 @@
 
 use PHPUnit\Framework\TestCase;
 
-use endurant\donationsfree\models\Customer;
-use endurant\donationsfree\models\Address;
-use endurant\donationsfree\models\Card;
-use endurant\donationsfree\models\Transaction;
-use endurant\donationsfree\components\httpClient\braintree\BraintreeHttpClient;
+use endurant\braintreedonation\models\Customer;
+use endurant\braintreedonation\models\Address;
+use endurant\braintreedonation\models\Card;
+use endurant\braintreedonation\models\Transaction;
+use endurant\braintreedonation\components\httpClient\braintree\BraintreeHttpClient;
 
 class BraintreeServiceTest extends TestCase
 {

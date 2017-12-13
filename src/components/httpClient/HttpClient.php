@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\donationsfree\components\httpClient;
+namespace endurant\braintreedonation\components\httpClient;
 
 // use GuzzleHttp\Client;
 

@@ -1,14 +1,14 @@
 {
-    "name": "endurant/donations-free",
-    "description": "Free Braintree Donation System",
+    "name": "endurant/braintree-donation",
+    "description": "Braintree Donation System",
     "type": "craft-plugin",
-    "version": "1.0.10",
+    "version": "1.0.0",
     "keywords": [
         "craft",
         "cms",
         "craftcms",
         "craft-plugin",
-        "donations-free"
+        "braintree-donation"
     ],
     "support": {
         "docs": "http://test",
@@ -24,43 +24,44 @@
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
         "braintree/braintree_php" : "3.6.1",
-        "yiisoft/yii2": "^2.0"
+        "yiisoft/yii2": "^2.0",
+        "endurant/mail-manager": "dev-master"
     },
     "repositories": [
         {
             "type": "composer",
-            "url": "https://asset-packagist.org"
+            "url": "https://oms:Ap5AJN86bLg93dxX@composer.oms.systems"
         }
     ],
     "autoload": {
         "psr-4": {
-          "endurant\\donationsfree\\": "src/"
+          "endurant\\braintreedonation\\": "src/"
         }
     },
     "extra": {
-        "name": "Donations Free",
-        "handle": "donations-free",
+        "name": "Braintree Donation",
+        "handle": "braintree-donation",
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "donationService": "endurant\\donationsfree\\services\\DonationService",
-            "braintreeService": "endurant\\donationsfree\\services\\BraintreeService",
-            "cardService": "endurant\\donationsfree\\services\\CardService",
-            "customerService": "endurant\\donationsfree\\services\\CustomerService",
-            "addressService": "endurant\\donationsfree\\services\\AddressService",
-            "transactionService": "endurant\\donationsfree\\services\\TransactionService",
-            "logService": "endurant\\donationsfree\\services\\LogService",
-            "donationsSettingsService": "endurant\\donationsfree\\services\\DonationsSettingsService",
-            "fieldService": "endurant\\donationsfree\\services\\FieldService",
-            "pluginService": "endurant\\donationsfree\\services\\PluginService",
-            "stepService": "endurant\\donationsfree\\services\\StepService",
-            "braintreeHttpClient": "endurant\\donationsfree\\components\\httpClient\\braintree\\BraintreeHttpClient",
-            "donationLogger": "endurant\\donationsfree\\components\\logger\\Logger",
-            "csvParser": "endurant\\donationsfree\\components\\parser\\CsvParser"
+            "donationService": "endurant\\braintreedonation\\services\\DonationService",
+            "braintreeService": "endurant\\braintreedonation\\services\\BraintreeService",
+            "cardService": "endurant\\braintreedonation\\services\\CardService",
+            "customerService": "endurant\\braintreedonation\\services\\CustomerService",
+            "addressService": "endurant\\braintreedonation\\services\\AddressService",
+            "transactionService": "endurant\\braintreedonation\\services\\TransactionService",
+            "logService": "endurant\\braintreedonation\\services\\LogService",
+            "donationsSettingsService": "endurant\\braintreedonation\\services\\DonationsSettingsService",
+            "fieldService": "endurant\\braintreedonation\\services\\FieldService",
+            "pluginService": "endurant\\braintreedonation\\services\\PluginService",
+            "stepService": "endurant\\braintreedonation\\services\\StepService",
+            "braintreeHttpClient": "endurant\\braintreedonation\\components\\httpClient\\braintree\\BraintreeHttpClient",
+            "donationLogger": "endurant\\braintreedonation\\components\\logger\\Logger",
+            "csvParser": "endurant\\braintreedonation\\components\\parser\\CsvParser"
         },
-        "class": "endurant\\donationsfree\\DonationsFree"
+        "class": "endurant\\braintreedonation\\DonationsFree"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"

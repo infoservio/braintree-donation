@@ -1,7 +1,7 @@
 <?php
 
-namespace endurant\donationsfree\errors;
-use endurant\donationsfree\DonationsFree;
+namespace endurant\braintreedonation\errors;
+use endurant\braintreedonation\DonationsFree;
 
 class DonationsPluginException extends \Exception
 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,14 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\controllers;
+namespace endurant\braintreedonation\controllers;
 
 use Craft;
 use craft\web\Controller;
-use endurant\donationsfree\DonationsFree;
-use endurant\donationsfree\models\DonationsSettings;
-use endurant\donationsfree\records\Field;
-use endurant\donationsfree\records\Step;
+use endurant\braintreedonation\DonationsFree;
+use endurant\braintreedonation\models\DonationsSettings;
+use endurant\braintreedonation\records\Field;
+use endurant\braintreedonation\records\Step;
 
 /**
  * Donate Controller
@@ -64,11 +64,11 @@ class SettingsController extends Controller
     {
         if ($post = Craft::$app->request->post()) {
             DonationsFree::$PLUGIN->pluginService->updatePluginSettings($post);
-            return $this->redirect('donations-free/settings');
+            return $this->redirect('braintree-donation/settings');
         }
 
         $settings = DonationsSettings::getSettingsArr();
-        return $this->renderTemplate('donations-free/settings/index', [
+        return $this->renderTemplate('braintree-donation/settings/index', [
             'settings' => $settings
         ]);
     }
@@ -81,7 +81,7 @@ class SettingsController extends Controller
 
         $fields = Field::find()->all();
 
-        return $this->renderTemplate('donations-free/settings/fields', [
+        return $this->renderTemplate('braintree-donation/settings/fields', [
             'fields' => $fields
         ]);
     }
@@ -94,13 +94,13 @@ class SettingsController extends Controller
 
         $steps = Step::find()->orderBy('order asc')->all();
 
-        return $this->renderTemplate('donations-free/settings/steps', [
+        return $this->renderTemplate('braintree-donation/settings/steps', [
             'steps' => $steps
         ]);
     }
 
     public function actionDonationForm()
     {
-        return $this->renderTemplate('donations-free/settings/donation-form');
+        return $this->renderTemplate('braintree-donation/settings/donation-form');
     }
 }

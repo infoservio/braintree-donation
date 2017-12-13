@@ -1,4 +1,4 @@
-# donations-free plugin for Craft CMS 3.x
+# braintree-donation plugin for Craft CMS 3.x
 
 Free Braintree Donation System
 
@@ -18,23 +18,23 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require /donations-free
+        composer require /braintree-donation
 
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for donations-free.
+3. In the Control Panel, go to Settings → Plugins and click the “Install” button for braintree-donation.
 
-## donations-free Overview
-
--Insert text here-
-
-## Configuring donations-free
+## braintree-donation Overview
 
 -Insert text here-
 
-## Using donations-free
+## Configuring braintree-donation
 
 -Insert text here-
 
-## donations-free Roadmap
+## Using braintree-donation
+
+-Insert text here-
+
+## braintree-donation Roadmap
 
 Some things to do, and ideas for potential features:
 

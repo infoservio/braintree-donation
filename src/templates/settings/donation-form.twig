@@ -1,7 +1,7 @@
 {% extends "_layouts/cp" %}
 {% import "_includes/forms" as forms %}
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\sidebar\\SidebarAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\prism\\PrismAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\braintreedonation\\assetbundles\\sidebar\\SidebarAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\braintreedonation\\assetbundles\\prism\\PrismAssetBundle") %}
 {% set title = "Donation Form"|t('app') %}
 {% block sidebar %}
     <div class="sidebar-header">
@@ -10,10 +10,10 @@
 
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
-        <li class="sidebar-item"><a href="/admin/donations-free/settings">Settings Manager</a></li>
-        <li class="sidebar-item"><a href="/admin/donations-free/fields">Fields Manager</a></li>
-        <li class="sidebar-item"><a href="/admin/donations-free/steps">Steps Manager</a></li>
-        <li class="active sidebar-item"><a href="/admin/donations-free/donation-form">Donation Form <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/settings">Settings Manager</a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/fields">Fields Manager</a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/steps">Steps Manager</a></li>
+        <li class="active sidebar-item"><a href="/admin/braintree-donation/donation-form">Donation Form <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
     </ul>
 {% endblock %}
 {% block content %}
@@ -22,7 +22,7 @@
     <pre class="line-numbers">
         <code class="language-html">
         {{ '<div class="entry-footer" style="text-align: right">
-			<form id="donate-form" action="/actions/donations-free/donation/donate" method="post">
+			<form id="donate-form" action="/actions/braintree-donation/donation/donate" method="post">
 				<span class="dollar">$</span><input id="amount" type="number" name="amount" class="donate-field" placeholder="Enter amount here..." min="0" />
 				<input type="hidden" name="projectId" value="1"> <!-- Please fill this hidden field to identificate donation for project -->
 				<input type="hidden" name="projectName" value="Your project name"> <!-- Please fill this hidden field to identificate donation for project -->

@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\models;
+namespace endurant\braintreedonation\models;
 
-use endurant\donationsfree\Donationsfree;
+use endurant\braintreedonation\Donationsfree;
 
 use Craft;
 use craft\base\Model;

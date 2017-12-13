@@ -1,8 +1,8 @@
 {% extends "_layouts/cp" %}
 {#{% set fullPageForm = true %}#}
 {% import "_includes/forms" as forms %}
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\sidebar\\SidebarAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\donationsfree\\assetbundles\\fields\\DonationsFreeFieldsAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\braintreedonation\\assetbundles\\sidebar\\SidebarAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\braintreedonation\\assetbundles\\fields\\DonationsFreeFieldsAssetBundle") %}
 {% set title = "Donations Fields Manager"|t('app') %}
 {% block sidebar %}
     <div class="sidebar-header">
@@ -11,10 +11,10 @@
 
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
-        <li class="sidebar-item"><a href="/admin/donations-free/settings">Settings Manager</a></li>
-        <li class="active sidebar-item"><a href="/admin/donations-free/fields">Fields Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
-        <li class="sidebar-item"><a href="/admin/donations-free/steps">Steps Manager</a></li>
-        <li class="sidebar-item"><a href="/admin/donations-free/donation-form">Donation Form</a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/settings">Settings Manager</a></li>
+        <li class="active sidebar-item"><a href="/admin/braintree-donation/fields">Fields Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/steps">Steps Manager</a></li>
+        <li class="sidebar-item"><a href="/admin/braintree-donation/donation-form">Donation Form</a></li>
     </ul>
 {% endblock %}
 {% block content %}

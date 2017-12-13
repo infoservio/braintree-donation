@@ -1,11 +1,11 @@
 <?php
-namespace endurant\donationsfree\migrations;
+namespace endurant\braintreedonation\migrations;
 
 use Yii;
 use Craft;
 use craft\db\Migration;
 
-use endurant\donationsfree\DonationsFree;
+use endurant\braintreedonation\DonationsFree;
 
 class Install extends Migration
 {
@@ -35,8 +35,6 @@ class Install extends Migration
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
-        $this->insertDefaultData();
-
         return true;
     }
 
@@ -52,8 +50,8 @@ class Install extends Migration
      */
     public function safeDown()
     {
-        $this->removeForeignKeys();
-        $this->removeTables();
+//        $this->removeForeignKeys();
+//        $this->removeTables();
 
         return true;
     }
@@ -157,6 +155,10 @@ class Install extends Migration
                 'regionCode' => $this->integer(50),
                 'subRegionCode' => $this->integer()
             ]);
+
+            if ($this->fileExists($this->_countryCsvPath)) {
+                $this->insertCountries();
+            }
         }
 
         if (!$this->tableExists('donations_state')) {
@@ -165,6 +167,10 @@ class Install extends Migration
                 'name' => $this->string(50),
                 'code' => $this->string(2)
             ]);
+
+            if ($this->fileExists($this->_usaStatesCsvPath)) {
+                $this->insertUsaStates();
+            }
         }
 
         if (!$this->tableExists('donations_logs')) {
@@ -194,6 +200,8 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->insertDonationsFieldDefaultValue();
         }
 
         if (!$this->tableExists('donations_settings')) {
@@ -205,6 +213,8 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->insertDonationsSettingsDefaultValue();
         }
 
         if (!$this->tableExists('donations_step')) {
@@ -217,6 +227,8 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->insertDonationsStepsDefaultValue();
         }
     }
 
@@ -336,21 +348,6 @@ class Install extends Migration
         if ($this->tableExists('donations_step')) {
             $this->dropTable('donations_step');
         }
-    }
-
-    private function insertDefaultData()
-    {
-        if ($this->fileExists($this->_countryCsvPath)) {
-            $this->insertCountries();
-        }
-
-        if ($this->fileExists($this->_usaStatesCsvPath)) {
-            $this->insertUsaStates();
-        }
-
-        $this->insertDonationsFieldDefaultValue();
-        $this->insertDonationsSettingsDefaultValue();
-        $this->insertDonationsStepsDefaultValue();
     }
 
     private function insertCountries()

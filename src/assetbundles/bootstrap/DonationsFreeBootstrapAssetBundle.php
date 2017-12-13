@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\assetbundles\bootstrap;
+namespace endurant\braintreedonation\assetbundles\bootstrap;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -43,7 +43,7 @@ class DonationsFreeBootstrapAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/donationsfree/assetbundles/bootstrap/dist';
+        $this->sourcePath = '@endurant/braintreedonation/assetbundles/bootstrap/dist';
 
         $this->js = [
             'js/index.js'

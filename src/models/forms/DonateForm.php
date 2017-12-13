@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\donationsfree\models\forms;
+namespace endurant\braintreedonation\models\forms;
 
 use craft\base\Model;
 

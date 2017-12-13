@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree;
+namespace endurant\braintreedonation;
 
-use endurant\donationsfree\models\Settings;
+use endurant\braintreedonation\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -87,9 +87,9 @@ class DonationsFree extends Plugin
 
         Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
             if (\Craft::$app->user->identity->admin) {
-//                $event->navItems['donations-free'] = [
+//                $event->navItems['braintree-donation'] = [
 //                    'label' => 'Donations Manager',
-//                    'url' => 'donations-free/settings'
+//                    'url' => 'braintree-donation/settings'
 //                ];
             }
         });
@@ -99,7 +99,7 @@ class DonationsFree extends Plugin
 //            UrlManager::class,
 //            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
 //            function (RegisterUrlRulesEvent $event) {
-//                $event->rules['donations-free/donation/pay'] = '/actions/donations-free/donation/pay';
+//                $event->rules['braintree-donation/donation/pay'] = '/actions/braintree-donation/donation/pay';
 //            }
 //        );
 
@@ -108,17 +108,17 @@ class DonationsFree extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['donations-free'] = 'donations-free/settings/settings';
-                $event->rules['donations-free/settings'] = 'donations-free/settings/settings';
-                $event->rules['donations-free/fields'] = 'donations-free/settings/fields';
-                $event->rules['donations-free/steps'] = 'donations-free/settings/steps';
-                $event->rules['donations-free/donation-form'] = 'donations-free/settings/donation-form';
+                $event->rules['braintree-donation'] = 'braintree-donation/settings/settings';
+                $event->rules['braintree-donation/settings'] = 'braintree-donation/settings/settings';
+                $event->rules['braintree-donation/fields'] = 'braintree-donation/settings/fields';
+                $event->rules['braintree-donation/steps'] = 'braintree-donation/settings/steps';
+                $event->rules['braintree-donation/donation-form'] = 'braintree-donation/settings/donation-form';
             }
         );
 
         Craft::info(
             Craft::t(
-                'donations-free',
+                'braintree-donation',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),
@@ -130,9 +130,9 @@ class DonationsFree extends Plugin
 //    {
 //        $item = parent::getCpNavItem();
 //        $item['subnav'] = [
-//            'settings' => ['label' => 'Settings Manager', 'url' => 'donations-free/settings'],
-//            'fields' => ['label' => 'Fields Manager', 'url' => 'donations-free/fields'],
-//            'steps' => ['label' => 'Steps Manager', 'url' => 'donations-free/steps'],
+//            'settings' => ['label' => 'Settings Manager', 'url' => 'braintree-donation/settings'],
+//            'fields' => ['label' => 'Fields Manager', 'url' => 'braintree-donation/fields'],
+//            'steps' => ['label' => 'Steps Manager', 'url' => 'braintree-donation/steps'],
 //        ];
 //        return $item;
 //    }
@@ -159,7 +159,7 @@ class DonationsFree extends Plugin
     protected function settingsHtml(): string
     {
         return Craft::$app->view->renderTemplate(
-            'donations-free/settings',
+            'braintree-donation/settings',
             [
                 'settings' => $this->getSettings()
             ]

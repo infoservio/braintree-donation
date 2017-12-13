@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\donationsfree\components\httpClient\braintree;
+namespace endurant\braintreedonation\components\httpClient\braintree;
 
-use endurant\donationsfree\DonationsFree;
+use endurant\braintreedonation\DonationsFree;
 use yii\base\Component;
 
 use Braintree\ClientToken as BraintreeClientToken;
@@ -12,10 +12,10 @@ use Braintree\Address as BraintreeAddress;
 use Braintree\PaymentMethod as BraintreeCard;
 use Braintree\Transaction as BraintreeTransaction;
 
-use endurant\donationsfree\models\Customer;
-use endurant\donationsfree\models\Address;
-use endurant\donationsfree\models\Card;
-use endurant\donationsfree\models\Transaction;
+use endurant\braintreedonation\models\Customer;
+use endurant\braintreedonation\models\Address;
+use endurant\braintreedonation\models\Card;
+use endurant\braintreedonation\models\Transaction;
 
 class BraintreeHttpClient extends Component
 {

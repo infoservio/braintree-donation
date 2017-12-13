@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,23 +8,23 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\controllers;
+namespace endurant\braintreedonation\controllers;
 
 use Braintree\ClientToken;
-use endurant\donationsfree\DonationsFree;
+use endurant\braintreedonation\DonationsFree;
 
 use Craft;
 use craft\web\Controller;
 use craft\helpers\ArrayHelper;
-use endurant\donationsfree\assetbundles\donations\DonationsFreeAssetBundle;
-use endurant\donationsfree\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
-use endurant\donationsfree\errors\DonationsPluginException;
-use endurant\donationsfree\models\forms\DonateForm;
-use endurant\donationsfree\records\Country;
-use endurant\donationsfree\models\Field;
-use endurant\donationsfree\records\DonationsSettings;
-use endurant\donationsfree\records\State;
-use endurant\donationsfree\records\Step;
+use endurant\braintreedonation\assetbundles\donations\DonationsFreeAssetBundle;
+use endurant\braintreedonation\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
+use endurant\braintreedonation\errors\DonationsPluginException;
+use endurant\braintreedonation\models\forms\DonateForm;
+use endurant\braintreedonation\records\Country;
+use endurant\braintreedonation\models\Field;
+use endurant\braintreedonation\records\DonationsSettings;
+use endurant\braintreedonation\records\State;
+use endurant\braintreedonation\records\Step;
 
 /**
  * Donate Controller
@@ -112,7 +112,7 @@ class DonationController extends Controller
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/donations-free/donate/do-something
+     * e.g.: actions/braintree-donation/donate/do-something
      *
      * @return mixed
      */
@@ -128,16 +128,16 @@ class DonationController extends Controller
             try {
                 DonationsFree::$PLUGIN->donationService->donate($post);
             } catch (DonationsPluginException $e) {
-                return $this->redirect('/actions/donations-free/donation/error');
+                return $this->redirect('/actions/braintree-donation/donation/error');
             } catch (\Exception $e) {
-                return $this->redirect('/actions/donations-free/donation/error');
+                return $this->redirect('/actions/braintree-donation/donation/error');
             } catch (\Error $e) {
-                return $this->redirect('/actions/donations-free/donation/error');
+                return $this->redirect('/actions/braintree-donation/donation/error');
             }
 
             $view->resolveTemplate('success');
             Craft::$app->session->set('donation', $post);
-            return $this->redirect('/actions/donations-free/donation/success');
+            return $this->redirect('/actions/braintree-donation/donation/success');
         }
 
         $fixed = false;
@@ -178,7 +178,7 @@ class DonationController extends Controller
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/donations-free/donate/do-something
+     * e.g.: actions/braintree-donation/donate/do-something
      *
      * @return mixed
      */
@@ -196,6 +196,6 @@ class DonationController extends Controller
         Craft::$app->session->set('donationForm', $donateForm);
         Craft::$app->session->set('baseUrl', Craft::$app->request->baseUrl);
 
-        return $this->redirect('/actions/donations-free/donation/pay');
+        return $this->redirect('/actions/braintree-donation/donation/pay');
     }
 }

@@ -1,4 +1,4 @@
-# donations-free Changelog
+# braintree-donation Changelog
 
 All notable changes to this project will be documented in this file.
 

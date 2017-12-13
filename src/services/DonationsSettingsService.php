@@ -1,6 +1,6 @@
 <?php
 /**
- * donations-free plugin for Craft CMS 3.x
+ * braintree-donation plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,15 +8,15 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\donationsfree\services;
+namespace endurant\braintreedonation\services;
 
-use endurant\donationsfree\DonationsFree;
+use endurant\braintreedonation\DonationsFree;
 
 use Craft;
 use craft\base\Component;
 
-use endurant\donationsfree\records\DonationsSettings as DonationsSettingsRecord;
-use endurant\donationsfree\models\DonationsSettings;
+use endurant\braintreedonation\records\DonationsSettings as DonationsSettingsRecord;
+use endurant\braintreedonation\models\DonationsSettings;
 
 /**
  * Donate Service

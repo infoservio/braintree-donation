@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\donationsfree\errors;
+namespace endurant\braintreedonation\errors;
 
-use endurant\donationsfree\models\Log;
+use endurant\braintreedonation\models\Log;
 
 class BraintreeDonationsPluginException extends DonationsPluginException
 {
