@@ -30,8 +30,6 @@ class Install extends Migration
     public function safeUp()
     {
         $this->createTables();
-        // $this->createIndexes();
-        $this->addForeignKeys();
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
@@ -54,7 +52,6 @@ class Install extends Migration
     {
 //        $this->removeForeignKeys();
 //        $this->removeTables();
-
         return true;
     }
 
@@ -97,6 +94,14 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->addForeignKey(
+                'fk-donations-transaction-card',
+                'donations_transaction',
+                'cardId',
+                'donations_card',
+                'id'
+            );
         }
 
         if (!$this->tableExists('donations_customer')) {
@@ -112,6 +117,14 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->addForeignKey(
+                'fk-donations-card-customer',
+                'donations_card',
+                'customerId',
+                'donations_customer',
+                'id'
+            );
         }
 
         if (!$this->tableExists('donations_address')) {
@@ -128,6 +141,14 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->addForeignKey(
+                'fk-donations-customer-address',
+                'donations_customer',
+                'addressId',
+                'donations_address',
+                'id'
+            );
         }
 
         if (!$this->tableExists('donations_recurring_payment')) {
@@ -143,6 +164,14 @@ class Install extends Migration
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
             ]);
+
+            $this->addForeignKey(
+                'fk-donations-recurring_payment-card',
+                'donations_recurring_payment',
+                'cardId',
+                'donations_card',
+                'id'
+            );
         }
 
         if (!$this->tableExists('donations_country')) {
@@ -157,6 +186,14 @@ class Install extends Migration
                 'regionCode' => $this->integer(50),
                 'subRegionCode' => $this->integer()
             ]);
+
+            $this->addForeignKey(
+                'fk-donations-address-country',
+                'donations_address',
+                'countryId',
+                'donations_country',
+                'id'
+            );
 
             if ($this->fileExists($this->_countryCsvPath)) {
                 $this->insertCountries();
@@ -234,49 +271,6 @@ class Install extends Migration
         }
     }
 
-    private function addForeignKeys()
-    {
-        $this->addForeignKey(
-            'fk-donations-transaction-card',
-            'donations_transaction',
-            'cardId',
-            'donations_card',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-card-customer',
-            'donations_card',
-            'customerId',
-            'donations_customer',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-recurring_payment-card',
-            'donations_recurring_payment',
-            'cardId',
-            'donations_card',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-customer-address',
-            'donations_customer',
-            'addressId',
-            'donations_address',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-address-country',
-            'donations_address',
-            'countryId',
-            'donations_country',
-            'id'
-        );
-    }
-
     private function removeForeignKeys()
     {
         $this->dropForeignKey(
@@ -307,49 +301,17 @@ class Install extends Migration
 
     private function removeTables()
     {
-        if ($this->tableExists('donations_recurring_payment')) {
-            $this->dropTable('donations_recurring_payment');
-        }
-
-        if ($this->tableExists('donations_transaction')) {
-            $this->dropTable('donations_transaction');
-        }
-
-        if ($this->tableExists('donations_customer')) {
-            $this->dropTable('donations_customer');
-        }
-
-        if ($this->tableExists('donations_address')) {
-            $this->dropTable('donations_address');
-        }
-
-        if ($this->tableExists('donations_card')) {
-            $this->dropTable('donations_card');
-        }
-
-        if ($this->tableExists('donations_country')) {
-            $this->dropTable('donations_country');
-        }
-
-        if ($this->tableExists('donations_state')) {
-            $this->dropTable('donations_state');
-        }
-
-        if ($this->tableExists('donations_logs')) {
-            $this->dropTable('donations_logs');
-        }
-
-        if ($this->tableExists('donations_field')) {
-            $this->dropTable('donations_field');
-        }
-
-        if ($this->tableExists('donations_settings')) {
-            $this->dropTable('donations_settings');
-        }
-
-        if ($this->tableExists('donations_step')) {
-            $this->dropTable('donations_step');
-        }
+        $this->dropTableIfExists('donations_recurring_payment');
+        $this->dropTableIfExists('donations_transaction');
+        $this->dropTableIfExists('donations_customer');
+        $this->dropTableIfExists('donations_address');
+        $this->dropTableIfExists('donations_card');
+        $this->dropTableIfExists('donations_country');
+        $this->dropTableIfExists('donations_state');
+        $this->dropTableIfExists('donations_logs');
+        $this->dropTableIfExists('donations_field');
+        $this->dropTableIfExists('donations_settings');
+        $this->dropTableIfExists('donations_step');
     }
 
     private function insertMailManagerTemplate()
