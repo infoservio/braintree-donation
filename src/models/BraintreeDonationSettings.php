@@ -14,7 +14,7 @@ use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\base\Model;
-use endurant\braintreedonation\records\DonationsSettings as DonationsSettingsRecord;
+use endurant\braintreedonation\records\BraintreeDonationSettings as DonationsSettingsRecord;
 
 /**
  * Card Model
@@ -28,7 +28,7 @@ use endurant\braintreedonation\records\DonationsSettings as DonationsSettingsRec
  * @package   Donationsfree
  * @since     1.0.0
  */
-class DonationsSettings extends Model
+class BraintreeDonationSettings extends Model
 {
     // Public Properties
     // =========================================================================

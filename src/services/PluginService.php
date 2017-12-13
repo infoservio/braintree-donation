@@ -11,26 +11,23 @@
 namespace endurant\braintreedonation\services;
 
 use craft\base\Component;
-use endurant\braintreedonation\records\DonationsSettings;
+use endurant\braintreedonation\records\BraintreeDonationSettings;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Plugin Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class PluginService extends Component
 {
+    /**
+     * @param array $post
+     */
     public function updatePluginSettings(array $post)
     {
-        $settings = DonationsSettings::find()->all();
+        $settings = BraintreeDonationSettings::find()->all();
 
         foreach ($settings as $setting) {
 

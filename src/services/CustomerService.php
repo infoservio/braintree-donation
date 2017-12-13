@@ -21,16 +21,10 @@ use endurant\braintreedonation\models\Customer;
 use endurant\braintreedonation\models\Log;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Customer Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class CustomerService extends Component
@@ -38,21 +32,26 @@ class CustomerService extends Component
     // Public Methods
     // =========================================================================
 
-    public function saveCustomer(Customer $customer) 
+    /**
+     * @param Customer $model
+     * @return CustomerRecord
+     * @throws DbDonationsPluginException
+     */
+    public function save(Customer $model)
     {
-        $customerRecord = new CustomerRecord();
-        $customerRecord->setAttributes($customer->getAttributes(), false);
+        $record = new CustomerRecord();
+        $record->setAttributes($model->getAttributes(), false);
 
-        if (!$customerRecord->save()) {
+        if (!$record->save()) {
             
             throw new DbDonationsPluginException(
-                $customerRecord->errors,
-                json_encode($customerRecord->toArray()),
+                $record->errors,
+                json_encode($record->toArray()),
                  __METHOD__, 
                  Log::CUSTOMER_LOGS
             );
         } 
 
-        return $customerRecord; 
+        return $record;
     }
 }

@@ -25,7 +25,7 @@ use craft\db\ActiveRecord;
  * @property string $dateUpdated
  * @property string $uid
  */
-class DonationsSettings extends ActiveRecord
+class BraintreeDonationSettings extends ActiveRecord
 {
     // Public Static Methods
     // =========================================================================

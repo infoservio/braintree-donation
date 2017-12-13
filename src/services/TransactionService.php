@@ -21,16 +21,10 @@ use endurant\braintreedonation\models\Transaction;
 use endurant\braintreedonation\models\Log;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Transaction Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class TransactionService extends Component
@@ -38,21 +32,26 @@ class TransactionService extends Component
     // Public Methods
     // =========================================================================
 
-    public function saveTransaction(Transaction $transaction)
+    /**
+     * @param Transaction $model
+     * @return TransactionRecord
+     * @throws DbDonationsPluginException
+     */
+    public function save(Transaction $model)
     {
-        $transactionRecord = new TransactionRecord();
-        $transactionRecord->setAttributes($transaction->getAttributes(), false);
+        $record = new TransactionRecord();
+        $record->setAttributes($model->getAttributes(), false);
 
-        if (!$transactionRecord->save()) {
+        if (!$record->save()) {
 
             throw new DbDonationsPluginException(
-                $transactionRecord->errors,
-                json_encode($transactionRecord->toArray()),
+                $record->errors,
+                json_encode($record->toArray()),
                 __METHOD__,
                 Log::TRANSACTION_LOGS
             );
         }
 
-        return $transactionRecord;
+        return $record;
     }
 }

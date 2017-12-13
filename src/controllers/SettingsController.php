@@ -13,7 +13,7 @@ namespace endurant\braintreedonation\controllers;
 use Craft;
 use craft\web\Controller;
 use endurant\braintreedonation\BraintreeDonation;
-use endurant\braintreedonation\models\DonationsSettings;
+use endurant\braintreedonation\models\BraintreeDonationSettings;
 use endurant\braintreedonation\records\Field;
 use endurant\braintreedonation\records\Step;
 
@@ -67,7 +67,7 @@ class SettingsController extends Controller
             return $this->redirect('braintree-donation/settings');
         }
 
-        $settings = DonationsSettings::getSettingsArr();
+        $settings = BraintreeDonationSettings::getSettingsArr();
         return $this->renderTemplate('braintree-donation/settings/index', [
             'settings' => $settings
         ]);

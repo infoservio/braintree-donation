@@ -61,13 +61,13 @@ class DonationService extends Component
         $braintreeService->createTransaction($customer, $transaction);
 
        try {
-            $address = BraintreeDonation::$PLUGIN->address->saveAddress($address);
+            $address = BraintreeDonation::$PLUGIN->address->save($address);
             $customer->addressId = $address->id;
-            $customer = BraintreeDonation::$PLUGIN->customer->saveCustomer($customer);
+            $customer = BraintreeDonation::$PLUGIN->customer->save($customer);
             $card->customerId = $customer->id;
-            $card = BraintreeDonation::$PLUGIN->card->saveCard($card);
+            $card = BraintreeDonation::$PLUGIN->card->save($card);
             $transaction->cardId = $card->id;
-            $transaction = BraintreeDonation::$PLUGIN->transaction->saveTransaction($transaction);
+            $transaction = BraintreeDonation::$PLUGIN->transaction->save($transaction);
 
        } catch(DbDonationsPluginException $e) {
            

@@ -22,7 +22,7 @@ use endurant\braintreedonation\errors\DonationsPluginException;
 use endurant\braintreedonation\models\forms\DonateForm;
 use endurant\braintreedonation\records\Country;
 use endurant\braintreedonation\models\Field;
-use endurant\braintreedonation\records\DonationsSettings;
+use endurant\braintreedonation\records\BraintreeDonationSettings;
 use endurant\braintreedonation\records\State;
 use endurant\braintreedonation\records\Step;
 
@@ -77,7 +77,7 @@ class DonationController extends Controller
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeBootstrapAssetBundle::class);
 
-        $successMessage = DonationsSettings::find()->where(['name' => 'successMessage'])->one()->value;
+        $successMessage = BraintreeDonationSettings::find()->where(['name' => 'successMessage'])->one()->value;
 
         $resetForm = Craft::$app->session->get('donation');
         if ($stateId = $resetForm['stateId']) {
@@ -102,7 +102,7 @@ class DonationController extends Controller
         // Include all the JS and CSS stuff
         $view->registerAssetBundle(DonationsFreeBootstrapAssetBundle::class);
 
-        $errorMessage = DonationsSettings::find()->where(['name' => 'errorMessage'])->one()->value;
+        $errorMessage = BraintreeDonationSettings::find()->where(['name' => 'errorMessage'])->one()->value;
 
         return $this->renderTemplate('donation-error', [
             'errorMessage' => $errorMessage,
@@ -152,7 +152,7 @@ class DonationController extends Controller
 
         $projectId = Craft::$app->session->get('donationForm')['projectId'];
         $projectName = Craft::$app->session->get('donationForm')['projectName'];
-        $color = DonationsSettings::find()->where(['name' => 'color'])->one()->value;
+        $color = BraintreeDonationSettings::find()->where(['name' => 'color'])->one()->value;
         $steps = Step::find()->orderBy('order ASC')->all();
 
         $view->resolveTemplate('index');

@@ -29,7 +29,7 @@ use endurant\braintreedonation\services\BraintreeService;
 use endurant\braintreedonation\services\CardService;
 use endurant\braintreedonation\services\CustomerService;
 use endurant\braintreedonation\services\DonationService;
-use endurant\braintreedonation\services\DonationsSettingsService;
+use endurant\braintreedonation\services\BraintreeDonationSettingsService;
 use endurant\braintreedonation\services\FieldService;
 use endurant\braintreedonation\services\LogService;
 use endurant\braintreedonation\services\PluginService;
@@ -44,7 +44,7 @@ use yii\base\Event;
  * @property CardService $card
  * @property CustomerService $customer
  * @property DonationService $donation
- * @property DonationsSettingsService $donationSetting
+ * @property BraintreeDonationSettingsService $donationSetting
  * @property FieldService $field
  * @property LogService $log
  * @property PluginService $plugin

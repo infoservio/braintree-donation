@@ -53,7 +53,7 @@
             "address": "endurant\\braintreedonation\\services\\AddressService",
             "transaction": "endurant\\braintreedonation\\services\\TransactionService",
             "log": "endurant\\braintreedonation\\services\\LogService",
-            "donationSettings": "endurant\\braintreedonation\\services\\DonationsSettingsService",
+            "donationSetting": "endurant\\braintreedonation\\services\\BraintreeDonationSettingsService",
             "field": "endurant\\braintreedonation\\services\\FieldService",
             "plugin": "endurant\\braintreedonation\\services\\PluginService",
             "step": "endurant\\braintreedonation\\services\\StepService",

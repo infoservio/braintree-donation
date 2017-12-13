@@ -23,16 +23,10 @@ use endurant\braintreedonation\models\Transaction;
 use endurant\braintreedonation\models\Log;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Braintree Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class BraintreeService extends Component
@@ -40,6 +34,11 @@ class BraintreeService extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param Customer $customer
+     * @return \Braintree\Customer
+     * @throws BraintreeDonationsPluginException
+     */
     public function createCustomer(Customer &$customer)
     {
         $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCustomer($customer);
@@ -58,6 +57,12 @@ class BraintreeService extends Component
         return $result;
     }
 
+    /**
+     * @param Customer $customer
+     * @param Address $address
+     * @return \Braintree\Address
+     * @throws BraintreeDonationsPluginException
+     */
     public function createAddress(Customer $customer, Address $address)
     {
         $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
@@ -75,6 +80,13 @@ class BraintreeService extends Component
         return $result;
     }
 
+    /**
+     * @param Customer $customer
+     * @param Card $card
+     * @param string $paymentMethodNonce
+     * @return mixed
+     * @throws BraintreeDonationsPluginException
+     */
     public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce)
     {
         $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
@@ -102,6 +114,12 @@ class BraintreeService extends Component
         return $result;
     }
 
+    /**
+     * @param Customer $customer
+     * @param Transaction $transaction
+     * @return array
+     * @throws BraintreeDonationsPluginException
+     */
     public function createTransaction(Customer $customer, Transaction &$transaction)
     {
         $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);

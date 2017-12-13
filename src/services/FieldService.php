@@ -16,19 +16,12 @@ use Craft;
 use craft\base\Component;
 
 use endurant\braintreedonation\records\Field as FieldRecord;
-use endurant\braintreedonation\models\Field;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Field Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class FieldService extends Component
@@ -36,6 +29,9 @@ class FieldService extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param array $post
+     */
     public function update(array $post)
     {
         $arr = $this->getArrFromPost($post);
@@ -49,6 +45,10 @@ class FieldService extends Component
         }
     }
 
+    /**
+     * @param array $post
+     * @return array
+     */
     private function getArrFromPost(array $post)
     {
         $arr = [];

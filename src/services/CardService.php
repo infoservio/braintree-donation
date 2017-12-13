@@ -21,16 +21,10 @@ use endurant\braintreedonation\models\Card;
 use endurant\braintreedonation\models\Log;
 
 /**
- * Donate Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
+ * Card Service
  *
  * @author    endurant
- * @package   Donationsfree
+ * @package   Braintreedonation
  * @since     1.0.0
  */
 class CardService extends Component
@@ -39,40 +33,25 @@ class CardService extends Component
     // =========================================================================
 
     /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     Donationsfree::$plugin->donate->exampleService()
-     *
-     * @return mixed
+     * @param Card $model
+     * @return CardRecord
+     * @throws DbDonationsPluginException
      */
-    public function exampleService()
+    public function save(Card $model)
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (BraintreeDonation::$PLUGIN->getSettings()->someAttribute) {
-        }
+        $record = new CardRecord();
+        $record->setAttributes($model->getAttributes(), false);
 
-        return $result;
-    }
-
-    public function saveCard(Card $card)
-    {
-        $cardRecord = new CardRecord();
-        $cardRecord->setAttributes($card->getAttributes(), false);
-
-        if (!$cardRecord->save()) {
+        if (!$record->save()) {
 
             throw new DbDonationsPluginException(
-                $cardRecord->errors,
-                json_encode($cardRecord->toArray()),
+                $record->errors,
+                json_encode($record->toArray()),
                 __METHOD__,
                 Log::CARD_LOGS
             );
         }
 
-        return $cardRecord;
+        return $record;
     }
 }
