@@ -20,6 +20,7 @@ use endurant\braintreedonation\models\Customer;
 use endurant\braintreedonation\models\Address;
 use endurant\braintreedonation\models\Card;
 use endurant\braintreedonation\models\Transaction;
+use endurant\mailmanager\MailManager;
 
 /**
  * Donation Service
@@ -60,7 +61,10 @@ class DonationService extends Component
         $braintreeService->createCard($customer, $card, $params['nonce']);
         $braintreeService->createTransaction($customer, $transaction);
 
-       try {
+        // sending email
+        MailManager::$PLUGIN->mail->send($customer->email, 'success-donation');
+
+        try {
             $address = BraintreeDonation::$PLUGIN->address->save($address);
             $customer->addressId = $address->id;
             $customer = BraintreeDonation::$PLUGIN->customer->save($customer);
@@ -69,8 +73,8 @@ class DonationService extends Component
             $transaction->cardId = $card->id;
             $transaction = BraintreeDonation::$PLUGIN->transaction->save($transaction);
 
-       } catch(DbDonationsPluginException $e) {
+        } catch(DbDonationsPluginException $e) {
            
-       }
+        }
     }
 }
