@@ -2,7 +2,7 @@
 
 namespace infoservio\braintreedonation\components\httpClient\braintree;
 
-use endurant\braintreedonation\BraintreeDonation;
+use infoservio\braintreedonation\BraintreeDonation;
 use yii\base\Component;
 
 use Braintree\ClientToken as BraintreeClientToken;

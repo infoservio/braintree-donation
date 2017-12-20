@@ -10,7 +10,7 @@
 
 namespace infoservio\braintreedonation\controllers;
 
-use endurant\braintreedonation\BraintreeDonation;
+use infoservio\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\web\Controller;

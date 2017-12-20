@@ -10,7 +10,7 @@
 
 namespace infoservio\braintreedonation\services;
 
-use endurant\braintreedonation\BraintreeDonation;
+use infoservio\braintreedonation\BraintreeDonation;
 
 use craft\base\Component;
 
