@@ -8,14 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
 use craft\base\Component;
 
-use endurant\braintreedonation\errors\DbDonationsPluginException;
-use endurant\braintreedonation\records\Address as AddressRecord;
-use endurant\braintreedonation\models\Address;
-use endurant\braintreedonation\models\Log;
+use infoservio\braintreedonation\errors\DbDonationsPluginException;
+use infoservio\braintreedonation\records\Address as AddressRecord;
+use infoservio\braintreedonation\models\Address;
+use infoservio\braintreedonation\models\Log;
 
 /**
  * Address Service

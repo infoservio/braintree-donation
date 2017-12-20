@@ -8,17 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
-use endurant\braintreedonation\BraintreeDonation;
-
-use Craft;
 use craft\base\Component;
 
-use endurant\braintreedonation\errors\DbDonationsPluginException;
-use endurant\braintreedonation\records\Customer as CustomerRecord;
-use endurant\braintreedonation\models\Customer;
-use endurant\braintreedonation\models\Log;
+use infoservio\braintreedonation\errors\DbDonationsPluginException;
+use infoservio\braintreedonation\records\Customer as CustomerRecord;
+use infoservio\braintreedonation\models\Customer;
+use infoservio\braintreedonation\models\Log;
 
 /**
  * Customer Service

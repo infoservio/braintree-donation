@@ -8,11 +8,10 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
 use craft\base\Component;
-use endurant\braintreedonation\records\BraintreeDonationSettings;
-use endurant\braintreedonation\records\Step;
+use infoservio\braintreedonation\records\Step;
 
 /**
  * Step Service

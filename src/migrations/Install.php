@@ -1,11 +1,11 @@
 <?php
-namespace endurant\braintreedonation\migrations;
+namespace infoservio\braintreedonation\migrations;
 
 use Yii;
 use Craft;
 use craft\db\Migration;
 
-use endurant\braintreedonation\BraintreeDonation;
+use infoservio\braintreedonation\BraintreeDonation;
 
 class Install extends Migration
 {

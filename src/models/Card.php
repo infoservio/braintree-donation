@@ -8,11 +8,8 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\models;
+namespace infoservio\braintreedonation\models;
 
-use endurant\braintreedonation\BraintreeDonation;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -23,7 +20,7 @@ use craft\base\Model;
  *
  * https://craftcms.com/docs/plugins/models
  *
- * @author    endurant
+ * @author    infoservio
  * @package   Donationsfree
  * @since     1.0.0
  */

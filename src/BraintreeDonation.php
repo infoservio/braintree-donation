@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation;
+namespace infoservio\braintreedonation;
 
-use endurant\braintreedonation\components\httpClient\braintree\BraintreeHttpClient;
-use endurant\braintreedonation\components\logger\Logger;
-use endurant\braintreedonation\components\parser\CsvParser;
-use endurant\braintreedonation\models\Settings;
+use infoservio\braintreedonation\components\httpClient\braintree\BraintreeHttpClient;
+use infoservio\braintreedonation\components\logger\Logger;
+use infoservio\braintreedonation\components\parser\CsvParser;
+use infoservio\braintreedonation\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -24,18 +24,17 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 
-use endurant\braintreedonation\services\AddressService;
-use endurant\braintreedonation\services\BraintreeService;
-use endurant\braintreedonation\services\CardService;
-use endurant\braintreedonation\services\CustomerService;
-use endurant\braintreedonation\services\DonationService;
-use endurant\braintreedonation\services\BraintreeDonationSettingsService;
-use endurant\braintreedonation\services\FieldService;
-use endurant\braintreedonation\services\LogService;
-use endurant\braintreedonation\services\PluginService;
-use endurant\braintreedonation\services\StepService;
-use endurant\braintreedonation\services\TransactionService;
-use oms\billionglobalserver\services\AnswerService;
+use infoservio\braintreedonation\services\AddressService;
+use infoservio\braintreedonation\services\BraintreeService;
+use infoservio\braintreedonation\services\CardService;
+use infoservio\braintreedonation\services\CustomerService;
+use infoservio\braintreedonation\services\DonationService;
+use infoservio\braintreedonation\services\BraintreeDonationSettingsService;
+use infoservio\braintreedonation\services\FieldService;
+use infoservio\braintreedonation\services\LogService;
+use infoservio\braintreedonation\services\PluginService;
+use infoservio\braintreedonation\services\StepService;
+use infoservio\braintreedonation\services\TransactionService;
 use yii\base\Event;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\braintreedonation\components\parser;
+namespace infoservio\braintreedonation\components\parser;
 
 use craft\base\Component;
 

@@ -1,13 +1,12 @@
 <?php
-namespace endurant\braintreedonation\components\logger;
+namespace infoservio\braintreedonation\components\logger;
 
 use Craft;
-use endurant\braintreedonation\records\Log as LogRecord;
-use endurant\braintreedonation\models\Log;
-use endurant\braintreedonation\components\Settings;
+use infoservio\braintreedonation\records\Log as LogRecord;
+use infoservio\braintreedonation\models\Log;
+use infoservio\braintreedonation\components\Settings;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
-use yii\db\Exception;
 
 /**
  * General Logger

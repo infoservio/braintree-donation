@@ -8,11 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\assetbundles\bootstrap;
+namespace infoservio\braintreedonation\assetbundles\bootstrap;
 
-use Craft;
 use craft\web\AssetBundle;
-use craft\web\assets\cp\CpAsset;
 
 /**
  * DonationsfreeAsset AssetBundle
@@ -43,7 +41,7 @@ class DonationsFreeBootstrapAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/braintreedonation/assetbundles/bootstrap/dist';
+        $this->sourcePath = '@infoservio/braintreedonation/assetbundles/bootstrap/dist';
 
         $this->js = [
             'js/index.js'

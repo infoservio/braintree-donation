@@ -1,8 +1,8 @@
 {
-    "name": "endurant/braintree-donation",
+    "name": "infoservio/braintree-donation",
     "description": "Braintree Donation System",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -17,15 +17,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "endurant",
-            "homepage": "https://endurant.org"
+            "name": "infoserv.io",
+            "homepage": "https://infoserv.io"
         }
     ],
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
         "braintree/braintree_php" : "3.6.1",
         "yiisoft/yii2": "^2.0",
-        "endurant/mail-manager": "dev-master"
+        "infoservio/mail-manager": "dev-master"
     },
     "repositories": [
         {
@@ -35,33 +35,33 @@
     ],
     "autoload": {
         "psr-4": {
-          "endurant\\braintreedonation\\": "src/"
+          "infoservio\\braintreedonation\\": "src/"
         }
     },
     "extra": {
         "name": "Braintree Donation",
         "handle": "braintree-donation",
-        "schemaVersion": "1.0.0",
+        "schemaVersion": "0.0.1",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "donation": "endurant\\braintreedonation\\services\\DonationService",
-            "braintree": "endurant\\braintreedonation\\services\\BraintreeService",
-            "card": "endurant\\braintreedonation\\services\\CardService",
-            "customer": "endurant\\braintreedonation\\services\\CustomerService",
-            "address": "endurant\\braintreedonation\\services\\AddressService",
-            "transaction": "endurant\\braintreedonation\\services\\TransactionService",
-            "log": "endurant\\braintreedonation\\services\\LogService",
-            "donationSetting": "endurant\\braintreedonation\\services\\BraintreeDonationSettingsService",
-            "field": "endurant\\braintreedonation\\services\\FieldService",
-            "plugin": "endurant\\braintreedonation\\services\\PluginService",
-            "step": "endurant\\braintreedonation\\services\\StepService",
-            "braintreeHttpClient": "endurant\\braintreedonation\\components\\httpClient\\braintree\\BraintreeHttpClient",
-            "donationLogger": "endurant\\braintreedonation\\components\\logger\\Logger",
-            "csvParser": "endurant\\braintreedonation\\components\\parser\\CsvParser"
+            "donation": "infoservio\\braintreedonation\\services\\DonationService",
+            "braintree": "infoservio\\braintreedonation\\services\\BraintreeService",
+            "card": "infoservio\\braintreedonation\\services\\CardService",
+            "customer": "infoservio\\braintreedonation\\services\\CustomerService",
+            "address": "infoservio\\braintreedonation\\services\\AddressService",
+            "transaction": "infoservio\\braintreedonation\\services\\TransactionService",
+            "log": "infoservio\\braintreedonation\\services\\LogService",
+            "donationSetting": "infoservio\\braintreedonation\\services\\BraintreeDonationSettingsService",
+            "field": "infoservio\\braintreedonation\\services\\FieldService",
+            "plugin": "infoservio\\braintreedonation\\services\\PluginService",
+            "step": "infoservio\\braintreedonation\\services\\StepService",
+            "braintreeHttpClient": "infoservio\\braintreedonation\\components\\httpClient\\braintree\\BraintreeHttpClient",
+            "donationLogger": "infoservio\\braintreedonation\\components\\logger\\Logger",
+            "csvParser": "infoservio\\braintreedonation\\components\\parser\\CsvParser"
         },
-        "class": "endurant\\braintreedonation\\BraintreeDonation"
+        "class": "infoservio\\braintreedonation\\BraintreeDonation"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"

@@ -8,11 +8,8 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\records;
+namespace infoservio\braintreedonation\records;
 
-use endurant\braintreedonation\BraintreeDonation;
-
-use Craft;
 use craft\db\ActiveRecord;
 
 /**

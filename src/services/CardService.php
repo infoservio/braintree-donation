@@ -8,17 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
-use endurant\braintreedonation\BraintreeDonation;
-
-use Craft;
 use craft\base\Component;
 
-use endurant\braintreedonation\errors\DbDonationsPluginException;
-use endurant\braintreedonation\records\Card as CardRecord;
-use endurant\braintreedonation\models\Card;
-use endurant\braintreedonation\models\Log;
+use infoservio\braintreedonation\errors\DbDonationsPluginException;
+use infoservio\braintreedonation\records\Card as CardRecord;
+use infoservio\braintreedonation\models\Card;
+use infoservio\braintreedonation\models\Log;
 
 /**
  * Card Service

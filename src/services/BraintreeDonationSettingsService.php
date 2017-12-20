@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
 use craft\base\Component;
 
-use endurant\braintreedonation\records\BraintreeDonationSettings as DonationsSettingsRecord;
-use endurant\braintreedonation\models\BraintreeDonationSettings;
+use infoservio\braintreedonation\records\BraintreeDonationSettings as DonationsSettingsRecord;
+use infoservio\braintreedonation\models\BraintreeDonationSettings;
 
 /**
  * Donate Service

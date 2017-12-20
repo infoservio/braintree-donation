@@ -8,11 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\assetbundles\settings;
+namespace infoservio\braintreedonation\assetbundles\settings;
 
-use Craft;
 use craft\web\AssetBundle;
-use craft\web\assets\cp\CpAsset;
 
 /**
  * DonationsfreeAsset AssetBundle
@@ -43,7 +41,7 @@ class DonationsFreeSettingsAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/braintreedonation/assetbundles/settings/dist/';
+        $this->sourcePath = '@infoservio/braintreedonation/assetbundles/settings/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered

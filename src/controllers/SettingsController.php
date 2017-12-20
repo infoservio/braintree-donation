@@ -8,14 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\controllers;
+namespace infoservio\braintreedonation\controllers;
 
 use Craft;
 use craft\web\Controller;
-use endurant\braintreedonation\BraintreeDonation;
-use endurant\braintreedonation\models\BraintreeDonationSettings;
-use endurant\braintreedonation\records\Field;
-use endurant\braintreedonation\records\Step;
+use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\braintreedonation\models\BraintreeDonationSettings;
+use infoservio\braintreedonation\records\Field;
+use infoservio\braintreedonation\records\Step;
 
 /**
  * Donate Controller

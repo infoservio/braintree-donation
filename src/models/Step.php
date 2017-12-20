@@ -1,9 +1,21 @@
 <?php
 
-namespace endurant\braintreedonation\models;
+namespace infoservio\braintreedonation\models;
 
 use craft\base\Model;
 
+/**
+ * Step Model
+ *
+ * Models are containers for data. Just about every time information is passed
+ * between services, controllers, and templates in Craft, it’s passed via a model.
+ *
+ * https://craftcms.com/docs/plugins/models
+ *
+ * @author    infoservio
+ * @package   Donationsfree
+ * @since     1.0.0
+ */
 class Step extends Model
 {
     public $id;

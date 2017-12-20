@@ -8,23 +8,20 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\controllers;
+namespace infoservio\braintreedonation\controllers;
 
-use Braintree\ClientToken;
 use endurant\braintreedonation\BraintreeDonation;
 
 use Craft;
 use craft\web\Controller;
 use craft\helpers\ArrayHelper;
-use endurant\braintreedonation\assetbundles\donations\DonationsFreeAssetBundle;
-use endurant\braintreedonation\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
-use endurant\braintreedonation\errors\DonationsPluginException;
-use endurant\braintreedonation\models\forms\DonateForm;
-use endurant\braintreedonation\records\Country;
-use endurant\braintreedonation\models\Field;
-use endurant\braintreedonation\records\BraintreeDonationSettings;
-use endurant\braintreedonation\records\State;
-use endurant\braintreedonation\records\Step;
+use infoservio\braintreedonation\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
+use infoservio\braintreedonation\models\forms\DonateForm;
+use infoservio\braintreedonation\records\Country;
+use infoservio\braintreedonation\models\Field;
+use infoservio\braintreedonation\records\BraintreeDonationSettings;
+use infoservio\braintreedonation\records\State;
+use infoservio\braintreedonation\records\Step;
 
 /**
  * Donate Controller

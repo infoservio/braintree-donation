@@ -1,5 +1,5 @@
 <?php
-namespace endurant\braintreedonation\components;
+namespace infoservio\braintreedonation\components;
 
 class Settings
 {

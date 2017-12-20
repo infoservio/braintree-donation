@@ -8,14 +8,11 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\braintreedonation\services;
+namespace infoservio\braintreedonation\services;
 
 use endurant\braintreedonation\BraintreeDonation;
 
-use Craft;
 use craft\base\Component;
-
-use endurant\donationsFree\models\Log;
 
 /**
  * Log Service
