@@ -3,4 +3,4 @@ stages:
 trigger_build:
   stage: satis-update
   script:
-    - "curl -X POST -F token=1c61dddc8b2ba95cbae282752afec8 -F ref=master https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
+    - "curl -X POST -F token=8f1cf898ae59bf4a3b2d1c9dedb35e -F ref=master https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
