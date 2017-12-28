@@ -14,7 +14,7 @@ job_for_github_push:
     - mkdir -p /tmp/repo
     - git clone $CI_REPOSITORY_URL /tmp/repo
     - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-    - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo remote add github git@github.com:infoservio/braintree-donation.git
+    - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo remote add github git@github.com:infoservio/donate-elite.git
     - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo push -u github --all
     - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo push -u github --tags
   tags:
