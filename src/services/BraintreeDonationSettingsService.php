@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\braintreedonation\services;
+namespace infoservio\donateelite\services;
 
 use craft\base\Component;
 
-use infoservio\braintreedonation\records\BraintreeDonationSettings as DonationsSettingsRecord;
-use infoservio\braintreedonation\models\BraintreeDonationSettings;
+use infoservio\donateelite\records\BraintreeDonationSettings as DonationsSettingsRecord;
+use infoservio\donateelite\models\BraintreeDonationSettings;
 
 /**
  * Donate Service

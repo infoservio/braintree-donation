@@ -2,8 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-use endurant\braintreedonation\models\Address;
-use endurant\braintreedonation\records\Address as AddressRecord;
+use endurant\donateelite\models\Address;
+use endurant\donateelite\records\Address as AddressRecord;
 
 class AddressRecordTest extends TestCase
 {

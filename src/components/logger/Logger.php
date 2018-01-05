@@ -1,10 +1,10 @@
 <?php
-namespace infoservio\braintreedonation\components\logger;
+namespace infoservio\donateelite\components\logger;
 
 use Craft;
-use infoservio\braintreedonation\records\Log as LogRecord;
-use infoservio\braintreedonation\models\Log;
-use infoservio\braintreedonation\components\Settings;
+use infoservio\donateelite\records\Log as LogRecord;
+use infoservio\donateelite\models\Log;
+use infoservio\donateelite\components\Settings;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
 
@@ -18,7 +18,7 @@ class Logger implements ILogger
 
     public function __construct()
     {
-        $this->category = 'braintree-donation-logs';
+        $this->category = 'donate-elite-logs';
         $this->processId = Settings::createProcessID();
     }
 

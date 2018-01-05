@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,12 +8,12 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\braintreedonation\models;
+namespace infoservio\donateelite\models;
 
 use craft\base\Model;
 
-use infoservio\braintreedonation\records\Country as CountryRecord;
-use infoservio\braintreedonation\records\State as StateRecord;
+use infoservio\donateelite\records\Country as CountryRecord;
+use infoservio\donateelite\records\State as StateRecord;
 
 /**
  * Customer Model

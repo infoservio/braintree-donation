@@ -1,8 +1,8 @@
 <?php
 
-namespace infoservio\braintreedonation\errors;
+namespace infoservio\donateelite\errors;
 
-use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\donateelite\DonateElite;
 
 class DonationsPluginException extends \Exception
 {
@@ -20,7 +20,7 @@ class DonationsPluginException extends \Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = BraintreeDonation::$PLUGIN->log;
+        $this->_logService = DonateElite::$PLUGIN->log;
         $this->log($category);
     }
     

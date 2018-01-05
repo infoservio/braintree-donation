@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,14 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\braintreedonation\controllers;
+namespace infoservio\donateelite\controllers;
 
 use Craft;
 use craft\web\Controller;
-use infoservio\braintreedonation\BraintreeDonation;
-use infoservio\braintreedonation\models\BraintreeDonationSettings;
-use infoservio\braintreedonation\records\Field;
-use infoservio\braintreedonation\records\Step;
+use infoservio\donateelite\DonateElite;
+use infoservio\donateelite\models\BraintreeDonationSettings;
+use infoservio\donateelite\records\Field;
+use infoservio\donateelite\records\Step;
 
 /**
  * Donate Controller
@@ -63,12 +63,12 @@ class SettingsController extends Controller
     public function actionSettings()
     {
         if ($post = Craft::$app->request->post()) {
-            BraintreeDonation::$PLUGIN->plugin->updatePluginSettings($post);
-            return $this->redirect('braintree-donation/settings');
+            DonateElite::$PLUGIN->plugin->updatePluginSettings($post);
+            return $this->redirect('donate-elite/settings');
         }
 
         $settings = BraintreeDonationSettings::getSettingsArr();
-        return $this->renderTemplate('braintree-donation/settings/index', [
+        return $this->renderTemplate('donate-elite/settings/index', [
             'settings' => $settings
         ]);
     }
@@ -76,12 +76,12 @@ class SettingsController extends Controller
     public function actionFields()
     {
         if ($post = Craft::$app->request->post()) {
-            BraintreeDonation::$PLUGIN->field->update($post);
+            DonateElite::$PLUGIN->field->update($post);
         }
 
         $fields = Field::find()->all();
 
-        return $this->renderTemplate('braintree-donation/settings/fields', [
+        return $this->renderTemplate('donate-elite/settings/fields', [
             'fields' => $fields
         ]);
     }
@@ -89,18 +89,18 @@ class SettingsController extends Controller
     public function actionSteps()
     {
         if ($post = Craft::$app->request->post()) {
-            BraintreeDonation::$PLUGIN->step->update($post);
+            DonateElite::$PLUGIN->step->update($post);
         }
 
         $steps = Step::find()->orderBy('order asc')->all();
 
-        return $this->renderTemplate('braintree-donation/settings/steps', [
+        return $this->renderTemplate('donate-elite/settings/steps', [
             'steps' => $steps
         ]);
     }
 
     public function actionDonationForm()
     {
-        return $this->renderTemplate('braintree-donation/settings/donation-form');
+        return $this->renderTemplate('donate-elite/settings/donation-form');
     }
 }

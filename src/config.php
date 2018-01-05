@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -9,12 +9,12 @@
  */
 
 /**
- * braintree-donation config.php
+ * donate-elite config.php
  *
- * This file exists only as a template for the braintree-donation settings.
+ * This file exists only as a template for the donate-elite settings.
  * It does nothing on its own.
  *
- * Don't edit this file, instead copy it to 'craft/config' as 'braintree-donation.php'
+ * Don't edit this file, instead copy it to 'craft/config' as 'donate-elite.php'
  * and make your changes there to override default settings.
  *
  * Once copied to 'craft/config', this file will be multi-environment aware as

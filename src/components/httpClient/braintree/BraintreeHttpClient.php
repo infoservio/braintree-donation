@@ -1,8 +1,8 @@
 <?php
 
-namespace infoservio\braintreedonation\components\httpClient\braintree;
+namespace infoservio\donateelite\components\httpClient\braintree;
 
-use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\donateelite\DonateElite;
 use yii\base\Component;
 
 use Braintree\ClientToken as BraintreeClientToken;
@@ -12,10 +12,9 @@ use Braintree\Address as BraintreeAddress;
 use Braintree\PaymentMethod as BraintreeCard;
 use Braintree\Transaction as BraintreeTransaction;
 
-use infoservio\braintreedonation\models\Customer;
-use infoservio\braintreedonation\models\Address;
-use infoservio\braintreedonation\models\Card;
-use infoservio\braintreedonation\models\Transaction;
+use infoservio\donateelite\models\Customer;
+use infoservio\donateelite\models\Address;
+use infoservio\donateelite\models\Transaction;
 
 class BraintreeHttpClient extends Component
 {
@@ -25,7 +24,7 @@ class BraintreeHttpClient extends Component
     function __construct()
     {
         parent::__construct();
-        $this->_settings = BraintreeDonation::$PLUGIN->getSettings();
+        $this->_settings = DonateElite::$PLUGIN->getSettings();
 
         // Configuration of Braintree
         BraintreeConfiguration::environment($this->_settings->btEnvironment);

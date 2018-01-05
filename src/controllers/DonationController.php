@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,20 +8,20 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\braintreedonation\controllers;
+namespace infoservio\donateelite\controllers;
 
-use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\donateelite\DonateElite;
 
 use Craft;
 use craft\web\Controller;
 use craft\helpers\ArrayHelper;
-use infoservio\braintreedonation\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
-use infoservio\braintreedonation\models\forms\DonateForm;
-use infoservio\braintreedonation\records\Country;
-use infoservio\braintreedonation\models\Field;
-use infoservio\braintreedonation\records\BraintreeDonationSettings;
-use infoservio\braintreedonation\records\State;
-use infoservio\braintreedonation\records\Step;
+use infoservio\donateelite\assetbundles\bootstrap\DonationsFreeBootstrapAssetBundle;
+use infoservio\donateelite\models\forms\DonateForm;
+use infoservio\donateelite\records\Country;
+use infoservio\donateelite\models\Field;
+use infoservio\donateelite\records\BraintreeDonationSettings;
+use infoservio\donateelite\records\State;
+use infoservio\donateelite\records\Step;
 
 /**
  * Donate Controller
@@ -109,7 +109,7 @@ class DonationController extends Controller
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/braintree-donation/donate/do-something
+     * e.g.: actions/donate-elite/donate/do-something
      *
      * @return mixed
      */
@@ -123,14 +123,14 @@ class DonationController extends Controller
             $view->resolveTemplate('error');
 
             try {
-                BraintreeDonation::$PLUGIN->donation->donate($post);
+                DonateElite::$PLUGIN->donation->donate($post);
             } catch (\Exception $e) {
-                return $this->redirect('/actions/braintree-donation/donation/error');
+                return $this->redirect('/actions/donate-elite/donation/error');
             }
 
             $view->resolveTemplate('success');
             Craft::$app->session->set('donation', $post);
-            return $this->redirect('/actions/braintree-donation/donation/success');
+            return $this->redirect('/actions/donate-elite/donation/success');
         }
 
         $fixed = false;
@@ -160,7 +160,7 @@ class DonationController extends Controller
             'defaultCountryId' => $defaultCountryId,
             'countries' => $countries,
             'states' => $states,
-            'btAuthorization' => BraintreeDonation::$PLUGIN->braintreeHttpClient->generateToken(),
+            'btAuthorization' => DonateElite::$PLUGIN->braintreeHttpClient->generateToken(),
             'projectId' => $projectId,
             'projectName' => $projectName,
             'mainColor' => $color,
@@ -171,7 +171,7 @@ class DonationController extends Controller
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/braintree-donation/donate/do-something
+     * e.g.: actions/donate-elite/donate/do-something
      *
      * @return mixed
      * @throws \yii\web\BadRequestHttpException
@@ -190,6 +190,6 @@ class DonationController extends Controller
         Craft::$app->session->set('donationForm', $donateForm);
         Craft::$app->session->set('baseUrl', Craft::$app->request->baseUrl);
 
-        return $this->redirect('/actions/braintree-donation/donation/pay');
+        return $this->redirect('/actions/donate-elite/donation/pay');
     }
 }

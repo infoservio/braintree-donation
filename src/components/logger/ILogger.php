@@ -1,5 +1,5 @@
 <?php
-namespace infoservio\braintreedonation\components\logger;
+namespace infoservio\donateelite\components\logger;
 
 interface ILogger
 {

@@ -1,11 +1,11 @@
 <?php
-namespace infoservio\braintreedonation\migrations;
+namespace infoservio\donateelite\migrations;
 
 use Yii;
 use Craft;
 use craft\db\Migration;
 
-use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\donateelite\DonateElite;
 
 class Install extends Migration
 {
@@ -330,7 +330,7 @@ class Install extends Migration
 
     private function insertCountries()
     {
-        $countries = BraintreeDonation::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
+        $countries = DonateElite::$PLUGIN->csvParser->parseCsvFile($this->_countryCsvPath);
         $country = null;
         foreach($countries as &$country) {
             $this->insert('donations_country', [
@@ -350,7 +350,7 @@ class Install extends Migration
 
     private function insertUsaStates()
     {
-        $usaStates = BraintreeDonation::$PLUGIN->csvParser->parseCsvFile($this->_usaStatesCsvPath);
+        $usaStates = DonateElite::$PLUGIN->csvParser->parseCsvFile($this->_usaStatesCsvPath);
         $state = null;
         foreach($usaStates as &$state) {
             $this->insert('donations_state', [

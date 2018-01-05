@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -10,7 +10,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use endurant\braintreedonation\models\forms\PayForm;
+use endurant\donateelite\models\forms\PayForm;
 
 
 class PayFormTest extends TestCase

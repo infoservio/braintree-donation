@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -9,9 +9,9 @@
  */
 
 /**
- * braintree-donation en Translation
+ * donate-elite en Translation
  *
- * Returns an array with the string to be translated (as passed to `Craft::t('braintree-donation', '...')`) as
+ * Returns an array with the string to be translated (as passed to `Craft::t('donate-elite', '...')`) as
  * the key, and the translation as the value.
  *
  * http://www.yiiframework.com/doc-2.0/guide-tutorial-i18n.html
@@ -21,5 +21,5 @@
  * @since     1.0.0
  */
 return [
-    'braintree-donation plugin loaded' => 'braintree-donation plugin loaded',
+    'donate-elite plugin loaded' => 'donate-elite plugin loaded',
 ];

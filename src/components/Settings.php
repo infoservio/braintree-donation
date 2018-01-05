@@ -1,5 +1,5 @@
 <?php
-namespace infoservio\braintreedonation\components;
+namespace infoservio\donateelite\components;
 
 class Settings
 {

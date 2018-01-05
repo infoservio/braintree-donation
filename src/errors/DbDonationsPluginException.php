@@ -1,8 +1,8 @@
 <?php
 
-namespace infoservio\braintreedonation\errors;
+namespace infoservio\donateelite\errors;
 
-use infoservio\braintreedonation\models\Log;
+use infoservio\donateelite\models\Log;
 
 
 class DbDonationsPluginException extends DonationsPluginException

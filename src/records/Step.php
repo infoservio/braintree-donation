@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\braintreedonation\records;
+namespace infoservio\donateelite\records;
 
 use craft\db\ActiveRecord;
 

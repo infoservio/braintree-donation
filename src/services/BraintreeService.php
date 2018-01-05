@@ -1,6 +1,6 @@
 <?php
 /**
- * braintree-donation plugin for Craft CMS 3.x
+ * donate-elite plugin for Craft CMS 3.x
  *
  * Free Braintree Donation System
  *
@@ -8,18 +8,18 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\braintreedonation\services;
+namespace infoservio\donateelite\services;
 
-use infoservio\braintreedonation\BraintreeDonation;
+use infoservio\donateelite\DonateElite;
 
 use craft\base\Component;
 
-use infoservio\braintreedonation\errors\BraintreeDonationsPluginException;
-use infoservio\braintreedonation\models\Customer;
-use infoservio\braintreedonation\models\Address;
-use infoservio\braintreedonation\models\Card;
-use infoservio\braintreedonation\models\Transaction;
-use infoservio\braintreedonation\models\Log;
+use infoservio\donateelite\errors\BraintreeDonationsPluginException;
+use infoservio\donateelite\models\Customer;
+use infoservio\donateelite\models\Address;
+use infoservio\donateelite\models\Card;
+use infoservio\donateelite\models\Transaction;
+use infoservio\donateelite\models\Log;
 
 /**
  * Braintree Service
@@ -40,7 +40,7 @@ class BraintreeService extends Component
      */
     public function createCustomer(Customer &$customer)
     {
-        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCustomer($customer);
+        $result = DonateElite::$PLUGIN->braintreeHttpClient->createCustomer($customer);
 
         if (!$result->success) {
 
@@ -64,7 +64,7 @@ class BraintreeService extends Component
      */
     public function createAddress(Customer $customer, Address $address)
     {
-        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
+        $result = DonateElite::$PLUGIN->braintreeHttpClient->createAddress($customer, $address);
 
         if (!$result->success) {
 
@@ -88,7 +88,7 @@ class BraintreeService extends Component
      */
     public function createCard(Customer $customer, Card &$card, string $paymentMethodNonce)
     {
-        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
+        $result = DonateElite::$PLUGIN->braintreeHttpClient->createCard($customer, $paymentMethodNonce);
 
         if (!$result->success) {
 
@@ -121,7 +121,7 @@ class BraintreeService extends Component
      */
     public function createTransaction(Customer $customer, Transaction &$transaction)
     {
-        $result = BraintreeDonation::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
+        $result = DonateElite::$PLUGIN->braintreeHttpClient->createTransaction($customer, $transaction);
 
         if (!$result->success) {
 

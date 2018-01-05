@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\braintreedonation\models;
+namespace infoservio\donateelite\models;
 
 use craft\base\Model;
 

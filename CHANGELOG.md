@@ -1,4 +1,4 @@
-# braintree-donation Changelog
+# donate-elite Changelog
 
 All notable changes to this project will be documented in this file.
 

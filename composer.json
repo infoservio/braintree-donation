@@ -1,6 +1,6 @@
 {
-    "name": "infoservio/braintree-donation",
-    "description": "Braintree Donation System",
+    "name": "infoservio/donate-elite",
+    "description": "Donate Elite using Braintree",
     "type": "craft-plugin",
     "version": "0.0.1",
     "keywords": [
@@ -8,7 +8,7 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "braintree-donation"
+        "donate-elite"
     ],
     "support": {
         "docs": "http://test",
@@ -35,33 +35,33 @@
     ],
     "autoload": {
         "psr-4": {
-          "infoservio\\braintreedonation\\": "src/"
+          "infoservio\\donateelite\\": "src/"
         }
     },
     "extra": {
-        "name": "Braintree Donation",
-        "handle": "braintree-donation",
+        "name": "Donate Elite",
+        "handle": "donate-elite",
         "schemaVersion": "0.0.1",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "donation": "infoservio\\braintreedonation\\services\\DonationService",
-            "braintree": "infoservio\\braintreedonation\\services\\BraintreeService",
-            "card": "infoservio\\braintreedonation\\services\\CardService",
-            "customer": "infoservio\\braintreedonation\\services\\CustomerService",
-            "address": "infoservio\\braintreedonation\\services\\AddressService",
-            "transaction": "infoservio\\braintreedonation\\services\\TransactionService",
-            "log": "infoservio\\braintreedonation\\services\\LogService",
-            "donationSetting": "infoservio\\braintreedonation\\services\\BraintreeDonationSettingsService",
-            "field": "infoservio\\braintreedonation\\services\\FieldService",
-            "plugin": "infoservio\\braintreedonation\\services\\PluginService",
-            "step": "infoservio\\braintreedonation\\services\\StepService",
-            "braintreeHttpClient": "infoservio\\braintreedonation\\components\\httpClient\\braintree\\BraintreeHttpClient",
-            "donationLogger": "infoservio\\braintreedonation\\components\\logger\\Logger",
-            "csvParser": "infoservio\\braintreedonation\\components\\parser\\CsvParser"
+            "donation": "infoservio\\donateelite\\services\\DonationService",
+            "braintree": "infoservio\\donateelite\\services\\BraintreeService",
+            "card": "infoservio\\donateelite\\services\\CardService",
+            "customer": "infoservio\\donateelite\\services\\CustomerService",
+            "address": "infoservio\\donateelite\\services\\AddressService",
+            "transaction": "infoservio\\donateelite\\services\\TransactionService",
+            "log": "infoservio\\donateelite\\services\\LogService",
+            "donationSetting": "infoservio\\donateelite\\services\\BraintreeDonationSettingsService",
+            "field": "infoservio\\donateelite\\services\\FieldService",
+            "plugin": "infoservio\\donateelite\\services\\PluginService",
+            "step": "infoservio\\donateelite\\services\\StepService",
+            "braintreeHttpClient": "infoservio\\donateelite\\components\\httpClient\\braintree\\BraintreeHttpClient",
+            "donationLogger": "infoservio\\donateelite\\components\\logger\\Logger",
+            "csvParser": "infoservio\\donateelite\\components\\parser\\CsvParser"
         },
-        "class": "infoservio\\braintreedonation\\BraintreeDonation"
+        "class": "infoservio\\donateelite\\DonateElite"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
