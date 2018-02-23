@@ -1,22 +1,21 @@
 stages:
   - satis-update
   - push-in-github
+image: centos
 trigger_build:
   stage: satis-update
   script:
-    - curl -X POST -F token=$COMPOSER_REPO_TOKEN -F ref=master "https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
-  tags:
-    - kmtest
+    - |
+       set -e
+       curl -X POST -F token=$COMPOSER_REPO_TOKEN -F ref=master "https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
 job_for_github_push:
   stage: push-in-github
   script:
-    - yum install git -y
+    - yum install git rsync -y
     - mkdir -p /tmp/repo
+    - rsync -avPhz /home/apache/.ssh/ /root/.ssh/
     - git clone $CI_REPOSITORY_URL /tmp/repo
     - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
     - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo remote add github git@github.com:infoservio/donate-elite.git
     - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo push -u github --all
     - git --git-dir=/tmp/repo/.git --work-tree=/tmp/repo push -u github --tags
-  tags:
-    - cpanels_docker
-  image: gitlab.oms.systems:4567/km/mysqlbackup
